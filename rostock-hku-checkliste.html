@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rostock HKU-Entscheidungshilfe – ESC 2024 &amp; NVL KHK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{
+  --bg:#f3f6fb;--surface:#fff;--surface-2:#f8fafc;--surface-off:#eef2f7;
+  --divider:#e2e8f0;--border:#cbd5e1;
+  --text:#0f172a;--muted:#64748b;--faint:#94a3b8;
+  --primary:#1d4ed8;--primary-h:#1e40af;--primary-l:#dbeafe;--primary-hl:#bfdbfe;
+  --ok:#15803d;--ok-l:#dcfce7;
+  --warn:#b45309;--warn-l:#fef3c7;
+  --err:#b91c1c;--err-l:#fee2e2;
+  --orange:#c2410c;--orange-l:#ffedd5;
+  --purple:#7c3aed;--purple-l:#ede9fe;
+  --teal:#0d9488;--teal-l:#ccfbf1;
+  --blue2:#0369a1;--blue2-l:#e0f2fe;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.07);
+  --shadow-md:0 4px 14px rgba(0,0,0,.09);
+  --shadow-lg:0 12px 36px rgba(0,0,0,.11);
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:20px;
+  --tr:180ms cubic-bezier(.16,1,.3,1);
+}
+[data-theme="dark"]{
+  --bg:#0f172a;--surface:#1e293b;--surface-2:#263548;--surface-off:#1a2840;
+  --divider:#2d3f55;--border:#334155;
+  --text:#e2e8f0;--muted:#94a3b8;--faint:#64748b;
+  --primary:#60a5fa;--primary-h:#93c5fd;--primary-l:#1e3a5f;--primary-hl:#1e40af;
+  --ok:#4ade80;--ok-l:#14532d;
+  --warn:#fbbf24;--warn-l:#451a03;
+  --err:#f87171;--err-l:#450a0a;
+  --orange:#fb923c;--orange-l:#431407;
+  --purple:#a78bfa;--purple-l:#2e1065;
+  --teal:#2dd4bf;--teal-l:#042f2e;
+  --blue2:#38bdf8;--blue2-l:#0c4a6e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,sans-serif;font-size:15px;color:var(--text);background:var(--bg);min-height:100dvh;line-height:1.6;padding-bottom:4rem}
+a,button,input,select{font:inherit;color:inherit;transition:color var(--tr),background var(--tr),border-color var(--tr),box-shadow var(--tr)}
+button{cursor:pointer;border:none;background:none}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--r-sm)}
+
+/* HEADER */
+.app-header{background:var(--surface);border-bottom:1px solid var(--divider);padding:.9rem 1.5rem;position:sticky;top:0;z-index:50;box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.header-logo{display:flex;align-items:center;gap:.75rem}
+.logo-svg{width:42px;height:42px;flex-shrink:0}
+.header-title{font-family:'Instrument Serif',Georgia,serif;font-size:1.15rem;font-weight:400;line-height:1.2}
+.header-sub{font-size:.72rem;color:var(--muted)}
+.header-actions{display:flex;align-items:center;gap:.6rem}
+.badge{background:var(--primary-l);color:var(--primary);font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase}
+.badge.nvl{background:var(--teal-l);color:var(--teal)}
+.btn-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-md);color:var(--muted);background:var(--surface-off);border:1px solid var(--border)}
+.btn-icon:hover{background:var(--divider);color:var(--text)}
+
+/* LAYOUT */
+.container{max-width:840px;margin:0 auto;padding:0 1rem}
+.page-hero{padding:2.5rem 1rem 1.5rem;max-width:840px;margin:0 auto}
+.page-hero h1{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:400;color:var(--text);margin-bottom:.5rem;line-height:1.2}
+.page-hero p{font-size:.9rem;color:var(--muted);max-width:65ch}
+.guideline-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+.gl-badge{padding:4px 12px;border-radius:99px;font-size:.75rem;font-weight:600;border:1px solid}
+.gl-badge.esc{background:var(--primary-l);color:var(--primary);border-color:var(--primary)}
+.gl-badge.nvl{background:var(--teal-l);color:var(--teal);border-color:var(--teal)}
+.gl-badge.discharge{background:var(--purple-l);color:var(--purple);border-color:var(--purple)}
+
+/* PROGRESS */
+.progress-wrap{max-width:840px;margin:0 auto;padding:0 1rem 1.5rem}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.progress-label{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.progress-count{font-size:.82rem;color:var(--muted)}
+.progress-bar-outer{height:6px;background:var(--divider);border-radius:99px;overflow:hidden}
+.progress-bar-inner{height:100%;background:var(--primary);border-radius:99px;transition:width 400ms cubic-bezier(.16,1,.3,1);width:0%}
+
+/* STEP CARDS */
+.step-card{background:var(--surface);border:1px solid var(--divider);border-radius:var(--r-lg);margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow-sm);transition:box-shadow var(--tr)}
+.step-card.active{box-shadow:var(--shadow-md)}
+.step-card.completed .step-header{background:var(--ok-l)}
+.step-card.completed .step-num{background:var(--ok);color:#fff}
+.step-header{padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;cursor:pointer;background:var(--surface);transition:background var(--tr);user-select:none}
+.step-header:hover{background:var(--surface-2)}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--surface-off);color:var(--muted);font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background var(--tr),color var(--tr)}
+.step-card.active .step-num{background:var(--primary);color:#fff}
+.step-title-wrap{flex:1}
+.step-title{font-size:.93rem;font-weight:600;color:var(--text)}
+.step-desc{font-size:.78rem;color:var(--muted)}
+.step-chevron{color:var(--faint);transition:transform var(--tr)}
+.step-card.open .step-chevron{transform:rotate(180deg)}
+.step-body{padding:0 1.25rem 1.25rem;display:none}
+.step-card.open .step-body{display:block}
+
+/* SECTION LABELS */
+.section-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:1rem 0 .6rem;padding-top:.8rem;border-top:1px solid var(--divider);display:flex;align-items:center;gap:.4rem}
+.section-label:first-of-type{border-top:none;margin-top:.4rem}
+.section-label .src{font-size:.65rem;background:var(--primary-l);color:var(--primary);padding:1px 6px;border-radius:99px;font-weight:700;letter-spacing:.04em}
+.section-label .src.nvl{background:var(--teal-l);color:var(--teal)}
+
+/* OPTIONS */
+.options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem}
+.options-grid.c2{grid-template-columns:1fr 1fr}
+.options-grid.c3{grid-template-columns:repeat(3,1fr)}
+.option-item{position:relative}
+.option-item input{position:absolute;opacity:0;width:0;height:0}
+.option-label{display:flex;align-items:flex-start;gap:.5rem;padding:.65rem 1rem;border:1.5px solid var(--border);border-radius:var(--r-md);cursor:pointer;font-size:.855rem;background:var(--surface-2);transition:all var(--tr);line-height:1.4}
+.option-label:hover{border-color:var(--primary);background:var(--primary-l)}
+.option-item input:checked+.option-label{border-color:var(--primary);background:var(--primary-l);color:var(--primary);font-weight:600}
+.radio-dot,.check-box{width:15px;height:15px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all var(--tr);margin-top:2px}
+.check-box{border-radius:4px}
+.option-item input:checked+.option-label .radio-dot,
+.option-item input:checked+.option-label .check-box{background:var(--primary);border-color:var(--primary)}
+.radio-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;opacity:0;transition:opacity var(--tr)}
+.option-item input:checked+.option-label .radio-dot::after{opacity:1}
+.check-box::after{content:'✓';font-size:9px;color:#fff;opacity:0;transition:opacity var(--tr)}
+.option-item input:checked+.option-label .check-box::after{opacity:1}
+
+/* SCORE DISPLAY */
+.score-display{display:inline-flex;align-items:center;gap:.75rem;background:var(--primary-l);border:1.5px solid var(--primary);padding:.6rem 1.25rem;border-radius:var(--r-lg);margin-top:.75rem}
+.score-num{font-size:1.8rem;font-weight:800;color:var(--primary);line-height:1}
+.score-label{font-size:.8rem;color:var(--primary);font-weight:600}
+.score-sub{font-size:.72rem;color:var(--primary);opacity:.8}
+
+/* RISK HIGHLIGHT */
+.risk-band{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border-radius:var(--r-md);margin-top:.75rem;border:1px solid}
+.risk-band.vlow{background:var(--ok-l);border-color:var(--ok);color:var(--ok)}
+.risk-band.low{background:var(--warn-l);border-color:var(--warn);color:var(--warn)}
+.risk-band.mod{background:var(--orange-l);border-color:var(--orange);color:var(--orange)}
+.risk-band.high{background:var(--err-l);border-color:var(--err);color:var(--err)}
+.risk-band.vhigh{background:var(--err-l);border-color:var(--err);color:var(--err)}
+.risk-pct{font-size:1.4rem;font-weight:800;line-height:1;white-space:nowrap}
+.risk-text{font-size:.82rem;font-weight:600}
+.risk-sub{font-size:.74rem;opacity:.85;font-weight:400}
+
+/* INFO BOX */
+.info-box{padding:.65rem .9rem;border-radius:var(--r-md);font-size:.83rem;margin-top:.75rem;line-height:1.5;display:flex;gap:.6rem;border:1px solid}
+.info-box.blue{background:var(--primary-l);color:var(--primary);border-color:var(--primary-hl)}
+.info-box.teal{background:var(--teal-l);color:var(--teal);border-color:var(--teal)}
+.info-box.orange{background:var(--orange-l);color:var(--orange);border-color:var(--orange)}
+.info-box.purple{background:var(--purple-l);color:var(--purple);border-color:var(--purple)}
+.info-box.blue2{background:var(--blue2-l);color:var(--blue2);border-color:var(--blue2)}
+.info-icon{font-size:.95rem;flex-shrink:0;padding-top:1px}
+
+/* BUTTONS */
+.step-nav{display:flex;justify-content:flex-end;gap:.75rem;margin-top:1.25rem}
+.btn{padding:.55rem 1.3rem;border-radius:var(--r-md);font-size:.855rem;font-weight:600;display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;border:none}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-h)}
+.btn-secondary{background:var(--surface-off);border:1px solid var(--border);color:var(--text)}
+.btn-secondary:hover{background:var(--divider)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-reset{background:var(--surface-off);border:1px solid var(--border);color:var(--muted);font-size:.78rem;padding:.35rem .9rem}
+.btn-reset:hover{background:var(--divider);color:var(--text)}
+
+/* RESULT */
+.result-panel{background:var(--surface);border-radius:var(--r-xl);border:2px solid var(--divider);box-shadow:var(--shadow-lg);overflow:hidden;margin-top:.5rem}
+.result-header{padding:1.5rem 1.5rem 1rem;display:flex;align-items:flex-start;gap:1rem}
+.result-icon-wrap{width:54px;height:54px;border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.result-icon-wrap.green{background:var(--ok-l)}
+.result-icon-wrap.red{background:var(--err-l)}
+.result-icon-wrap.orange{background:var(--orange-l)}
+.result-icon-wrap.blue{background:var(--primary-l)}
+.result-icon-wrap.teal{background:var(--teal-l)}
+.result-title{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;font-weight:400;line-height:1.2;margin-bottom:.2rem}
+.result-title.green{color:var(--ok)}
+.result-title.red{color:var(--err)}
+.result-title.orange{color:var(--orange)}
+.result-title.blue{color:var(--primary)}
+.result-title.teal{color:var(--teal)}
+.result-sub{font-size:.86rem;color:var(--muted)}
+.result-body{padding:0 1.5rem 1.5rem}
+.result-section{margin-top:1.25rem}
+.result-section-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.result-section-title::after{content:'';flex:1;height:1px;background:var(--divider)}
+.recs-list{display:flex;flex-direction:column;gap:.5rem}
+.rec-item{display:flex;gap:.75rem;padding:.65rem .9rem;border-radius:var(--r-md);font-size:.855rem;line-height:1.5;border:1px solid var(--divider);background:var(--surface-2)}
+.rec-item.c1{border-left:3px solid var(--ok)}
+.rec-item.c2a{border-left:3px solid var(--warn)}
+.rec-item.c2b{border-left:3px solid var(--orange)}
+.rec-item.cnvl{border-left:3px solid var(--teal)}
+.rec-badge{font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:99px;flex-shrink:0;align-self:flex-start;margin-top:2px;white-space:nowrap}
+.rec-badge.ia{background:var(--ok-l);color:var(--ok)}
+.rec-badge.ib{background:#d1fae5;color:#065f46}
+.rec-badge.ic{background:var(--blue2-l);color:var(--blue2)}
+.rec-badge.iia{background:var(--warn-l);color:var(--warn)}
+.rec-badge.iib{background:var(--orange-l);color:var(--orange)}
+.rec-badge.nvls{background:var(--teal-l);color:var(--teal)}
+.rec-text{flex:1}
+.rec-text strong{display:block;font-weight:600;color:var(--text);margin-bottom:1px}
+.rec-text span{color:var(--muted);font-size:.81rem}
+
+/* DRUG TAGS */
+.drug-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.drug-tag{padding:3px 10px;border-radius:99px;font-size:.76rem;font-weight:600;background:var(--surface-off);border:1px solid var(--border);color:var(--text)}
+.drug-tag.p{background:var(--primary-l);border-color:var(--primary);color:var(--primary)}
+.drug-tag.ok{background:var(--ok-l);border-color:var(--ok);color:var(--ok)}
+.drug-tag.w{background:var(--warn-l);border-color:var(--warn);color:var(--warn)}
+.drug-tag.tl{background:var(--teal-l);border-color:var(--teal);color:var(--teal)}
+
+/* LEGEND */
+.legend-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:.74rem;color:var(--muted)}
+
+/* MHS/DISCHARGE TABLE */
+.prob-table{width:100%;border-collapse:collapse;font-size:.8rem;border-radius:var(--r-md);overflow:hidden;margin-top:.5rem}
+.prob-table th{background:var(--primary);color:#fff;padding:.4rem .6rem;text-align:center;font-weight:600}
+.prob-table td{padding:.4rem .6rem;text-align:center;border-bottom:1px solid var(--divider);background:var(--surface)}
+.prob-table tr:nth-child(even) td{background:var(--surface-2)}
+.prob-table td.hl{background:var(--primary-l)!important;color:var(--primary);font-weight:700;outline:2px solid var(--primary)}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--divider);margin:1rem 0}
+.disclaimer{font-size:.72rem;color:var(--faint);text-align:center;padding:1.5rem 1rem .5rem;max-width:840px;margin:0 auto;line-height:1.5}
+@media(max-width:600px){.options-grid,.options-grid.c2,.options-grid.c3{grid-template-columns:1fr}.result-header{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-logo">
+    <svg class="logo-svg" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Universitätsmedizin Rostock – Kardiovaskuläre Diagnostik">
+      <rect width="42" height="42" rx="11" fill="#1d4ed8"/>
+      <!-- Herzsilhouette mit EKG-Linie -->
+      <path d="M21 31s-10-6-10-14a7 7 0 0 1 10-6.26A7 7 0 0 1 31 17c0 8-10 14-10 14z" fill="none" stroke="#93c5fd" stroke-width="1.5"/>
+      <path d="M11 21h4l2-4.5 3.5 8 2.5-3.5H27" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div>
+      <div class="header-title">Rostock – HKU-Entscheidungshilfe</div>
+      <div class="header-sub">Kardiovaskuläre Diagnostik | Chronisches Koronarsyndrom</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <span class="badge">ESC 2024</span>
+    <span class="badge nvl">NVL 2024</span>
+    <button class="btn-icon" data-theme-toggle aria-label="Farbschema wechseln">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>Sollte eine HKU durchgeführt werden?</h1>
+  <p>Strukturierte Entscheidungshilfe auf Basis der aktuellen Leitlinien – speziell für die Zuweisung aus dem Raum Rostock.</p>
+  <div class="guideline-badges">
+    <span class="gl-badge esc">ESC 2024 CCS-Leitlinie</span>
+    <span class="gl-badge nvl">NVL Chronische KHK 2024</span>
+    <span class="gl-badge discharge">DISCHARGE-Kalkulator</span>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-header">
+    <span class="progress-label">Fortschritt</span>
+    <span class="progress-count" id="progressCount">Schritt 1 von 5</span>
+  </div>
+  <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
+</div>
+
+<div class="container" id="stepsContainer">
+
+<!-- ======= STEP 1: ACS & SYMPTOME ======= -->
+<div class="step-card open active" id="step1">
+  <div class="step-header" onclick="toggleStep('step1')">
+    <div class="step-num">1</div>
+    <div class="step-title-wrap">
+      <div class="step-title">Akuter Ausschluss &amp; Symptomcharakter</div>
+      <div class="step-desc">ACS ausschließen · Symptomkriterien &amp; Score berechnen</div>
+    </div>
+    <svg class="step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+
+    <div class="section-label">⚡ Akuter Ausschluss – ACS-Screening</div>
+    <div class="info-box blue" style="margin-bottom:.75rem">
+      <span class="info-icon">❓</span>
+      <span><strong>Liegen Beschwerden vor, die auf ein akutes Koronarsyndrom (ACS) hindeuten?</strong><br>
+      <span style="font-size:.82rem">Anhaltende Ruheschmerzen &gt;20 min · Crescendo-Angina (zunehmend, häufiger, stärker) · V.a. STEMI/NSTEMI · Akute ST-Veränderungen im EKG · Troponin-Anstieg</span></span>
+    </div>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <button id="acs_yes_btn" onclick="handleAcuteBtn('yes')" style="flex:1;min-width:140px;padding:.75rem 1rem;border-radius:var(--r-lg);border:2px solid var(--border);background:var(--surface-2);font-size:.92rem;font-weight:600;cursor:pointer;transition:all var(--tr);color:var(--text)">
+        🚨 Ja – ACS-Verdacht
+      </button>
+      <button id="acs_no_btn" onclick="handleAcuteBtn('no')" style="flex:1;min-width:140px;padding:.75rem 1rem;border-radius:var(--r-lg);border:2px solid var(--border);background:var(--surface-2);font-size:.92rem;font-weight:600;cursor:pointer;transition:all var(--tr);color:var(--text)">
+        ✅ Nein – Stabiles Bild
+      </button>
+    </div>
+    <div class="info-box orange" id="acuteWarn" style="display:none;margin-top:.75rem">
+      <span class="info-icon">🚨</span>
+      <span><strong>Akutes Koronarsyndrom:</strong> Diese Checkliste gilt ausschließlich für das chronische Koronarsyndrom (CCS). Bei ACS-Verdacht → sofortige Notfalldiagnostik gemäß ESC 2023 ACS-Leitlinien. Keine weitere Bearbeitung dieser Checkliste.</span>
+    </div>
+
+    <!-- SYMPTOMKRITERIEN nach ESC/NVL -->
+    <div id="sympSection" style="display:none">
+      <div class="section-label">📋 Symptomkriterien <span class="src">ESC 2024 / NVL 2024</span></div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.6rem">Bitte alle zutreffenden Kriterien ankreuzen (NVL: klassische AP-Definition, ESC: inkl. Äquivalente):</p>
+      <div class="options-grid">
+        <div class="option-item">
+          <input type="checkbox" id="s_retrosternal" name="symp" value="retrosternal" onchange="calcSymptomScore()">
+          <label class="option-label" for="s_retrosternal"><span class="check-box"></span>Retrosternales Druckgefühl / Enge / Brennen</label>
+        </div>
+        <div class="option-item">
+          <input type="checkbox" id="s_exertion" name="symp" value="exertion" onchange="calcSymptomScore()">
+          <label class="option-label" for="s_exertion"><span class="check-box"></span>Auslösung durch Belastung oder emotionalen Stress</label>
+        </div>
+        <div class="option-item">
+          <input type="checkbox" id="s_nitro" name="symp" value="nitro" onchange="calcSymptomScore()">
+          <label class="option-label" for="s_nitro"><span class="check-box"></span>Besserung durch Ruhe und/oder Nitrat (innerhalb 5 min)</label>
+        </div>
+        <div class="option-item">
+          <input type="checkbox" id="s_radiation" name="symp" value="radiation" onchange="calcSymptomScore()">
+          <label class="option-label" for="s_radiation"><span class="check-box"></span>Ausstrahlung in Arm, Kiefer, Nacken, Schulter oder Rücken</label>
+        </div>
+        <div class="option-item">
+          <input type="checkbox" id="s_equivdyspnoe" name="symp" value="equiv" onchange="calcSymptomScore()">
+          <label class="option-label" for="s_equivdyspnoe"><span class="check-box"></span>Angina-Äquivalent: Dyspnoe, Fatigue, Schwindel (ESC 2024)</label>
+        </div>
+        <div class="option-item">
+          <input type="checkbox" id="s_rest" name="symp" value="rest" onchange="calcSymptomScore()">
+          <label class="option-label" for="s_rest"><span class="check-box"></span>Spontane Beschwerden in Ruhe / nachts (V.a. Vasospasmus)</label>
+        </div>
+      </div>
+
+      <!-- SCORE ANZEIGE -->
+      <div id="sympScoreDisplay" style="display:none;margin-top:.75rem">
+        <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <div class="score-display">
+            <div>
+              <div class="score-label">Angina-Klasse</div>
+              <div class="score-num" id="sympScoreVal">–</div>
+              <div class="score-sub" id="sympScoreCat">–</div>
+            </div>
+          </div>
+          <div id="sympScoreInfo" style="font-size:.83rem;color:var(--muted);max-width:40ch"></div>
+        </div>
+      </div>
+
+      <div class="info-box blue" style="margin-top:.75rem">
+        <span class="info-icon">ℹ️</span>
+        <span><strong>NVL-Definition:</strong> Typische Angina = alle 3 Klassikritierien (retrosternal, belastungsinduziert, Nitratansprechen). Atypische Angina = 2 Kriterien. Nicht-anginöser Schmerz = ≤1 Kriterium. <strong>ESC 2024</strong> erweitert um Angina-Äquivalente.</span>
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-primary" id="step1Next" onclick="goToStep(2)" disabled>Weiter <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= STEP 2: VORTESTWAHRSCHEINLICHKEIT ======= -->
+<div class="step-card" id="step2">
+  <div class="step-header" onclick="toggleStep('step2')">
+    <div class="step-num">2</div>
+    <div class="step-title-wrap">
+      <div class="step-title">Vortestwahrscheinlichkeit</div>
+      <div class="step-desc">RF-CL (ESC) · DISCHARGE-Kalkulator (NVL) · Risikofaktoren</div>
+    </div>
+    <svg class="step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="info-box purple">
+      <span class="info-icon">📐</span>
+      <span><strong>Duale Leitlinienbasis:</strong> Die ESC 2024 empfiehlt den RF-CL-Score. Die NVL 2024 empfiehlt auf kardiologischer Ebene den <strong>DISCHARGE-Kalkulator</strong>. Diese Checkliste berechnet beide und gibt eine fusionierte Empfehlung aus.</span>
+    </div>
+
+    <div class="section-label">👤 Basisdaten <span class="src">ESC + NVL</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.75rem">
+      <div>
+        <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.3rem">Geschlecht</label>
+        <div class="options-grid c2" style="min-width:180px">
+          <div class="option-item"><input type="radio" name="sex" id="sex_m" value="m" onchange="calcAll()"><label class="option-label" for="sex_m"><span class="radio-dot"></span>Männlich</label></div>
+          <div class="option-item"><input type="radio" name="sex" id="sex_f" value="f" onchange="calcAll()"><label class="option-label" for="sex_f"><span class="radio-dot"></span>Weiblich</label></div>
+        </div>
+      </div>
+      <div>
+        <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.3rem">Altersgruppe</label>
+        <div class="options-grid" style="grid-template-columns:repeat(5,1fr);min-width:280px">
+          <div class="option-item"><input type="radio" name="age" id="a30" value="30" onchange="calcAll()"><label class="option-label" for="a30"><span class="radio-dot"></span>30–39</label></div>
+          <div class="option-item"><input type="radio" name="age" id="a40" value="40" onchange="calcAll()"><label class="option-label" for="a40"><span class="radio-dot"></span>40–49</label></div>
+          <div class="option-item"><input type="radio" name="age" id="a50" value="50" onchange="calcAll()"><label class="option-label" for="a50"><span class="radio-dot"></span>50–59</label></div>
+          <div class="option-item"><input type="radio" name="age" id="a60" value="60" onchange="calcAll()"><label class="option-label" for="a60"><span class="radio-dot"></span>60–69</label></div>
+          <div class="option-item"><input type="radio" name="age" id="a70" value="70" onchange="calcAll()"><label class="option-label" for="a70"><span class="radio-dot"></span>≥70</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RISIKOFAKTOREN einzeln abgefragt -->
+    <div class="section-label">🧬 Kardiovaskuläre Risikofaktoren <span class="src">ESC RF-CL</span></div>
+    <p style="font-size:.81rem;color:var(--muted);margin-bottom:.6rem">Bitte jeden Risikofaktor einzeln ankreuzen – die Anzahl wird automatisch berechnet:</p>
+    <div class="options-grid">
+      <div class="option-item"><input type="checkbox" id="rf_hyp" name="rfactors" onchange="calcAll()"><label class="option-label" for="rf_hyp"><span class="check-box"></span>Arterielle Hypertonie (bekannt, behandelt oder RR ≥140/90)</label></div>
+      <div class="option-item"><input type="checkbox" id="rf_dm" name="rfactors" onchange="calcAll()"><label class="option-label" for="rf_dm"><span class="check-box"></span>Diabetes mellitus (Typ 1 oder 2)</label></div>
+      <div class="option-item"><input type="checkbox" id="rf_lip" name="rfactors" onchange="calcAll()"><label class="option-label" for="rf_lip"><span class="check-box"></span>Hypercholesterinämie / Dyslipidämie (bekannt oder LDL ≥3 mmol/l)</label></div>
+      <div class="option-item"><input type="checkbox" id="rf_smoke" name="rfactors" onchange="calcAll()"><label class="option-label" for="rf_smoke"><span class="check-box"></span>Rauchen / Nikotinabusus (aktuell oder &lt;5 J. sistiert)</label></div>
+      <div class="option-item"><input type="checkbox" id="rf_fam" name="rfactors" onchange="calcAll()"><label class="option-label" for="rf_fam"><span class="check-box"></span>Positive Familienanamnese (KHK bei Verwandtem 1. Grades: ♂ &lt;55 J., ♀ &lt;65 J.)</label></div>
+      <div class="option-item"><input type="checkbox" id="rf_obe" name="rfactors" onchange="calcAll()"><label class="option-label" for="rf_obe"><span class="check-box"></span>Adipositas (BMI ≥30 kg/m²)</label></div>
+    </div>
+    <div id="rfCountDisplay" style="display:none;margin-top:.6rem">
+      <span style="font-size:.83rem;font-weight:600;color:var(--primary)">Gezählte Risikofaktoren: <span id="rfCountNum" style="font-size:1.1rem">0</span></span>
+    </div>
+
+    <!-- KLINISCHE ANPASSUNG ESC -->
+    <div class="section-label">🔄 Klinische Adjustierung RF-CL <span class="src">ESC 2024</span></div>
+    <p style="font-size:.81rem;color:var(--muted);margin-bottom:.6rem">Vorhandene Befunde, die die Wahrscheinlichkeit erhöhen:</p>
+    <div class="options-grid">
+      <div class="option-item"><input type="checkbox" id="adj_ecg" name="adj" onchange="calcAll()"><label class="option-label" for="adj_ecg"><span class="check-box"></span>Ruhe-EKG: Q-Zacken / ST-T-Veränderungen</label></div>
+      <div class="option-item"><input type="checkbox" id="adj_echo" name="adj" onchange="calcAll()"><label class="option-label" for="adj_echo"><span class="check-box"></span>Echo: LV-Dysfunktion / segm. Wandbewegungsstörung</label></div>
+      <div class="option-item"><input type="checkbox" id="adj_bel" name="adj" onchange="calcAll()"><label class="option-label" for="adj_bel"><span class="check-box"></span>Belastungs-EKG pathologisch</label></div>
+      <div class="option-item"><input type="checkbox" id="adj_cacs" name="adj" onchange="calcAll()"><label class="option-label" for="adj_cacs"><span class="check-box"></span>CACS ≥100 Agatston (aus früherem CT)</label></div>
+      <div class="option-item"><input type="checkbox" id="adj_pad" name="adj" onchange="calcAll()"><label class="option-label" for="adj_pad"><span class="check-box"></span>Periphere Atherosklerose / pAVK</label></div>
+    </div>
+
+    <!-- ERGEBNISANZEIGE -->
+    <div id="probResult" style="display:none;margin-top:1rem">
+      <div class="section-label" style="border-top:none;margin-top:0">📊 Berechnete Vortestwahrscheinlichkeit</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+        <div>
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem">ESC 2024 (RF-CL)</div>
+          <div id="rfclBand" class="risk-band">
+            <div class="risk-pct" id="rfclPct">–%</div>
+            <div><div class="risk-text" id="rfclCat">–</div><div class="risk-sub" id="rfclSub">–</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem">NVL 2024 (DISCHARGE)</div>
+          <div id="dischBand" class="risk-band">
+            <div class="risk-pct" id="dischPct">–%</div>
+            <div><div class="risk-text" id="dischCat">–</div><div class="risk-sub" id="dischSub">–</div></div>
+          </div>
+        </div>
+      </div>
+      <div id="fusedBand" class="risk-band mod" style="margin-top:.75rem">
+        <span style="font-size:1rem">🎯</span>
+        <div><div class="risk-text" id="fusedText">Fusionierte Einschätzung</div><div class="risk-sub" id="fusedSub"></div></div>
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-secondary" onclick="goToStep(1)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg> Zurück</button>
+      <button class="btn btn-primary" id="step2Next" onclick="goToStep(3)" disabled>Weiter <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= STEP 3: VORBEFUNDE ======= -->
+<div class="step-card" id="step3">
+  <div class="step-header" onclick="toggleStep('step3')">
+    <div class="step-num">3</div>
+    <div class="step-title-wrap">
+      <div class="step-title">Vordiagnostik &amp; Testergebnisse</div>
+      <div class="step-desc">LV-Funktion · Stresstest-Ergebnisse differenziert nach Risikoklasse</div>
+    </div>
+    <svg class="step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+
+    <div class="section-label">🫀 LV-Funktion (Echokardiographie) <span class="src">ESC + NVL</span></div>
+    <div class="options-grid c3">
+      <div class="option-item"><input type="radio" name="lvef" id="lv_norm" value="norm" onchange="updateStep3()"><label class="option-label" for="lv_norm"><span class="radio-dot"></span>Erhalten (EF ≥50%)</label></div>
+      <div class="option-item"><input type="radio" name="lvef" id="lv_mid" value="mid" onchange="updateStep3()"><label class="option-label" for="lv_mid"><span class="radio-dot"></span>Leicht reduziert (EF 40–49%)</label></div>
+      <div class="option-item"><input type="radio" name="lvef" id="lv_red" value="red" onchange="updateStep3()"><label class="option-label" for="lv_red"><span class="radio-dot"></span>Deutlich reduziert (EF &lt;40%)</label></div>
+      <div class="option-item"><input type="radio" name="lvef" id="lv_unk" value="unk" onchange="updateStep3()"><label class="option-label" for="lv_unk"><span class="radio-dot"></span>Nicht bekannt / nicht durchgeführt</label></div>
+    </div>
+
+    <!-- STRESSECHOKARDIOGRAPHIE -->
+    <div class="section-label">📡 Stressechokardiographie <span class="src nvl">NVL (bevorzugt) / ESC I B</span></div>
+    <p style="font-size:.81rem;color:var(--muted);margin-bottom:.6rem">GKV-Leistung | Sens. 87% / Spez. 89% | kein Strahlenrisiko | bevorzugtes funktionelles Verfahren laut NVL:</p>
+    <div class="options-grid">
+      <div class="option-item"><input type="checkbox" id="se_norm" name="stressecho" value="norm" onchange="handleStressEchoNorm(this)"><label class="option-label" for="se_norm"><span class="check-box"></span>✅ Normal – keine induzierbare Wandbewegungsstörung</label></div>
+      <div class="option-item"><input type="checkbox" id="se_low" name="stressecho" value="low" onchange="updateStep3()"><label class="option-label" for="se_low"><span class="check-box"></span>🟡 Geringgradige WBS (&lt;3 Segmente, nur 1 Gefäßgebiet)</label></div>
+      <div class="option-item"><input type="checkbox" id="se_high" name="stressecho" value="high" onchange="updateStep3()"><label class="option-label" for="se_high"><span class="check-box"></span>🔴 Hochrisiko: ≥3 Segmente WBS / bei niedriger Belastung / Stressinduzierte LVEF-Abnahme</label></div>
+      <div class="option-item"><input type="checkbox" id="se_na" name="stressecho" value="na" onchange="handleNAcheck('stressecho','se_na')"><label class="option-label" for="se_na"><span class="check-box"></span>Nicht durchgeführt / nicht verfügbar</label></div>
+    </div>
+
+    <!-- MYOKARDSZINTIGRAPHIE -->
+    <div class="section-label">☢️ Myokardszintigraphie (SPECT / PET) <span class="src">ESC I B / NVL (GKV-SPECT)</span></div>
+    <p style="font-size:.81rem;color:var(--muted);margin-bottom:.6rem">GKV-Leistung (SPECT) | SPECT Sens. 83–88% / PET Sens. 93% | quantitative MBF-Messung bei PET:</p>
+    <div class="options-grid">
+      <div class="option-item"><input type="checkbox" id="mp_norm" name="myoPerf" value="norm" onchange="handleMPNorm(this)"><label class="option-label" for="mp_norm"><span class="check-box"></span>✅ Normal – homogene Traceranreicherung, kein Perfusionsdefekt</label></div>
+      <div class="option-item"><input type="checkbox" id="mp_low" name="myoPerf" value="low" onchange="updateStep3()"><label class="option-label" for="mp_low"><span class="check-box"></span>🟡 Kleiner reversibler Defekt (&lt;10% LV-Myokard)</label></div>
+      <div class="option-item"><input type="checkbox" id="mp_high" name="myoPerf" value="high" onchange="updateStep3()"><label class="option-label" for="mp_high"><span class="check-box"></span>🔴 Hochrisiko: Ausgedehnter reversibler Defekt ≥10% LV-Myokard oder multivaskuläre Ischämie</label></div>
+      <div class="option-item"><input type="checkbox" id="mp_scar" name="myoPerf" value="scar" onchange="updateStep3()"><label class="option-label" for="mp_scar"><span class="check-box"></span>🟠 Fixierter Defekt (Narbe) – kein/wenig reversibler Anteil</label></div>
+      <div class="option-item"><input type="checkbox" id="mp_na" name="myoPerf" value="na" onchange="handleNAcheck('myoPerf','mp_na')"><label class="option-label" for="mp_na"><span class="check-box"></span>Nicht durchgeführt / nicht verfügbar</label></div>
+    </div>
+
+    <!-- CCTA BEFUNDE -->
+    <div class="section-label">🔬 CCTA-Befunde (falls vorliegend) <span class="src">ESC I A / NVL bevorzugt bei VTW ≤50%</span></div>
+    <div class="options-grid">
+      <div class="option-item"><input type="checkbox" id="ct_norm" name="ccta" value="norm" onchange="handleCCTAnorm(this)"><label class="option-label" for="ct_norm"><span class="check-box"></span>✅ Keine stenosierende KHK (&lt;50% Stenose)</label></div>
+      <div class="option-item"><input type="checkbox" id="ct_nonobt" name="ccta" value="nonobt" onchange="updateStep3()"><label class="option-label" for="ct_nonobt"><span class="check-box"></span>🟡 Nicht-obstruktive KHK (Plaques, keine relevante Stenose)</label></div>
+      <div class="option-item"><input type="checkbox" id="ct_inter" name="ccta" value="inter" onchange="updateStep3()"><label class="option-label" for="ct_inter"><span class="check-box"></span>🟡 Intermediäre Stenose (40–70%) – funktionelle Relevanz unklar</label></div>
+      <div class="option-item"><input type="checkbox" id="ct_lm" name="ccta" value="lm" onchange="updateStep3()"><label class="option-label" for="ct_lm"><span class="check-box"></span>🔴 Hauptstammstenose ≥50% (HOCHRISIKO)</label></div>
+      <div class="option-item"><input type="checkbox" id="ct_3v" name="ccta" value="3v" onchange="updateStep3()"><label class="option-label" for="ct_3v"><span class="check-box"></span>🔴 3-Gefäß-KHK mit ≥70% oder RIVA prox. ≥70% (HOCHRISIKO)</label></div>
+      <div class="option-item"><input type="checkbox" id="ct_na" name="ccta" value="na" onchange="handleNAcheck('ccta','ct_na')"><label class="option-label" for="ct_na"><span class="check-box"></span>Nicht durchgeführt</label></div>
+    </div>
+
+    <!-- BELASTUNGS-EKG -->
+    <div class="section-label">📈 Belastungs-EKG (ergänzend) <span class="src nvl">NVL: eingeschränkte Diagnosequalität</span></div>
+    <div class="options-grid">
+      <div class="option-item"><input type="checkbox" id="ecg_norm" name="ergEcg" value="norm" onchange="handleNAcheck('ergEcg','ecg_norm')"><label class="option-label" for="ecg_norm"><span class="check-box"></span>✅ Normal / negativ</label></div>
+      <div class="option-item"><input type="checkbox" id="ecg_duke" name="ergEcg" value="duke" onchange="updateStep3()"><label class="option-label" for="ecg_duke"><span class="check-box"></span>🔴 Duke-Treadmill-Score &#8804;&#8722;10 (HOCHRISIKO)</label></div>
+      <div class="info-box orange" style="margin-top:.4rem;margin-bottom:.2rem">
+        <span class="info-icon">📐</span>
+        <span>
+          <strong>Duke-Treadmill-Score – Formel:</strong><br>
+          Belastungszeit (min) − (5 × max. ST-Senkung in mm) − (4 × Angina-Index)<br>
+          <em>Angina-Index:</em> 0 = keine Angina · 1 = Angina aufgetreten · 2 = Abbruch wegen Angina<br>
+          <em>Bewertung:</em> ≥+5 = niedriges Risiko (~0,25% 1-J-Mort.) · −10 bis +4 = mittleres Risiko · ≤−10 = Hochrisiko (~5% 1-J-Mort.)
+        </span>
+      </div>
+      <div class="option-item"><input type="checkbox" id="ecg_pos" name="ergEcg" value="pos" onchange="updateStep3()"><label class="option-label" for="ecg_pos"><span class="check-box"></span>🟡 Positiv – ST-Senkung ≥1mm, aber Duke-Score ≥-10</label></div>
+      <div class="option-item"><input type="checkbox" id="ecg_na2" name="ergEcg" value="na" onchange="handleNAcheck('ergEcg','ecg_na2')"><label class="option-label" for="ecg_na2"><span class="check-box"></span>Nicht durchgeführt</label></div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-secondary" onclick="goToStep(2)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg> Zurück</button>
+      <button class="btn btn-primary" id="step3Next" onclick="goToStep(4)" disabled>Weiter <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= STEP 4: KLINISCHE BESONDERHEITEN ======= -->
+<div class="step-card" id="step4">
+  <div class="step-header" onclick="toggleStep('step4')">
+    <div class="step-num">4</div>
+    <div class="step-title-wrap">
+      <div class="step-title">Therapiestatus &amp; klinische Besonderheiten</div>
+      <div class="step-desc">Antiangöse Therapie · Angina-Schwelle · Komorbiditäten</div>
+    </div>
+    <svg class="step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+
+    <div class="section-label">🏃 Belastungstoleranz / Angina-Schwelle <span class="src">ESC / NVL</span></div>
+    <div class="options-grid">
+      <div class="option-item"><input type="radio" name="angina" id="ang_high" value="high" onchange="updateStep4()"><label class="option-label" for="ang_high"><span class="radio-dot"></span>Nur bei hoher Belastung (CCS I–II) · Treppe &gt;2 Stockwerke oder &gt;100m schnelles Gehen</label></div>
+      <div class="option-item"><input type="radio" name="angina" id="ang_low" value="low" onchange="updateStep4()"><label class="option-label" for="ang_low"><span class="radio-dot"></span>Bereits bei geringer Belastung (CCS III) · Normales Gehen eingeschränkt</label></div>
+      <div class="option-item"><input type="radio" name="angina" id="ang_rest" value="rest" onchange="updateStep4()"><label class="option-label" for="ang_rest"><span class="radio-dot"></span>Ruheschmerzen / spontane Episoden (CCS IV) – V.a. Vasospasmus</label></div>
+    </div>
+
+    <div class="section-label">💊 Bisherige antiangöse Therapie <span class="src">ESC + NVL</span></div>
+    <div class="options-grid">
+      <div class="option-item"><input type="radio" name="therapy" id="th_none" value="none" onchange="updateStep4()"><label class="option-label" for="th_none"><span class="radio-dot"></span>Keine antiangöse Therapie bisher</label></div>
+      <div class="option-item"><input type="radio" name="therapy" id="th_one" value="one" onchange="updateStep4()"><label class="option-label" for="th_one"><span class="radio-dot"></span>Begonnen, aber weiterhin symptomatisch (1 Substanz)</label></div>
+      <div class="option-item"><input type="radio" name="therapy" id="th_opt" value="opt" onchange="updateStep4()"><label class="option-label" for="th_opt"><span class="radio-dot"></span>Optimierte Therapie (≥2 Substanzen), weiterhin symptomatisch</label></div>
+      <div class="option-item"><input type="radio" name="therapy" id="th_ref" value="ref" onchange="updateStep4()"><label class="option-label" for="th_ref"><span class="radio-dot"></span>Refraktäre Angina trotz max. GDMT (incl. Nitrat + BB + CCB)</label></div>
+    </div>
+
+    <div class="section-label">🏥 Relevante Komorbiditäten <span class="src">ESC + NVL</span></div>
+    <div class="options-grid">
+      <div class="option-item"><input type="checkbox" id="cm_hf" name="cm" onchange="updateStep4()"><label class="option-label" for="cm_hf"><span class="check-box"></span>Herzinsuffizienz mit reduzierter EF (HFrEF, EF &lt;35%)</label></div>
+      <div class="option-item"><input type="checkbox" id="cm_anoca" name="cm" onchange="updateStep4()"><label class="option-label" for="cm_anoca"><span class="check-box"></span>Bekannte normale Koronaranatomie / V.a. ANOCA/INOCA</label></div>
+      <div class="option-item"><input type="checkbox" id="cm_frail" name="cm" onchange="updateStep4()"><label class="option-label" for="cm_frail"><span class="check-box"></span>Schwere Gebrechlichkeit / stark eingeschränkte Lebenserwartung</label></div>
+      <div class="option-item"><input type="checkbox" id="cm_none3" name="cm" onchange="handleNoneCM(this)"><label class="option-label" for="cm_none3"><span class="check-box"></span>Keine der obigen</label></div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-secondary" onclick="goToStep(3)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg> Zurück</button>
+      <button class="btn btn-primary" id="step4Next" onclick="goToStep(5)" disabled>Empfehlung anzeigen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= STEP 5: ERGEBNIS ======= -->
+<div class="step-card" id="step5">
+  <div class="step-header" onclick="toggleStep('step5')">
+    <div class="step-num">5</div>
+    <div class="step-title-wrap">
+      <div class="step-title">Leitliniengerechte Empfehlung</div>
+      <div class="step-desc">Fusionierte ESC 2024 + NVL 2024 Entscheidung</div>
+    </div>
+    <svg class="step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div id="resultContainer"></div>
+    <div class="step-nav" style="justify-content:space-between">
+      <button class="btn btn-secondary" onclick="goToStep(4)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg> Zurück</button>
+      <button class="btn btn-reset" onclick="resetAll()">🔄 Neue Beurteilung</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<p class="disclaimer">
+  <strong style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:4px;font-size:.78rem">⚠️ TESTVERSION – Nicht für klinische Routinenutzung freigegeben</strong><br>
+  Klinisches Entscheidungshilfsmittel – Universitätsmedizin Rostock | Basierend auf: <em>ESC 2024 CCS-Leitlinien (Vrints C et al., Eur Heart J 2024;45:3415–3537)</em> und <em>NVL Chronische KHK, Version 7.0, 2024 (AWMF/BÄK/KBV)</em>.<br>
+  Dieses Tool ersetzt <strong>nicht</strong> die individuelle ärztliche Entscheidung. Keine Patientendaten werden gespeichert oder übertragen. Alle Empfehlungen sind im klinischen Kontext zu bewerten.
+</p>
+
+<script>
+// ===== DARK MODE =====
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  if(t)t.addEventListener('click',()=>{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d)});
+})();
+
+// ===== GLOBAL STATE =====
+let sympClass='none'; // 'typical','atypical','nonangin','equiv'
+let rfclProb=0;
+let dischProb=0;
+let fusedProb=0;
+
+// ===== SYMPTOM SCORE =====
+function calcSymptomScore(){
+  const retro=document.getElementById('s_retrosternal').checked;
+  const exert=document.getElementById('s_exertion').checked;
+  const nitro=document.getElementById('s_nitro').checked;
+  const rad=document.getElementById('s_radiation').checked;
+  const equiv=document.getElementById('s_equivdyspnoe').checked;
+  const rest=document.getElementById('s_rest').checked;
+
+  const classicCount=[retro,exert,nitro].filter(Boolean).length;
+  let cat,catLabel,info;
+  if(classicCount===3){cat='typical';catLabel='Typische Angina pectoris';info='Alle 3 Klassikkriterien erfüllt. Hohe Vortestwahrscheinlichkeit für obstruktive KHK.';}
+  else if(classicCount===2){cat='atypical';catLabel='Atypische Angina pectoris';info='2 von 3 Klassikkriterien. Mittlere Vortestwahrscheinlichkeit.';}
+  else if(classicCount<=1 && (equiv||rad)){cat='equiv';catLabel='Angina-Äquivalent (ESC 2024)';info='Angina-Äquivalent nach ESC 2024 – weitere Diagnostik entsprechend klinischem Bild.';}
+  else if(classicCount===1){cat='nonangin';catLabel='Nicht-anginöser Brustschmerz';info='Nur 1 Klassikkriterium. Andere Ursachen im Vordergrund, KHK nicht ausgeschlossen.';}
+  else{cat='none';catLabel='Keine Symptome ausgewählt';info='Bitte Symptome auswählen.'}
+
+  if(rest&&classicCount<3){cat='vasospasm';catLabel='V.a. Vasospastische Angina';info='Spontane/nächtliche Episoden: V.a. Koronarvasospasmus → spezifische Diagnostik erwägen (Acetylcholin-Test).';}
+
+  sympClass=cat;
+  document.getElementById('sympScoreVal').textContent=catLabel.split(' ')[0]==='Typische'?'Typisch':(catLabel.split(' ')[0]==='Atypische'?'Atypisch':(catLabel.split(' ')[0]==='Nicht-anginöser'?'Nicht-anginös':(catLabel.split(' ')[0]==='Angina-Äquivalent'?'Äquivalent':'V.a. Vasospasmus')));
+  document.getElementById('sympScoreCat').textContent=catLabel;
+  document.getElementById('sympScoreInfo').textContent=info;
+  document.getElementById('sympScoreDisplay').style.display=(cat==='none')?'none':'flex';
+
+  const anyChecked=[retro,exert,nitro,rad,equiv,rest].some(Boolean);
+  document.getElementById('step1Next').disabled=!anyChecked;
+  calcAll();
+}
+
+// ===== RF COUNTER =====
+function countRF(){
+  return document.querySelectorAll('input[name="rfactors"]:checked').length;
+}
+
+// ===== DISCHARGE TABLE (NVL Table 6) =====
+// [typical, atypical, nonangin, other] × [m/f] × age
+const discharge={
+  m:{30:[52,29,28,25],40:[59,36,35,31],50:[66,43,42,38],60:[72,51,49,45],70:[78,58,57,52]},
+  f:{30:[31,14,14,12],40:[38,19,18,15],50:[45,24,23,20],60:[52,30,29,25],70:[60,37,36,32]}
+};
+function getDischProb(sex,age){
+  let col=0;
+  if(sympClass==='typical')col=0;
+  else if(sympClass==='atypical')col=1;
+  else if(sympClass==='equiv')col=2;
+  else col=3;
+  const r=discharge[sex][age];
+  return r?r[col]:30;
+}
+
+// ===== RF-CL TABLE (ESC 2024) =====
+const rfcl={
+  m:{30:[[0,1,3],[3,6,11],[6,10,16]],40:[[2,5,10],[10,14,19],[16,19,23]],50:[[6,10,15],[14,20,27],[22,27,34]],60:[[4,7,12],[12,17,25],[21,27,33]],70:[[2,4,8],[10,15,21],[20,26,33]]},
+  f:{30:[[0,1,2],[1,2,5],[4,7,11]],40:[[1,2,5],[4,7,12],[8,12,17]],50:[[1,2,5],[6,11,17],[15,19,24]],60:[[1,2,5],[8,12,17],[22,27,34]],70:[[2,3,7],[9,14,22],[32,35,39]]}
+};
+function getRFCLProb(sex,age,rfCount,adjCount){
+  let ssIdx=0;
+  if(sympClass==='typical')ssIdx=2;
+  else if(sympClass==='atypical'||sympClass==='equiv')ssIdx=1;
+  else ssIdx=0;
+  let rfIdx=rfCount<=1?0:rfCount===2?1:2;
+  const tbl=rfcl[sex][age];
+  if(!tbl)return 20;
+  let base=tbl[ssIdx][rfIdx];
+  return Math.min(base+adjCount*7,95);
+}
+
+function calcAll(){
+  const sex=document.querySelector('input[name="sex"]:checked')?.value;
+  const age=parseInt(document.querySelector('input[name="age"]:checked')?.value||0);
+  const rfCount=countRF();
+  const adjCount=document.querySelectorAll('input[name="adj"]:checked').length;
+
+  document.getElementById('rfCountDisplay').style.display=rfCount>0?'block':'none';
+  document.getElementById('rfCountNum').textContent=rfCount;
+
+  if(!sex||!age){
+    document.getElementById('probResult').style.display='none';
+    document.getElementById('step2Next').disabled=true;
+    return;
+  }
+
+  rfclProb=getRFCLProb(sex,age,rfCount,adjCount);
+  dischProb=getDischProb(sex,age);
+  fusedProb=Math.round((rfclProb+dischProb)/2);
+
+  // Display
+  document.getElementById('probResult').style.display='block';
+  document.getElementById('rfclPct').textContent='~'+rfclProb+'%';
+  document.getElementById('dischPct').textContent='~'+dischProb+'%';
+
+  function setBand(el,prob){
+    el.className='risk-band';
+    let cat,sub,cls;
+    if(prob<5){cls='vlow';cat='Sehr niedrig (<5%)';sub='Weitere Tests aufschieben';}
+    else if(prob<15){cls='low';cat='Niedrig (5–15%)';sub='CACS zur Reklassifizierung';}
+    else if(prob<50){cls='mod';cat='Moderat (15–50%)';sub='CCTA bevorzugt (NVL I)';}
+    else if(prob<85){cls='high';cat='Hoch (50–85%)';sub='Funktionelle Bildgebung';}
+    else{cls='vhigh';cat='Sehr hoch (>85%)';sub='HKU erwägen';}
+    el.classList.add(cls);
+    return {cat,sub};
+  }
+  const r1=setBand(document.getElementById('rfclBand'),rfclProb);
+  document.getElementById('rfclCat').textContent=r1.cat;
+  document.getElementById('rfclSub').textContent=r1.sub;
+  const r2=setBand(document.getElementById('dischBand'),dischProb);
+  document.getElementById('dischCat').textContent=r2.cat;
+  document.getElementById('dischSub').textContent=r2.sub;
+
+  const fb=document.getElementById('fusedBand');
+  const r3=setBand(fb,fusedProb);
+  document.getElementById('fusedText').textContent='Fusionierte Einschätzung: '+r3.cat;
+  document.getElementById('fusedSub').textContent='Mittelwert ESC RF-CL ('+rfclProb+'%) + NVL DISCHARGE ('+dischProb+'%)';
+
+  document.getElementById('step2Next').disabled=false;
+}
+
+// ===== ACUTE =====
+function handleAcuteBtn(val){
+  const yesBtn=document.getElementById('acs_yes_btn');
+  const noBtn=document.getElementById('acs_no_btn');
+  yesBtn.style.borderColor = val==='yes' ? 'var(--err)' : 'var(--border)';
+  yesBtn.style.background  = val==='yes' ? 'var(--err-l)' : 'var(--surface-2)';
+  yesBtn.style.color        = val==='yes' ? 'var(--err)' : 'var(--text)';
+  noBtn.style.borderColor  = val==='no'  ? 'var(--ok)'  : 'var(--border)';
+  noBtn.style.background   = val==='no'  ? 'var(--ok-l)' : 'var(--surface-2)';
+  noBtn.style.color         = val==='no'  ? 'var(--ok)'  : 'var(--text)';
+  document.getElementById('acuteWarn').style.display = val==='yes' ? 'flex' : 'none';
+  document.getElementById('sympSection').style.display = val==='no' ? 'block' : 'none';
+  document.getElementById('step1Next').disabled = val!=='no';
+}
+
+// ===== STEP 3 HELPERS =====
+function handleStressEchoNorm(cb){
+  if(cb.checked){['se_low','se_high'].forEach(id=>{document.getElementById(id).checked=false})}
+  updateStep3();
+}
+function handleMPNorm(cb){
+  if(cb.checked){['mp_low','mp_high','mp_scar'].forEach(id=>{document.getElementById(id).checked=false})}
+  updateStep3();
+}
+function handleCCTAnorm(cb){
+  if(cb.checked){['ct_nonobt','ct_inter','ct_lm','ct_3v'].forEach(id=>{document.getElementById(id).checked=false})}
+  updateStep3();
+}
+function handleNAcheck(name,naId){
+  const na=document.getElementById(naId);
+  if(na.checked){
+    document.querySelectorAll('input[name="'+name+'"]').forEach(el=>{if(el.id!==naId)el.checked=false});
+  }
+  updateStep3();
+}
+function updateStep3(){
+  const lvef=document.querySelector('input[name="lvef"]:checked');
+  const anyTest=['stressecho','myoPerf','ccta','ergEcg'].some(n=>document.querySelectorAll('input[name="'+n+'"]:checked').length>0);
+  document.getElementById('step3Next').disabled=!(lvef&&anyTest);
+}
+
+// ===== STEP 4 =====
+function handleNoneCM(cb){
+  if(cb.checked)document.querySelectorAll('input[name="cm"]').forEach(el=>{if(el!==cb)el.checked=false});
+  updateStep4();
+}
+function updateStep4(){
+  const ang=document.querySelector('input[name="angina"]:checked');
+  const th=document.querySelector('input[name="therapy"]:checked');
+  const anyCM=document.querySelectorAll('input[name="cm"]:checked').length>0;
+  document.getElementById('step4Next').disabled=!(ang&&th&&anyCM);
+}
+
+// ===== STEP NAVIGATION =====
+function toggleStep(id){document.getElementById(id).classList.toggle('open')}
+function goToStep(n){
+  for(let i=1;i<=5;i++){
+    const c=document.getElementById('step'+i);
+    c.classList.remove('open','active','completed');
+    if(i<n)c.classList.add('completed');
+    else if(i===n){c.classList.add('open','active');c.scrollIntoView({behavior:'smooth',block:'start'})}
+  }
+  document.getElementById('progressBar').style.width=(((n-1)/4)*100)+'%';
+  document.getElementById('progressCount').textContent='Schritt '+n+' von 5';
+  if(n===5)generateResult();
+}
+
+// ===== RESULT GENERATION =====
+
+function buildSummary() {
+  const sex = document.querySelector('input[name="sex"]:checked')?.value;
+  const age = document.querySelector('input[name="age"]:checked')?.value;
+  const lvef = document.querySelector('input[name="lvef"]:checked')?.value;
+  const therapy = document.querySelector('input[name="therapy"]:checked')?.value;
+  const angina = document.querySelector('input[name="angina"]:checked')?.value;
+
+  const sexLabel = sex === 'm' ? 'Männlich' : sex === 'f' ? 'Weiblich' : '–';
+  const ageLabel = age ? age + '–' + (parseInt(age)+9) + ' J.' : '–';
+
+  const lvefMap = {norm:'EF ≥50% (erhalten)', mid:'EF 40–49% (leicht red.)', red:'EF <40% (deutlich red.)', unk:'Nicht bekannt'};
+  const therapyMap = {none:'Keine antiangöse Therapie', one:'1 Substanz, weiterhin symptomatisch', opt:'≥2 Substanzen, weiterhin symptomatisch', ref:'Refraktär trotz max. GDMT'};
+  const anginaMap = {high:'CCS I–II (hohe Belastung)', low:'CCS III (geringe Belastung)', rest:'CCS IV / Ruheschmerzen / Vasospasmus'};
+
+  const sympChecked = [];
+  if(document.getElementById('s_retrosternal').checked) sympChecked.push('Retrosternales Druckgefühl');
+  if(document.getElementById('s_exertion').checked) sympChecked.push('Belastungsabhängig');
+  if(document.getElementById('s_nitro').checked) sympChecked.push('Nitratansprechen');
+  if(document.getElementById('s_radiation').checked) sympChecked.push('Ausstrahlung');
+  if(document.getElementById('s_equivdyspnoe').checked) sympChecked.push('Angina-Äquivalent');
+  if(document.getElementById('s_rest').checked) sympChecked.push('Ruheschmerzen');
+
+  const rfChecked = [];
+  if(document.getElementById('rf_hyp').checked) rfChecked.push('Hypertonie');
+  if(document.getElementById('rf_dm').checked) rfChecked.push('Diabetes');
+  if(document.getElementById('rf_lip').checked) rfChecked.push('Dyslipidämie');
+  if(document.getElementById('rf_smoke').checked) rfChecked.push('Rauchen');
+  if(document.getElementById('rf_fam').checked) rfChecked.push('Familienanamnese');
+  if(document.getElementById('rf_obe').checked) rfChecked.push('Adipositas');
+
+  const findings = [];
+  if(document.getElementById('se_high').checked) findings.push('🔴 Stressecho: Hochrisiko (≥3 Segmente WBS)');
+  if(document.getElementById('se_low').checked) findings.push('🟡 Stressecho: Geringgradige WBS');
+  if(document.getElementById('se_norm').checked) findings.push('✅ Stressecho: Normal');
+  if(document.getElementById('mp_high').checked) findings.push('🔴 Szintigraphie: Hochrisiko (≥10% LV)');
+  if(document.getElementById('mp_low').checked) findings.push('🟡 Szintigraphie: Kleiner Defekt (<10% LV)');
+  if(document.getElementById('mp_scar').checked) findings.push('🟠 Szintigraphie: Narbe');
+  if(document.getElementById('mp_norm').checked) findings.push('✅ Szintigraphie: Normal');
+  if(document.getElementById('ct_lm').checked) findings.push('🔴 CCTA: Hauptstammstenose ≥50%');
+  if(document.getElementById('ct_3v').checked) findings.push('🔴 CCTA: 3-Gefäß-KHK / RIVA prox.');
+  if(document.getElementById('ct_inter').checked) findings.push('🟡 CCTA: Intermediäre Stenose');
+  if(document.getElementById('ct_nonobt').checked) findings.push('🟡 CCTA: Nicht-obstruktive KHK');
+  if(document.getElementById('ct_norm').checked) findings.push('✅ CCTA: Keine stenosierende KHK');
+  if(document.getElementById('ecg_duke').checked) findings.push('🔴 Belastungs-EKG: Duke-Score ≤−10');
+  if(document.getElementById('ecg_pos').checked) findings.push('🟡 Belastungs-EKG: Positiv');
+  if(document.getElementById('ecg_norm').checked) findings.push('✅ Belastungs-EKG: Normal');
+
+  const cms = [];
+  if(document.getElementById('cm_hf').checked) cms.push('HFrEF EF <35%');
+  if(document.getElementById('cm_anoca').checked) cms.push('V.a. ANOCA/INOCA');
+  if(document.getElementById('cm_frail').checked) cms.push('Schwere Gebrechlichkeit');
+
+  const sympLabel = {typical:'Typische Angina pectoris', atypical:'Atypische Angina pectoris', nonangin:'Nicht-anginöser Brustschmerz', equiv:'Angina-Äquivalent (ESC 2024)', vasospasm:'V.a. Vasospastische Angina', none:'–'}[sympClass] || '–';
+
+  let html = `<div style="background:var(--surface-2);border:1px solid var(--divider);border-radius:var(--r-lg);padding:1rem 1.25rem;margin-bottom:1rem">
+    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem">
+      📋 Entscheidungsgrundlage – eingegebene Befunde
+      <span style="flex:1;height:1px;background:var(--divider);display:block"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.82rem">`;
+
+  const row = (label, val) => val ? `<div style="color:var(--muted)">${label}</div><div style="font-weight:600;color:var(--text)">${val}</div>` : '';
+
+  html += row('Geschlecht / Alter', sexLabel + (age ? ' · ' + ageLabel : ''));
+  html += row('Symptomklasse', sympLabel);
+  html += row('Symptome', sympChecked.length ? sympChecked.join(' · ') : '–');
+  html += row('Risikofaktoren ('+rfChecked.length+')', rfChecked.length ? rfChecked.join(' · ') : 'Keine');
+  html += row('VTW ESC (RF-CL)', rfclProb ? '~'+rfclProb+'%' : '–');
+  html += row('VTW NVL (DISCHARGE)', dischProb ? '~'+dischProb+'%' : '–');
+  html += row('Fusionierte VTW', fusedProb ? '~'+fusedProb+'%' : '–');
+  html += row('LV-Funktion', lvefMap[lvef] || '–');
+  html += row('Vorherige Therapie', therapyMap[therapy] || '–');
+  html += row('Angina-Schwelle', anginaMap[angina] || '–');
+  if(findings.length) html += row('Testergebnisse', findings.join('<br>'));
+  if(cms.length) html += row('Komorbiditäten', cms.join(' · '));
+
+  html += `</div></div>`;
+  return html;
+}
+
+function generateResult(){
+  const container=document.getElementById('resultContainer');
+  const acute=document.querySelector('input[name="acute"]:checked')?.value;
+  const lvef=document.querySelector('input[name="lvef"]:checked')?.value;
+  const therapy=document.querySelector('input[name="therapy"]:checked')?.value;
+  const angina=document.querySelector('input[name="angina"]:checked')?.value;
+
+  const hasHighRiskSE=document.getElementById('se_high').checked;
+  const hasHighRiskMP=document.getElementById('mp_high').checked;
+  const hasHighRiskCT=document.getElementById('ct_lm').checked||document.getElementById('ct_3v').checked;
+  const hasDuke=document.getElementById('ecg_duke').checked;
+  const hasInterCCTA=document.getElementById('ct_inter').checked;
+  const hasNormCCTA=document.getElementById('ct_norm').checked;
+  const hasNormSE=document.getElementById('se_norm').checked;
+  const hasNormMP=document.getElementById('mp_norm').checked;
+
+  const isRefract=therapy==='ref';
+  const isLowAngina=angina==='low'||angina==='rest';
+  const isVasospasm=angina==='rest'||sympClass==='vasospasm';
+  const hasHF=document.getElementById('cm_hf').checked;
+  const hasANOCA=document.getElementById('cm_anoca').checked;
+  const hasFrailty=document.getElementById('cm_frail').checked;
+
+  const prob=fusedProb||rfclProb||30;
+  const isVHigh=prob>=85;
+  const isHigh=prob>=50&&prob<85;
+  const isMod=prob>=15&&prob<50;
+  const isLow=prob>=5&&prob<15;
+  const isVLow=prob<5;
+  const anyHighRisk=hasHighRiskSE||hasHighRiskMP||hasHighRiskCT||hasDuke;
+
+  let html='';
+
+  // ACS
+  if(acute==='yes'){
+    html=buildResult('🚨','red','Akutes Koronarsyndrom – kein CCS-Pfad','red',
+      'Diese Checkliste gilt ausschließlich für das chronische Koronarsyndrom. Bitte den ACS-Notfallpfad einleiten.',
+      [{c:'ic',t:'Sofortige Weiterleitung per ACS-Pfad',s:'Notaufnahme + EKG + Troponin + ACS-Leitlinie ESC 2023'}],[],[],[],[],['both_no']);
+    container.innerHTML=buildSummary()+html;return;
+  }
+
+  // FRAILTY
+  if(hasFrailty){
+    html=buildResult('🏥','orange','Keine HKU empfohlen – Konservatives Vorgehen','orange',
+      'Bei schwerer Gebrechlichkeit/eingeschränkter Lebenserwartung überwiegen Risiken der Invasivdiagnostik. Konservative Therapie und ggf. nicht-invasive Diagnostik zur Diagnosesicherung.',
+      [{c:'ic',t:'Konservatives Management',s:'Klinische Diagnose + medikamentöse Therapie + Lebensstilmodifikation ohne invasive Diagnostik (ESC IIa / NVL)'},
+       {c:'iib',t:'Ggf. nicht-invasive Funktionsdiagnostik',s:'Falls Diagnoseklarheit therapeutisch relevant: Stressecho oder Szintigraphie ohne Strahlenbelastungsrisiko bevorzugen'}],
+      [],getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['both_no']);
+    container.innerHTML=buildSummary()+html;return;
+  }
+
+  // ANOCA
+  if(hasANOCA&&!anyHighRisk){
+    html=buildResult('🔬','teal','Keine Standard-HKU – ICFT erwägen (ANOCA/INOCA)','teal',
+      'Bei bekannten normalen oder nicht-obstruktiven Koronarien: Invasive Koronare Funktionsdiagnostik (ICFT) zur Endotyp-Bestimmung gemäß ESC 2024 I B.',
+      [{c:'ib',t:'Invasive koronare Funktionsdiagnostik (ICFT)',s:'Acetylcholin-Provokation + CFR/IMR-Messung zur Bestimmung des Endotyps (mikrovaskul. Angina vs. Vasospasmus) – ESC I B'},
+       {c:'ic',t:'Standard-HKU ohne Funktionsdiagnostik nicht empfohlen',s:'Reiner anatomischer Befund ohne Funktionsdiagnostik bei ANOCA ohne Mehrwert'}],
+      [],getAntianginRecs(therapy,angina,true),getSecPrevRecs(lvef,hasHF),['anoca'],['icft']);
+    container.innerHTML=html;return;
+  }
+
+  // VERY HIGH or CRITICAL FINDINGS
+  if(isVHigh||anyHighRisk||(hasHF&&lvef==='red')||hasInterCCTA){
+    let title='HKU empfohlen (Klasse I)';
+    let sub='';
+    if(isVHigh&&!anyHighRisk)sub='Sehr hohe Vortestwahrscheinlichkeit (~'+prob+'%) – Direktes Vorgehen zur ICA ohne vorherige nicht-invasive Diagnostik.';
+    else if(anyHighRisk)sub='Hochrisikobefunde in der nicht-invasiven Diagnostik – HKU zur Risikostratifizierung und Revaskularisierungsplanung.';
+    else if(hasInterCCTA)sub='CCTA zeigt intermediäre Stenose mit unklarer hämodynamischer Relevanz – HKU mit FFR/iFR zur definitiven Klärung.';
+    else if(hasHF&&lvef==='red')sub='HFrEF mit EF<40% und V.a. obstruktiver KHK – HKU zur Prognoseoptimierung (Revaskularisation).';
+
+    const mainRecs=[
+      {c:'ia',t:'HKU mit radialem Zugang (bevorzugt)',s:'Signifikante Reduktion von Blutungskomplikationen und Mortalität vs. femoralem Zugang – ESC I A / NVL'},
+      {c:'ia',t:'Koronardruckmessung (FFR/iFR) bei intermediären Stenosen',s:'FFR ≤0,80 oder iFR ≤0,89 als Revaskularisierungsschwelle – ESC I A. Nicht routinemäßig alle Gefäße messen (ESC III A)'}
+    ];
+    if(hasHF&&lvef==='red')mainRecs.push({c:'ib',t:'HKU mit Blick auf CABG-Indikation',s:'Bei HFrEF EF<35% + obstruktiver KHK: CABG verbessert Prognose – ESC I B'});
+    if(isLowAngina)mainRecs.push({c:'ic',t:'Angina bei geringer Belastung: HKU als Ersttest',s:'De-novo-Symptome bei niedriger Belastungsschwelle – ICA nach kardiologischer Evaluation als erste Diagnostik – ESC I C'});
+    if(isRefract)mainRecs.push({c:'ic',t:'Refraktäre Angina: HKU für Revaskularisationsplanung',s:'Persistierende Symptome trotz max. GDMT – ICA + ggf. PCI/CABG zur Symptomkontrolle – ESC I C / NVL'});
+
+    html=buildResult('✅','green',title,'green',sub,mainRecs,[],getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['both_yes']);
+    container.innerHTML=buildSummary()+html;return;
+  }
+
+  // REFRACTORY – any probability
+  if(isRefract){
+    html=buildResult('✅','green','HKU empfohlen bei refraktärer Angina (Klasse I)','green',
+      'Persistierende Angina trotz optimierter GDMT (≥3 Substanzen): HKU für Revaskularisationsplanung.',
+      [{c:'ia',t:'HKU + Revaskularisationsplanung (PCI/CABG)',s:'Dokumentierte Ischämie + refraktäre Angina: Revaskularisation verbessert Lebensqualität – ESC I A / NVL Empf. 8-1'},
+       {c:'ic',t:'Radialer Zugang bevorzugt',s:'ESC I A'}],
+      [],getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['both_yes']);
+    container.innerHTML=buildSummary()+html;return;
+  }
+
+  // HIGH without high risk findings → functional imaging first
+  if(isHigh){
+    const nonInvRecs=[
+      {c:'nvls',t:'Stressechokardiographie (bevorzugt) – GKV-Leistung',s:'NVL 2024 + ESC I B | Sens. 87% / Spez. 89% | kein Strahlenrisiko | bei guten Schallbedingungen Mittel der Wahl für funktionelle Diagnostik in Rostock'},
+      {c:'ib',t:'Myokardszintigraphie SPECT (alternativ) – GKV-Leistung',s:'ESC I B / NVL | SPECT Sens. 83–88% | V.a. bei eingeschränktem Schallfenster oder Vorhofflimmern bevorzugen | Strahlenexposition beachten'},
+      {c:'ib',t:'PET-Myokardperfusion (wenn verfügbar)',s:'ESC bevorzugt bei V.a. mikrovask. Dysfunktion | quantitative MBF-Messung | geringere Strahlenbelastung als SPECT | kein GKV-Leistungsanspruch'},
+      {c:'iia',t:'Stress-MRT (wenn verfügbar und Expertise vorhanden)',s:'ESC I B / NVL | höchste Sens./Spez. | kein GKV-Anspruch | MRT-Kontraindikationen beachten (Schrittmacher, Claustrophobie)'}
+    ];
+    if(hasNormSE||hasNormMP){
+      html=buildResult('📊','blue','Keine HKU bei normalem Funktionstest – Konservatives Vorgehen','blue',
+        'Hohe Vortestwahrscheinlichkeit (~'+prob+'%), jedoch normaler Befund im Stresstest. Konservative Therapie + Verlaufskontrolle.',
+        [{c:'ib',t:'Konservative GDMT-Optimierung + Verlauf',s:'Negativer NPW ≥98,8% für MACE nach 36 Monaten bei negativem Stresstest (NVL) – keine HKU indiziert'},
+         {c:'iia',t:'Sequentielle Bildgebung erwägen',s:'Bei persistierenden Symptomen: ggf. ergänzende CCTA oder wiederholter Stresstest nach GDMT-Optimierung'}],
+        [],getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['both_no']);
+    } else {
+      html=buildResult('🔭','orange','Funktionelle Bildgebung empfohlen vor HKU','orange',
+        'Hohe klinische Wahrscheinlichkeit (~'+prob+'%) – Funktionelle Bildgebung zur Ischämiequantifizierung und Risikostratifizierung. HKU bei Hochrisikobefund.',
+        [],nonInvRecs,getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['esc_no','nvl_no']);
+    }
+    container.innerHTML=buildSummary()+html;return;
+  }
+
+  // MODERATE 15-50% → CCTA first
+  if(isMod){
+    const nonInvRecs=[
+      {c:'nvls',t:'CCTA – bevorzugte Erstdiagnostik (NVL Empf. 3-15)',s:'NVL I / ESC I A | VTW 15–50%: CCTA hat höchste Testgüte für KHK-Ausschluss | Sens. 95% / NPV 94% | GKV-Leistung | Strahlenexposition beachten'},
+      {c:'nvls',t:'Stressechokardiographie – Alternative bei Kontraindikation CCTA',s:'NVL + ESC I B | GKV-Leistung | bevorzugt bei: eingeschränkter Nierenfunktion, Kontrastmittelallergie, Vorhofflimmern, schwerer Koronarkalkose'},
+      {c:'ib',t:'Myokardszintigraphie SPECT – bei unklarem CCTA oder V.a. Ischämie',s:'ESC I B / NVL | Sequentielles Testen: CCTA → bei positiver CCTA + unklarer Hämodynamik → SPECT/Stressecho'},
+    ];
+    html=buildResult('🔬','blue','Keine HKU als Erstschritt – Nicht-invasive Diagnostik empfohlen','blue',
+      'Moderate Vortestwahrscheinlichkeit (~'+prob+'%) – NVL empfiehlt CCTA als bevorzugte Erstdiagnostik. HKU erst nach Hochrisikobefund oder refraktärer Angina.',
+      [],nonInvRecs,getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['esc_no','nvl_no']);
+    container.innerHTML=buildSummary()+html;return;
+  }
+
+  // LOW 5-15% → CACS first
+  if(isLow){
+    html=buildResult('📊','blue','Keine HKU – CACS-CT zur Reklassifizierung','blue',
+      'Niedrige klinische Wahrscheinlichkeit (~'+prob+'%). NVL: CACS-CT zur Reklassifizierung. Bei CACS=0 weitere Diagnostik aufschieben.',
+      [],
+      [{c:'nvls',t:'CACS-CT zur Reklassifizierung (NVL IIa B)',s:'CACS=0: Wahrscheinlichkeit <5% → Diagnose anderer Ursachen. CACS 100–399 → CCTA oder Stressecho. CACS ≥400 → hohe VTW, Anpassung nach oben'},
+       {c:'iia',t:'Bei CACS 1–99: CCTA erwägen',s:'ESC IIa / NVL: Quantifizierung der Plaquelast und Ausschluss stenosierender KHK'}],
+      getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['both_no']);
+    container.innerHTML=buildSummary()+html;return;
+  }
+
+  // VERY LOW <5%
+  html=buildResult('✅','blue','Keine HKU – Weitere kardiologische Diagnostik aufschieben','blue',
+    'Sehr niedrige Vortestwahrscheinlichkeit (~'+prob+'%). NVL Empf. 3-12: Bei VTW <15% sollte primär keine Diagnostik zum KHK-Nachweis eingeleitet werden.',
+    [],
+    [{c:'nvls',t:'Differenzialdiagnosen abklären (NVL Empf. 3-12)',s:'Andere Ursachen des Brustschmerzes in Vordergrund. Kardiale KHK-Diagnostik nicht primär indiziert.'},
+     {c:'iia',t:'Aufschieben weiterer kardiologischer Tests (ESC IIa B)',s:'Re-Evaluierung bei Symptomverschlechterung oder neuen Befunden.'}],
+    getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['both_no']);
+  html=buildResult('✅','blue','Keine HKU – Weitere kardiologische Diagnostik aufschieben','blue',
+    'Sehr niedrige Vortestwahrscheinlichkeit (~'+prob+'%). NVL Empf. 3-12: Bei VTW <15% sollte primär keine Diagnostik zum KHK-Nachweis eingeleitet werden.',
+    [],
+    [{c:'nvls',t:'Differenzialdiagnosen abklären (NVL Empf. 3-12)',s:'Andere Ursachen des Brustschmerzes in Vordergrund. Kardiale KHK-Diagnostik nicht primär indiziert.'},
+     {c:'iia',t:'Aufschieben weiterer kardiologischer Tests (ESC IIa B)',s:'Re-Evaluierung bei Symptomverschlechterung oder neuen Befunden.'}],
+    getAntianginRecs(therapy,angina),getSecPrevRecs(lvef,hasHF),[],['both_no']);
+  container.innerHTML=buildSummary()+html;
+}
+
+function getAntianginRecs(therapy,angina,isANOCA=false){
+  const recs=[];
+  recs.push({c:'nvls',t:'Schnellwirksames Nitrat zur Anfallskupierung',s:'NVL Empf. 7-18 / ESC: Sublinguales NTG bei jedem CCS-Patienten obligat – ggf. auch präventiv vor Belastung'});
+  if(isANOCA){
+    recs.push({c:'ia',t:'Kalziumantagonisten bei Vasospasmen (ESC I A)',s:'Nifedipin/Amlodipin 5–10 mg oder Diltiazem 60–120 mg als Erstlinie für vasospastische Angina'});
+    recs.push({c:'iia',t:'Beta-Blocker bei mikrovaskulärer Angina (ESC IIa B)',s:'Bisoprolol 5–10 mg oder Metoprolol ret. 50–200 mg bei mikrovaskulärer Angina'});
+    recs.push({c:'iia',t:'ACE-Hemmer bei Endotheldysfunktion (ESC IIa B)',s:'Ramipril 2,5–10 mg oder Perindopril 5–10 mg – Symptomkontrolle bei koronarer Endotheldysfunktion'});
+    return recs;
+  }
+  if(therapy==='none'||therapy==='one'){
+    recs.push({c:'nvls',t:'Beta-Blocker als Erstlinie (NVL / ESC I B)',s:'Bisoprolol 5–10 mg/d oder Metoprolol ret. 47,5–200 mg/d | Ziel-HF 55–60/min | 1. Wahl bei: HFrEF, Z.n. MI, Hypertonie, Tachykardie'});
+    recs.push({c:'nvls',t:'DHP-Kalziumantagonist (CCB) als Erstlinie oder Kombination',s:'Amlodipin 5–10 mg/d oder Felodipin 5–10 mg/d | 1. Wahl bei: Bradykardie, Asthma/COPD-Kontraindik. für BB | Kombination BB + DHP-CCB möglich'});
+  }
+  if(therapy==='one'){
+    recs.push({c:'iia',t:'Kombinationstherapie: Beta-Blocker + DHP-CCB',s:'Bisoprolol + Amlodipin – synergistisch bei insuffizienter Monotherapie (ESC IIa B / NVL)'});
+  }
+  if(therapy==='opt'||therapy==='ref'){
+    recs.push({c:'iia',t:'Langzeitnitrat als Add-on (NVL / ESC IIa B)',s:'ISOSORBID-MONONITRAT ret. 40–120 mg/d oder ISDN ret. 40–80 mg/d | Nitratpause 8–12 h/d zwingend (Toleranzentwicklung!)'});
+    recs.push({c:'iia',t:'Ranolazin als Add-on (ESC IIa B / NVL)',s:'375–750 mg 2×/d p.o. | spätnatriumstromhemmend | keine Herzfrequenzwirkung | gut verträglich bei Bradykardie'});
+    recs.push({c:'iib',t:'Nicorandil oder Trimetazidin als Reserveoption (ESC IIb B)',s:'Nicorandil 10–20 mg 2×/d | metabolisch wirksam | besonders bei Mikroangiopathie; Ivabradin nur bei Sinusrhythmus + EF <40% (NVL-Warnung: erhöhtes MACE-Risiko bei Angina + Ivabradin ohne HFrEF)'});
+  }
+  return recs;
+}
+
+function getSecPrevRecs(lvef,hasHF){
+  const recs=[];
+  recs.push({c:'ia',t:'Hochdosiertes Statin (LDL-Ziel <1,4 mmol/l)',s:'Atorvastatin 40–80 mg oder Rosuvastatin 20–40 mg | ≥50% LDL-Reduktion | ESC I A / NVL I A'});
+  recs.push({c:'ia',t:'Ezetimib wenn LDL-Ziel nicht erreicht',s:'10 mg/d als Kombinationstherapie zum Statin | ESC I A / NVL'});
+  recs.push({c:'ib',t:'Thrombozytenhemmung: ASS 75–100 mg oder Clopidogrel 75 mg',s:'Bei gesicherter obstruktiver KHK ohne vorherige Revaskularisation: ASS lifelong – ESC I B / NVL. Clopidogrel als gleichwertige Alternative (ESC I A)'});
+  recs.push({c:'iia',t:'Colchicin 0,5 mg täglich (antientzündlich)',s:'Reduktion von MI, Schlaganfall und Revaskularisationsbedarf – ESC IIa A | Indikation bei persistierend erhöhtem Inflammationsmarker (hsCRP)'});
+  if(hasHF||lvef==='red'){
+    recs.push({c:'ia',t:'Vollständige HF-Therapie (RAAS + BB + SGLT2 + MRA)',s:'Sacubitril/Valsartan (oder ACE-I) + Betablocker + Dapagliflozin/Empagliflozin + Eplerenon – ESC I A'});
+  } else {
+    recs.push({c:'ia',t:'ACE-Hemmer / ARB nur bei Komorbidität (Hypertonie, DM, HF)',s:'NVL: Keine eigenständige KHK-Indikation für ACE-Hemmer bei erhaltener LV-Funktion ohne weitere Indikation (NVL 2024 Empf. 7.5.1)'});
+  }
+  recs.push({c:'ia',t:'SGLT2-Hemmer bei Typ-2-Diabetes (ESC I A)',s:'Dapagliflozin oder Empagliflozin unabhängig von HbA1c – kardiovaskuläre Ereignisreduktion'});
+  recs.push({c:'iia',t:'GLP-1-RA Semaglutid bei Übergewicht (BMI ≥27) ohne Diabetes',s:'ESC IIa B – Reduktion von kardiovask. Tod, MI und Schlaganfall bei CCS + Adipositas'});
+  return recs;
+}
+
+function buildResult(icon,iconColor,title,titleColor,sub,mainRecs,diagRecs,antianginRecs,secPrevRecs,flags,sources){
+  sources = sources || [];
+  let srcBadges = '';
+  if(sources.includes('esc_yes')) srcBadges += '<span style="background:#dbeafe;color:#1d4ed8;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #1d4ed8">✅ ESC 2024: HKU empfohlen</span> ';
+  if(sources.includes('esc_no'))  srcBadges += '<span style="background:#fee2e2;color:#b91c1c;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #b91c1c">❌ ESC 2024: Keine HKU</span> ';
+  if(sources.includes('nvl_yes')) srcBadges += '<span style="background:#ccfbf1;color:#0d9488;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #0d9488">✅ NVL 2024: HKU empfohlen</span> ';
+  if(sources.includes('nvl_no'))  srcBadges += '<span style="background:#fef3c7;color:#b45309;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #b45309">❌ NVL 2024: Keine HKU</span> ';
+  if(sources.includes('both_yes')) srcBadges += '<span style="background:#dbeafe;color:#1d4ed8;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #1d4ed8">✅ ESC 2024: HKU empfohlen</span> <span style="background:#ccfbf1;color:#0d9488;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #0d9488">✅ NVL 2024: HKU empfohlen</span> ';
+  if(sources.includes('both_no'))  srcBadges += '<span style="background:#fee2e2;color:#b91c1c;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #b91c1c">❌ ESC 2024: Keine HKU</span> <span style="background:#fef3c7;color:#b45309;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #b45309">❌ NVL 2024: Keine HKU</span> ';
+  if(sources.includes('icft'))     srcBadges += '<span style="background:#ccfbf1;color:#0d9488;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid #0d9488">🔬 ESC 2024: ICFT statt HKU</span> ';
+  let html=`<div class="result-panel">
+    <div class="result-header">
+      <div class="result-icon-wrap ${iconColor}"><span>${icon}</span></div>
+      <div>
+        <div class="result-title ${titleColor}">${title}</div>
+        ${srcBadges ? '<div style="display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0">' + srcBadges + '</div>' : ''}
+        <div class="result-sub">${sub}</div>
+      </div>
+    </div>
+    <div class="result-body">`;
+
+  if(mainRecs.length){
+    html+=`<div class="result-section"><div class="result-section-title">📋 Indikation / Diagnostische Entscheidung</div>
+    <div class="recs-list">${mainRecs.map(r=>buildRec(r)).join('')}</div></div>`;
+  }
+  if(diagRecs.length){
+    html+=`<div class="result-section"><div class="result-section-title">🔬 Empfohlene nicht-invasive Diagnostik</div>
+    <div class="recs-list">${diagRecs.map(r=>buildRec(r)).join('')}</div>
+</div>`;
+  }
+  if(antianginRecs.length){
+    html+=`<div class="result-section"><div class="result-section-title">💊 Antiangöse Therapieempfehlung</div>
+    <div class="recs-list">${antianginRecs.map(r=>buildRec(r)).join('')}</div>
+    <div style="margin-top:.6rem">
+      <div style="font-size:.77rem;font-weight:600;color:var(--muted);margin-bottom:.4rem">Substanzauswahl (Beispiele):</div>
+      <div class="drug-tags">
+        <span class="drug-tag p">Bisoprolol 5–10mg</span>
+        <span class="drug-tag p">Metoprolol ret. 47,5–200mg</span>
+        <span class="drug-tag ok">Amlodipin 5–10mg</span>
+        <span class="drug-tag ok">Nifedipin GITS 30–60mg</span>
+        <span class="drug-tag w">ISMN ret. 40–120mg</span>
+        <span class="drug-tag w">ISDN ret. 40–80mg</span>
+        <span class="drug-tag tl">Ranolazin 375–750mg 2×</span>
+        <span class="drug-tag tl">Nitroglycerin s.l.</span>
+      </div>
+    </div></div>`;
+  }
+  if(secPrevRecs.length){
+    html+=`<div class="result-section"><div class="result-section-title">🛡️ Sekundärprävention &amp; Prognoseverbesserung</div>
+    <div class="recs-list">${secPrevRecs.map(r=>buildRec(r)).join('')}</div></div>`;
+  }
+  if(flags.includes('anoca')){
+    html+=`<div class="result-section"><div class="result-section-title">ℹ️ Besonderer Hinweis: ANOCA/INOCA</div>
+    <div class="info-box teal">
+      <span class="info-icon">🔬</span>
+      <span><strong>Mikrovask. Angina / Vasospasmen:</strong> Invasive Koronare Funktionsdiagnostik (ICFT) mit intrakoronarem Acetylcholin + CFR/IMR-Messung zur Endotyp-Bestimmung (ESC I B). Vasospasmus: Kalziumantagonisten (ESC I A). Mikrovask. Angina: Beta-Blocker (ESC IIa B), Ranolazin, ACE-Hemmer. Kein Standard-Koronarangiogramm ohne Funktionsdiagnostik.</span>
+    </div></div>`;
+  }
+
+  // Leitlinienlegende
+  html+=`<div style="margin-top:1rem;text-align:right"><button onclick="copyResult()" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Empfehlung kopieren</button> <span id="copyConfirm" style="display:none;font-size:.8rem;color:var(--ok);font-weight:600">✓ Kopiert</span></div>`;
+  html+=`<div class="divider"></div>
+  <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:.4rem">Empfehlungsklassen</div>
+  <div class="legend-row">
+    <div class="legend-item"><span class="rec-badge ia">I A</span> Starke Empfehlung, RCT-Evidenz</div>
+    <div class="legend-item"><span class="rec-badge ib">I B</span> Starke Empfehlung, Beobachtungsdaten</div>
+    <div class="legend-item"><span class="rec-badge ic">I C</span> Starke Empfehlung, Expertenkonsens</div>
+    <div class="legend-item"><span class="rec-badge iia">IIa B</span> Bedingte Empfehlung</div>
+    <div class="legend-item"><span class="rec-badge iib">IIb B</span> Schwache Empfehlung</div>
+    <div class="legend-item"><span class="rec-badge nvls">NVL</span> Nationale VersorgungsLeitlinie 2024</div>
+  </div>
+  </div></div>`;
+  return html;
+}
+
+function buildRec(r){
+  const borderClass=r.c==='nvls'?'cnvl':(r.c.startsWith('ia')||r.c.startsWith('ib')||r.c.startsWith('ic'))?'c1':r.c==='iia'?'c2a':'c2b';
+  const badgeClass=r.c==='nvls'?'nvls':r.c.replace(/\s/g,'').toLowerCase();
+  const badgeTxt=r.c==='nvls'?'NVL':r.c.toUpperCase();
+  return `<div class="rec-item ${borderClass}">
+    <span class="rec-badge ${badgeClass}">${badgeTxt}</span>
+    <div class="rec-text"><strong>${r.t}</strong><span>${r.s}</span></div>
+  </div>`;
+}
+
+function resetAll(){
+  document.querySelectorAll('input[type="radio"],input[type="checkbox"]').forEach(el=>el.checked=false);
+  sympClass='none';rfclProb=0;dischProb=0;fusedProb=0;
+  document.getElementById('acuteWarn').classList.add('hidden');
+  document.getElementById('sympSection').style.display='none';
+  document.getElementById('sympScoreDisplay').style.display='none';
+  document.getElementById('probResult').style.display='none';
+  document.getElementById('rfCountDisplay').style.display='none';
+  document.getElementById('resultContainer').innerHTML='';
+  ['step1Next','step2Next','step3Next','step4Next'].forEach(id=>document.getElementById(id).disabled=true);
+  for(let i=1;i<=5;i++){
+    const c=document.getElementById('step'+i);
+    c.classList.remove('open','active','completed');
+    if(i===1)c.classList.add('open','active');
+  }
+  document.getElementById('progressBar').style.width='0%';
+  document.getElementById('progressCount').textContent='Schritt 1 von 5';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// init
+document.querySelectorAll('input[name="cm"]').forEach(el=>{
+  if(el.id==='cm_none3')el.addEventListener('change',()=>handleNoneCM(el));
+  else el.addEventListener('change',()=>{document.getElementById('cm_none3').checked=false;updateStep4()});
+});
+
+function copyResult(){
+  const sex=document.querySelector('input[name="sex"]:checked')?.value;
+  const age=document.querySelector('input[name="age"]:checked')?.value;
+  const sexLabel=sex==='m'?'Männlich':sex==='f'?'Weiblich':'–';
+  const ageLabel=age?age+'–'+(parseInt(age)+9)+' J.':'–';
+  const sympMap={typical:'Typische Angina pectoris',atypical:'Atypische Angina pectoris',nonangin:'Nicht-anginöser Brustschmerz',equiv:'Angina-Äquivalent (ESC 2024)',vasospasm:'V.a. Vasospastische Angina',none:'–'};
+  const lvefMap={norm:'EF ≥50% (erhalten)',mid:'EF 40–49% (leicht red.)',red:'EF <40% (deutlich red.)',unk:'Nicht bekannt'};
+  const therapyMap={none:'Keine',one:'1 Substanz (weiterhin symptomatisch)',opt:'≥2 Substanzen (weiterhin symptomatisch)',ref:'Refraktär tropos max. GDMT'};
+  const anginaMap={high:'CCS I–II',low:'CCS III',rest:'CCS IV / Ruhe'};
+
+  const lvef=document.querySelector('input[name="lvef"]:checked')?.value;
+  const therapy=document.querySelector('input[name="therapy"]:checked')?.value;
+  const angina=document.querySelector('input[name="angina"]:checked')?.value;
+  const rfCount=document.querySelectorAll('input[name="rfactors"]:checked').length;
+
+  const resultTitle=document.querySelector('.result-title')?.textContent||'–';
+  const srcBadges=[...document.querySelectorAll('.result-header span[style*="border-radius:99px"]')].map(el=>el.textContent.trim()).join(' | ')||'–';
+
+  const findings=[];
+  const testMap={se_high:'Stressecho: Hochrisiko',se_low:'Stressecho: Geringgradige WBS',se_norm:'Stressecho: Normal',mp_high:'Szintigraphie: Hochrisiko (≥10% LV)',mp_low:'Szintigraphie: Kleiner Defekt',mp_scar:'Szintigraphie: Narbe',mp_norm:'Szintigraphie: Normal',ct_lm:'CCTA: Hauptstammstenose',ct_3v:'CCTA: 3-Gefäß-KHK',ct_inter:'CCTA: Intermediäre Stenose',ct_nonobt:'CCTA: Nicht-obstruktiv',ct_norm:'CCTA: Normal',ecg_duke:'Belastungs-EKG: Duke-Score ≤−10',ecg_pos:'Belastungs-EKG: Positiv',ecg_norm:'Belastungs-EKG: Normal'};
+  Object.keys(testMap).forEach(id=>{if(document.getElementById(id)?.checked)findings.push(testMap[id]);});
+
+  const recs=[...document.querySelectorAll('.rec-text strong')].map(el=>el.textContent.trim());
+  const recsDetail=[...document.querySelectorAll('.rec-text span')].map(el=>el.textContent.trim());
+
+  const date=new Date().toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
+
+  let txt='';
+  txt+='╔══════════════════════════════════════════════════════╗\n';
+  txt+='║  HKU-ENTSCHEIDUNGSHILFE – ESC 2024 / NVL 2024       ║\n';
+  txt+='╚══════════════════════════════════════════════════════╝\n';
+  txt+='Datum: '+date+'\n\n';
+
+  txt+='── PATIENTENBEZOGENE EINGABEN ──────────────────────────\n';
+  txt+='Geschlecht / Alter:    '+sexLabel+' / '+ageLabel+'\n';
+  txt+='Symptomklasse:         '+(sympMap[sympClass]||'–')+'\n';
+  txt+='Risikofaktoren:        '+rfCount+' von 6\n';
+  txt+='VTW ESC (RF-CL):       ~'+rfclProb+'%\n';
+  txt+='VTW NVL (DISCHARGE):   ~'+dischProb+'%\n';
+  txt+='Fusionierte VTW:       ~'+fusedProb+'%\n';
+  txt+='LV-Funktion:           '+(lvefMap[lvef]||'–')+'\n';
+  txt+='Angina-Schwelle:       '+(anginaMap[angina]||'–')+'\n';
+  txt+='Antiangöse Therapie:   '+(therapyMap[therapy]||'–')+'\n';
+  if(findings.length)txt+='Testergebnisse:        '+findings.join(' | ')+'\n';
+  txt+='\n';
+
+  txt+='── LEITLINIENGERECHTE EMPFEHLUNG ───────────────────────\n';
+  txt+=resultTitle+'\n';
+  txt+=srcBadges+'\n\n';
+
+  if(recs.length){
+    txt+='Empfehlungen:\n';
+    recs.forEach((r,i)=>{
+      txt+='  • '+r+'\n';
+      if(recsDetail[i])txt+='    '+recsDetail[i]+'\n';
+    });
+  }
+
+  txt+='\n── HINWEIS ──────────────────────────────────────────────\n';
+  txt+='⚠️  TESTVERSION – Nicht für klinische Routinenutzung freigegeben.\n';
+  txt+='    Basierend auf: ESC 2024 CCS-Leitlinien & NVL Chronische KHK 2024.\n';
+  txt+='    Dieses Tool ersetzt nicht die individuelle ärztliche Entscheidung.\n';
+  txt+='    Keine Patientendaten werden gespeichert oder übertragen.\n';
+
+  navigator.clipboard.writeText(txt).then(()=>{
+    const el=document.getElementById('copyConfirm');
+    el.style.display='inline';
+    setTimeout(()=>el.style.display='none',3000);
+  }).catch(()=>{
+    prompt('Text kopieren (Strg+C / Cmd+C):', txt);
+  });
+}
+</script>
+
+</body>
+</html>
