@@ -287,9 +287,24 @@ button{cursor:pointer;border:none;background:none}
         ✅ Nein – Stabiles Bild
       </button>
     </div>
-    <div class="info-box orange" id="acuteWarn" style="display:none;margin-top:.75rem">
-      <span class="info-icon">🚨</span>
-      <span><strong>Akutes Koronarsyndrom:</strong> Diese Checkliste gilt ausschließlich für das chronische Koronarsyndrom (CCS). Bei ACS-Verdacht → sofortige Notfalldiagnostik gemäß ESC 2023 ACS-Leitlinien. Keine weitere Bearbeitung dieser Checkliste.</span>
+    <div id="acuteWarn" style="display:none;margin-top:.75rem;background:var(--err-l);border:2px solid var(--err);border-radius:var(--r-lg);padding:1rem 1.25rem">
+      <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem">
+        <span style="font-size:1.4rem">🚨</span>
+        <strong style="color:var(--err);font-size:1rem">Verdacht auf akutes Koronarsyndrom (ACS)</strong>
+      </div>
+      <div style="font-size:.88rem;color:var(--err);line-height:1.7">
+        <div style="margin-bottom:.5rem">Diese Checkliste gilt ausschließlich für das <strong>chronische Koronarsyndrom (CCS)</strong>. Bitte keine weitere Bearbeitung.</div>
+        <div style="background:white;border-radius:var(--r-md);padding:.75rem 1rem;border:1px solid var(--err);margin-bottom:.5rem">
+          <div style="font-weight:700;font-size:.9rem;margin-bottom:.4rem;color:var(--err)">📞 Sofortmaßnahmen:</div>
+          <div style="color:var(--text);font-size:.88rem;line-height:1.8">
+            <strong>1.</strong> KWE-Dienst informieren: <a href="tel:2222" style="font-size:1.05rem;font-weight:800;color:var(--err);text-decoration:none;background:var(--err-l);padding:2px 8px;border-radius:6px">☎ 2222</a><br>
+            <strong>2.</strong> Dringlichkeit einer notfallmäßigen HKU prüfen lassen<br>
+            <strong>3.</strong> 12-Kanal-EKG + Troponin sofort veranlassen<br>
+            <strong>4.</strong> Weiterleitung gemäß <strong>ESC 2023 ACS-Leitlinien</strong>
+          </div>
+        </div>
+        <div style="font-size:.78rem;color:var(--muted)">⚠️ Bei STEMI: direkte Aktivierung des Herzkatheterlabors ohne Verzögerung (Door-to-balloon &lt;90 min).</div>
+      </div>
     </div>
 
     <!-- SYMPTOMKRITERIEN nach ESC/NVL -->
@@ -369,9 +384,9 @@ button{cursor:pointer;border:none;background:none}
     <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.75rem">
       <div>
         <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.3rem">Geschlecht</label>
-        <div class="options-grid c2" style="min-width:180px">
-          <div class="option-item"><input type="radio" name="sex" id="sex_m" value="m" onchange="calcAll()"><label class="option-label" for="sex_m"><span class="radio-dot"></span>Männlich</label></div>
-          <div class="option-item"><input type="radio" name="sex" id="sex_f" value="f" onchange="calcAll()"><label class="option-label" for="sex_f"><span class="radio-dot"></span>Weiblich</label></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+          <div class="option-item" style="flex:0 0 auto"><input type="radio" name="sex" id="sex_m" value="m" onchange="calcAll()"><label class="option-label" for="sex_m" style="white-space:nowrap;padding:.55rem .9rem"><span class="radio-dot"></span>Männlich</label></div>
+          <div class="option-item" style="flex:0 0 auto"><input type="radio" name="sex" id="sex_f" value="f" onchange="calcAll()"><label class="option-label" for="sex_f" style="white-space:nowrap;padding:.55rem .9rem"><span class="radio-dot"></span>Weiblich</label></div>
         </div>
       </div>
       <div>
