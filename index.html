@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>STILWATERS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- wichtig für Mobilgeräte -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Reset & Basis */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -29,7 +28,6 @@
       margin: auto;
     }
 
-    /* Header / Branding */
     header {
       text-align: center;
       margin-bottom: 24px;
@@ -48,7 +46,6 @@
       color: #9ca3af;
     }
 
-    /* Projekt-Grid */
     .section-title {
       font-size: 18px;
       margin-bottom: 12px;
@@ -67,6 +64,7 @@
       }
     }
 
+    /* card ist jetzt ein <a>-Tag */
     .card {
       background: rgba(15, 23, 42, 0.9);
       border-radius: 16px;
@@ -78,6 +76,9 @@
       justify-content: space-between;
       min-height: 110px;
       transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
 
     .card:hover {
@@ -112,25 +113,20 @@
       margin-bottom: 10px;
     }
 
-    .card-link {
-      font-size: 13px;
+    /* Pfeil-Indikator unten rechts */
+    .card-arrow {
+      font-size: 18px;
       color: #38bdf8;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       margin-top: auto;
+      align-self: flex-end;
+      line-height: 1;
+      transition: transform 0.15s ease;
     }
 
-    .card-link span {
-      font-size: 14px;
+    .card:hover .card-arrow {
+      transform: translateX(3px);
     }
 
-    .card-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Footer */
     footer {
       text-align: center;
       margin-top: 28px;
@@ -150,52 +146,51 @@
       <h2 class="section-title">Projekte</h2>
 
       <section class="projects">
-        <!-- Projekt 1 -->
-        <article class="card">
-          <h3 class="card-title">
-            Rostock HKU Entscheidungshilfe
-            <span class="badge">Tool</span>
-          </h3>
-          <p class="card-desc">
-            Entscheidungshilfe zur Indikationsstellung für eine Koronarangiographie bei CCS.
-          </p>
-          <a class="card-link" href="rostock-hku-checkliste">
-            <span>Öffnen</span>
-            <span>›</span>
-          </a>
-        </article>
 
-        <!-- Projekt 2 (Platzhalter) -->
-        <article class="card">
-          <h3 class="card-title">
-            Sizing Myval Octacor Pro+
-            <span class="badge">Tool</span>
-          </h3>
-          <p class="card-desc">
-            Bestimmung der passenden Klappengröße.
-          </p>
-          <a class="card-link" href="TAVI Sizing Myval.html">
-            <span>Details</span>
-            <span>›</span>
-          </a>
-        </article>
+        <!-- Projekt 1 -->
+        <a class="card" href="rostock-hku-checkliste">
+          <div>
+            <h3 class="card-title">
+              Rostock HKU Entscheidungshilfe
+              <span class="badge">Tool</span>
+            </h3>
+            <p class="card-desc">
+              Entscheidungshilfe zur Indikationsstellung für eine Koronarangiographie bei CCS.
+            </p>
+          </div>
+          <span class="card-arrow">›</span>
+        </a>
+
+        <!-- Projekt 2 -->
+        <a class="card" href="TAVI Sizing Myval.html">
+          <div>
+            <h3 class="card-title">
+              Sizing Myval Octacor Pro+
+              <span class="badge">Tool</span>
+            </h3>
+            <p class="card-desc">
+              Bestimmung der passenden Klappengröße.
+            </p>
+          </div>
+          <span class="card-arrow">›</span>
+        </a>
 
         <!-- ESC Guidelines (externer Link) -->
-        <article class="card">
-          <h3 class="card-title">
-            ESC Guidelines
-            <span class="badge">Extern</span>
-          </h3>
-          <p class="card-desc">
-            Direkter Zugang zu den aktuellen ESC‑Leitlinien auf escardio.org.
-          </p>
-          <a class="card-link"
-             href="https://www.escardio.org/guidelines/clinical-practice-guidelines/"
-             target="_blank" rel="noopener">
-            <span>Zu ESC</span>
-            <span>↗</span>
-          </a>
-        </article>
+        <a class="card"
+           href="https://www.escardio.org/guidelines/clinical-practice-guidelines/"
+           target="_blank" rel="noopener">
+          <div>
+            <h3 class="card-title">
+              ESC Guidelines
+              <span class="badge">Extern</span>
+            </h3>
+            <p class="card-desc">
+              Direkter Zugang zu den aktuellen ESC‑Leitlinien auf escardio.org.
+            </p>
+          </div>
+          <span class="card-arrow">↗</span>
+        </a>
+
       </section>
     </main>
 
@@ -205,7 +200,6 @@
   </div>
 
   <script>
-    // aktuelles Jahr im Footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
