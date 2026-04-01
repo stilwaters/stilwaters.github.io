@@ -212,12 +212,12 @@ select.inp{cursor:pointer}
         <div class="grid4">
           <div class="field"><label>AO (%)</label><input class="inp" id="sat_ao" type="number" placeholder="z.B. 95" oninput="calc()"><span class="norm">>95%</span></div>
           <div class="field"><label>PA (%)</label><input class="inp" id="sat_pa" type="number" placeholder="z.B. 65" oninput="calc()"><span class="norm">>65% (gemischtvenös)</span></div>
-          <div class="field"><label>PCW (%)</label><input class="inp" id="sat_pcw" type="number" placeholder="" oninput="calc()"><span class="norm"></span></div>
+          <div class="field"><label>PCW (%)</label><input class="inp" id="sat_pcw" type="number" placeholder="z.B. 95" oninput="calc()"><span class="norm"></span></div>
           <div class="field"><label>RA (%)</label><input class="inp" id="sat_ra" type="number" placeholder="z.B. 70" oninput="calc()"><span class="norm">>70% (zentralvenös)</span></div>
           <div class="field"><label>SVC (%)</label><input class="inp" id="sat_svc" type="number" placeholder="z.B. 70" oninput="calc()"><span class="norm">Für Shunt</span></div>
           <div class="field"><label>IVC (%)</label><input class="inp" id="sat_ivc" type="number" placeholder="z.B. 70" oninput="calc()"><span class="norm">Für Shunt</span></div>
-          <div class="field"><label>RV (%)</label><input class="inp" id="sat_rv" type="number" placeholder="" oninput="calc()"><span class="norm"></span></div>
-          <div class="field"><label>LA (%)</label><input class="inp" id="sat_la" type="number" placeholder="" oninput="calc()"><span class="norm"></span></div>
+          <div class="field"><label>RV (%)</label><input class="inp" id="sat_rv" type="number" placeholder="z.B. 65" oninput="calc()"><span class="norm"></span></div>
+          <div class="field"><label>LA (%)</label><input class="inp" id="sat_la" type="number" placeholder="z.B. 95" oninput="calc()"><span class="norm"></span></div>
         </div>
       </div>
     </div>
@@ -244,36 +244,36 @@ select.inp{cursor:pointer}
           <tbody>
             <tr>
               <td>AO</td>
-              <td><input class="p-inp" id="ao_s" type="number" placeholder="134" oninput="calc()"></td>
-              <td><input class="p-inp" id="ao_d" type="number" placeholder="75" oninput="calc()"></td>
-              <td><input class="p-inp" id="ao_m" type="number" placeholder="96" oninput="calc()"></td>
+              <td><input class="p-inp" id="ao_s" type="number" placeholder="120" oninput="calc()"></td>
+              <td><input class="p-inp" id="ao_d" type="number" placeholder="70" oninput="calc()"></td>
+              <td><input class="p-inp" id="ao_m" type="number" placeholder="MAP" oninput="calc()"></td>
               <td class="norm-cell">S 100-140 / D 60-90 / M 70-105</td>
             </tr>
             <tr>
               <td>LV</td>
-              <td><input class="p-inp" id="lv_s" type="number" placeholder="143" oninput="calc()"></td>
-              <td><input class="p-inp" id="lv_d" type="number" placeholder="-17" oninput="calc()"></td>
+              <td><input class="p-inp" id="lv_s" type="number" placeholder="120" oninput="calc()"></td>
+              <td><input class="p-inp" id="lv_d" type="number" placeholder="0" oninput="calc()"></td>
               <td><input class="p-inp" id="lv_edp" type="number" placeholder="LVEDP" oninput="calc()"></td>
               <td class="norm-cell">S 90-140 / EDP 6-12</td>
             </tr>
             <tr>
               <td>RA</td>
-              <td><input class="p-inp" id="ra_a" type="number" placeholder="a: 2" oninput="calc()"></td>
-              <td><input class="p-inp" id="ra_v" type="number" placeholder="v: 1" oninput="calc()"></td>
-              <td><input class="p-inp" id="ra_m" type="number" placeholder="M: 1" oninput="calc()"></td>
+              <td><input class="p-inp" id="ra_a" type="number" placeholder="a: 5" oninput="calc()"></td>
+              <td><input class="p-inp" id="ra_v" type="number" placeholder="v: 5" oninput="calc()"></td>
+              <td><input class="p-inp" id="ra_m" type="number" placeholder="M: 5" oninput="calc()"></td>
               <td class="norm-cell">a 3-9 / v 2-6 / M 2-5</td>
             </tr>
             <tr>
               <td>RV</td>
-              <td><input class="p-inp" id="rv_s" type="number" placeholder="37" oninput="calc()"></td>
-              <td><input class="p-inp" id="rv_d" type="number" placeholder="-2" oninput="calc()"></td>
+              <td><input class="p-inp" id="rv_s" type="number" placeholder="25" oninput="calc()"></td>
+              <td><input class="p-inp" id="rv_d" type="number" placeholder="0" oninput="calc()"></td>
               <td><input class="p-inp" id="rv_edp" type="number" placeholder="RVEDP" oninput="calc()"></td>
               <td class="norm-cell">S 20-30 / EDP 4-8</td>
             </tr>
             <tr>
               <td>PA</td>
-              <td><input class="p-inp" id="pa_s" type="number" placeholder="41" oninput="calc()"></td>
-              <td><input class="p-inp" id="pa_d" type="number" placeholder="21" oninput="calc()"></td>
+              <td><input class="p-inp" id="pa_s" type="number" placeholder="25" oninput="calc()"></td>
+              <td><input class="p-inp" id="pa_d" type="number" placeholder="10" oninput="calc()"></td>
               <td><input class="p-inp" id="pa_m" type="number" placeholder="mPAP" oninput="calc()"></td>
               <td class="norm-cell">S 15-30 / D 5-16 / M 10-22</td>
             </tr>
@@ -281,24 +281,24 @@ select.inp{cursor:pointer}
               <td>PCWP</td>
               <td><input class="p-inp" id="pcwp_a" type="number" placeholder="a: 8" oninput="calc()"></td>
               <td><input class="p-inp" id="pcwp_v" type="number" placeholder="v: 8" oninput="calc()"></td>
-              <td><input class="p-inp" id="pcwp_m" type="number" placeholder="M: 7" oninput="calc()"></td>
+              <td><input class="p-inp" id="pcwp_m" type="number" placeholder="mPCW" oninput="calc()"></td>
               <td class="norm-cell">a ≤15 / v ≤20 / M 6-12</td>
             </tr>
             <tr>
               <td>LA</td>
-              <td><input class="p-inp" id="la_a" type="number" placeholder="a" oninput="calc()"></td>
-              <td><input class="p-inp" id="la_v" type="number" placeholder="v" oninput="calc()"></td>
-              <td><input class="p-inp" id="la_m" type="number" placeholder="M" oninput="calc()"></td>
-              <td class="norm-cell">a 4-12 / v 5-15 / M 6-12</td>
+              <td><input class="p-inp" id="la_a" type="number" placeholder="a8" oninput="calc()"></td>
+              <td><input class="p-inp" id="la_v" type="number" placeholder="8" oninput="calc()"></td>
+              <td><input class="p-inp" id="la_m" type="number" placeholder="mLAP" oninput="calc()"></td>
+              <td class="norm-cell">a 4-12 / v 5-15 /m 6-12</td>
             </tr>
           </tbody>
         </table>
         <div class="divider"></div>
         <div class="grid3">
-          <div class="field"><label>LV max dP/dt (mmHg/s)</label><input class="inp" id="lv_dpdt" type="number" placeholder="1826" oninput="calc()"><span class="norm">Normal 1200-2000</span></div>
-          <div class="field"><label>LV dP/dt/P (1/s)</label><input class="inp" id="lv_dpdtp" type="number" placeholder="45" oninput="calc()"><span class="norm">Normal ≥44</span></div>
-          <div class="field"><label>RV max dP/dt (mmHg/s)</label><input class="inp" id="rv_dpdt" type="number" placeholder="" oninput="calc()"><span class="norm">Normal 400-1000</span></div>
-          <div class="field"><label>SEP LV (sec/min)</label><input class="inp" id="sep" type="number" step="0.01" placeholder="19.14" oninput="calc()"><span class="norm">Ejektionsdauer gesamt/min — auch für Gorlin</span></div>
+          <div class="field"><label>LV max dP/dt (mmHg/s)</label><input class="inp" id="lv_dpdt" type="number" placeholder="1800" oninput="calc()"><span class="norm">| Normal 1.200 – 2.000 | Grenzwertig 1.000 – 1.200 | Pathologisch < 1.000 | Schwer reduziert < 600|</span></div>
+          <div class="field"><label>LV dP/dt/P (1/s)</label><input class="inp" id="lv_dpdtp" type="number" placeholder="45" oninput="calc()"><span class="norm">| Normal ≥ 44 | Grenzwertig  36 – 44  | Eingeschränkt < 36  | Schwer reduziert  < 28 |</span></div>
+          <div class="field"><label>RV max dP/dt (mmHg/s)</label><input class="inp" id="rv_dpdt" type="number" placeholder="500" oninput="calc()"><span class="norm">Normal 400-1000</span></div>
+          <div class="field"><label>SEP LV (sec/min)</label><input class="inp" id="sep" type="number" step="0.01" placeholder="19" oninput="calc()"><span class="norm">Ejektionsdauer gesamt/min für Gorlin Formel</span></div>
         </div>
       </div>
     </div>
@@ -339,7 +339,7 @@ select.inp{cursor:pointer}
     </div>
     <div class="collapsible closed" id="mod-shunt" style="max-height:0">
       <div class="section-body">
-        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Sättigungen SVC, IVC, RA, RV, LA werden oben im Sättigungsabschnitt eingegeben.</p>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Sättigungen werden oben im Sättigungsabschnitt eingegeben.</p>
         <p style="font-size:11px;color:var(--faint)">PA &gt; 80% → verdächtig auf Links-Rechts-Shunt | SVC→PA ≥7% → ASD | RA→RV ≥5% → VSD</p>
       </div>
     </div>
@@ -669,6 +669,10 @@ select.inp{cursor:pointer}
         <div id="shunt_hints" style="margin-top:12px;font-size:12px;color:var(--muted)"></div>
       </div>
     </div>
+       <div class="section-body">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Sättigungen werden oben im Sättigungsabschnitt eingegeben.</p>
+        <p style="font-size:11px;color:var(--faint)">PA &gt; 80% → verdächtig auf Links-Rechts-Shunt | SVC→PA ≥7% → ASD | RA→RV ≥5% → VSD</p>
+      </div>
   </div>
 
   <!-- VASOREAGIBILITAET ERGEBNISSE -->
