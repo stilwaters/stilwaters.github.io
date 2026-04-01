@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rechtsherzkatheter</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+/* ===== TOKENS ===== */
+:root {
+  --bg:#0a0c10; --surface:#111418; --surface2:#181c22; --surface3:#1e242c;
+  --border:#2a3040; --border2:#38424f;
+  --text:#e8eaed; --muted:#8b95a1; --faint:#4a5568;
+  --blue:#3b9eff; --blue-dim:#1a4a7a; --blue-bg:#0d1f35; --blue-glow:rgba(59,158,255,.15);
+  --green:#22c55e; --green-bg:#0a2e1a; --green-dim:#14532d;
+  --red:#ef4444; --red-bg:#2d0a0a; --red-dim:#7f1d1d;
+  --amber:#f59e0b; --amber-bg:#2d1f0a;
+  --radius:8px; --radius-lg:12px;
+  --trans:160ms cubic-bezier(.16,1,.3,1);
+}
+[data-theme="light"] {
+  --bg:#f0f4f8; --surface:#fff; --surface2:#f7f9fc; --surface3:#eef2f7;
+  --border:#d1d9e0; --border2:#b8c4cf;
+  --text:#1a202c; --muted:#4a5568; --faint:#a0aec0;
+  --blue:#1a6fcf; --blue-dim:#bfdbfe; --blue-bg:#eff6ff; --blue-glow:rgba(26,111,207,.1);
+  --green:#16a34a; --green-bg:#f0fdf4; --green-dim:#bbf7d0;
+  --red:#dc2626; --red-bg:#fff5f5; --red-dim:#fecaca;
+  --amber:#d97706; --amber-bg:#fffbeb;
+}
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Satoshi',system-ui,sans-serif;font-size:14px;line-height:1.5;
+  background:var(--bg);color:var(--text);min-height:100dvh;-webkit-font-smoothing:antialiased}
+input,button,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+/* ===== HEADER ===== */
+header{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.3px}
+.logo svg{color:var(--blue)}
+.header-right{display:flex;align-items:center;gap:8px}
+.theme-btn{width:36px;height:36px;border-radius:var(--radius);border:1px solid var(--border);
+  background:var(--surface2);color:var(--muted);display:flex;align-items:center;justify-content:center;
+  transition:all var(--trans)}
+.theme-btn:hover{color:var(--text);border-color:var(--border2)}
+.copy-btn{display:flex;align-items:center;gap:6px;padding:0 14px;height:36px;border-radius:var(--radius);
+  background:var(--blue);color:#fff;font-weight:600;font-size:13px;
+  transition:all var(--trans);white-space:nowrap}
+.copy-btn:hover{background:#2d8ae0;transform:translateY(-1px)}
+.copy-btn:active{transform:none}
+/* ===== STEP BAR ===== */
+.step-bar{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;gap:4px}
+.step-pill{flex:1;max-width:200px;padding:8px 14px;border-radius:var(--radius);
+  background:var(--surface2);border:1px solid var(--border);color:var(--muted);
+  font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:all var(--trans)}
+.step-pill.active{background:var(--blue-bg);border-color:var(--blue);color:var(--blue);font-weight:600}
+/* ===== MAIN ===== */
+main{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+/* ===== SECTION ===== */
+.section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  margin-bottom:12px;overflow:hidden}
+.section-head{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;user-select:none;transition:background var(--trans)}
+.section-head:hover{background:var(--surface2)}
+.section-title{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.section-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.section-actions{display:flex;align-items:center;gap:10px}
+.chevron{color:var(--muted);font-size:12px;transition:transform .2s;flex-shrink:0}
+.chevron.open{transform:rotate(180deg)}
+.collapsible{transition:max-height .3s ease,padding .3s ease;overflow:hidden}
+.collapsible.closed{max-height:0!important}
+.section-body{padding:16px}
+/* ===== OPTIONAL TOGGLE ===== */
+.badge-opt{font-size:10px;font-weight:600;padding:2px 7px;border-radius:9999px;
+  background:var(--surface3);color:var(--muted);border:1px solid var(--border);letter-spacing:.3px;text-transform:uppercase}
+.toggle{position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;border-radius:11px;background:var(--border2);
+  cursor:pointer;transition:background var(--trans)}
+.slider::before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;
+  border-radius:50%;background:#fff;transition:transform var(--trans)}
+.toggle input:checked + .slider{background:var(--blue)}
+.toggle input:checked + .slider::before{transform:translateX(16px)}
+/* ===== GRID INPUTS ===== */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:600px){.grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+/* ===== FIELD ===== */
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.field .norm{font-size:10px;color:var(--faint);margin-top:1px}
+.inp{width:100%;padding:7px 10px;border-radius:var(--radius);border:1px solid var(--border);
+  background:var(--blue-bg);color:var(--text);font-size:14px;
+  transition:border-color var(--trans),box-shadow var(--trans)}
+.inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.inp::placeholder{color:var(--faint)}
+select.inp{cursor:pointer}
+/* ===== PRESSURE TABLE ===== */
+.ptable{width:100%;border-collapse:collapse;font-size:13px}
+.ptable th{padding:6px 8px;text-align:center;color:var(--muted);font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border)}
+.ptable td{padding:4px 6px;border-bottom:1px solid var(--border)}
+.ptable td:first-child{font-weight:600;color:var(--text);font-size:13px;white-space:nowrap;padding-left:8px}
+.ptable .p-inp{width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border);
+  background:var(--blue-bg);color:var(--text);font-size:13px;text-align:center;
+  transition:border-color var(--trans)}
+.ptable .p-inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-glow)}
+.ptable .norm-cell{font-size:10px;color:var(--faint);text-align:right;padding-right:8px;white-space:nowrap}
+/* ===== DIVIDER ===== */
+.divider{height:1px;background:var(--border);margin:14px 0}
+.sub-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted);margin-bottom:10px;margin-top:4px}
+/* ===== CALC BUTTON ===== */
+.calc-wrap{display:flex;gap:8px;margin-top:4px}
+.calc-btn{flex:1;padding:12px;border-radius:var(--radius);background:var(--blue);
+  color:#fff;font-weight:700;font-size:15px;text-align:center;
+  transition:all var(--trans)}
+.calc-btn:hover{background:#2d8ae0;transform:translateY(-1px)}
+.calc-btn:active{transform:none}
+/* ===== RESULTS ===== */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.res-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 14px;transition:border-color var(--trans)}
+.res-card.normal{border-color:var(--green-dim);background:var(--green-bg)}
+.res-card.patho{border-color:var(--red-dim);background:var(--red-bg)}
+.res-card.blue{border-color:var(--blue-dim);background:var(--blue-bg)}
+.res-card .r-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.res-card .r-val{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px;color:var(--text)}
+.res-card .r-unit{font-size:11px;color:var(--muted);font-weight:500;margin-top:1px}
+.res-card .r-ref{font-size:10px;color:var(--faint);margin-top:4px;line-height:1.4}
+.res-card.normal .r-val{color:var(--green)}
+.res-card.patho .r-val{color:var(--red)}
+.res-card.blue .r-val{color:var(--blue)}
+.section-sub{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted);padding:14px 16px 10px;border-top:1px solid var(--border)}
+/* ===== THERMO DUAL ===== */
+.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.dual-grid{grid-template-columns:1fr}}
+.dual-col-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+  color:var(--blue);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+/* ===== TEXTAREA ===== */
+.befund-ta{width:100%;padding:10px 12px;border-radius:var(--radius);border:1px solid var(--border);
+  background:var(--surface2);color:var(--text);font-size:14px;resize:vertical;min-height:120px;
+  transition:border-color var(--trans)}
+.befund-ta:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+/* ===== HIDDEN ===== */
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="RHK Logo">
+      <rect width="26" height="26" rx="6" fill="currentColor" opacity=".12"/>
+      <path d="M5 13 C5 8.58 8.58 5 13 5 C17.42 5 21 8.58 21 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M8 16 L10.5 11 L13 16 L15 13 L17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    Rechtsherzkatheter
+  </div>
+  <div class="header-right">
+    <button class="theme-btn" data-theme-toggle aria-label="Theme wechseln" onclick="toggleTheme()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="copy-btn" onclick="copyBefund()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span id="copy-label">Kopieren</span>
+    </button>
+  </div>
+</header>
+
+<div class="step-bar">
+  <div class="step-pill active" id="pill1" onclick="showStep(1)">① Eingabe</div>
+  <div class="step-pill" id="pill2" onclick="showStep(2)">② Ergebnisse</div>
+</div>
+
+<!-- ================================================================ STEP 1 ================================================================ -->
+<main id="step1">
+
+  <!-- BASISDATEN -->
+  <div class="section">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Basisdaten</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:600px">
+      <div class="section-body">
+        <div class="grid3">
+          <div class="field"><label>Größe (cm)</label><input class="inp" id="groesse" type="number" placeholder="z.B. 172" oninput="calc()"><span class="norm"></span></div>
+          <div class="field"><label>Gewicht (kg)</label><input class="inp" id="gewicht" type="number" placeholder="z.B. 79" oninput="calc()"><span class="norm"></span></div>
+          <div class="field"><label>Alter (Jahre)</label><input class="inp" id="alter" type="number" placeholder="z.B. 75" oninput="calc()"><span class="norm"></span></div>
+          <div class="field"><label>Hb (mmol/l)</label><input class="inp" id="hb_mmol" type="number" step="0.1" placeholder="z.B. 11" oninput="calc()"><span class="norm">→ g/dl wird berechnet</span></div>
+          <div class="field"><label>Herzfrequenz (/min)</label><input class="inp" id="hf" type="number" placeholder="z.B. 78" oninput="calc()"><span class="norm">Für VO₂ & Gorlin</span></div>
+          <div class="field"><label>Geschlecht</label><select class="inp" id="geschlecht" onchange="calc()"><option value="m">Männlich</option><option value="w">Weiblich</option></select></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAETTIGUNGEN -->
+  <div class="section">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Sauerstoffsättigungen</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:600px">
+      <div class="section-body">
+        <div class="grid4">
+          <div class="field"><label>AO (%)</label><input class="inp" id="sat_ao" type="number" placeholder="z.B. 98" oninput="calc()"><span class="norm">>95%</span></div>
+          <div class="field"><label>PA (%)</label><input class="inp" id="sat_pa" type="number" placeholder="z.B. 62" oninput="calc()"><span class="norm">>65% (gemischtvenös)</span></div>
+          <div class="field"><label>PCW (%)</label><input class="inp" id="sat_pcw" type="number" placeholder="" oninput="calc()"><span class="norm"></span></div>
+          <div class="field"><label>RA (%)</label><input class="inp" id="sat_ra" type="number" placeholder="z.B. 61" oninput="calc()"><span class="norm">>70% (zentralvenös)</span></div>
+          <div class="field"><label>SVC (%)</label><input class="inp" id="sat_svc" type="number" placeholder="" oninput="calc()"><span class="norm">Für Shunt</span></div>
+          <div class="field"><label>IVC (%)</label><input class="inp" id="sat_ivc" type="number" placeholder="" oninput="calc()"><span class="norm">Für Shunt</span></div>
+          <div class="field"><label>RV (%)</label><input class="inp" id="sat_rv" type="number" placeholder="" oninput="calc()"><span class="norm">Für Shunt</span></div>
+          <div class="field"><label>LA (%)</label><input class="inp" id="sat_la" type="number" placeholder="" oninput="calc()"><span class="norm">Für Shunt</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRÜCKE -->
+  <div class="section">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Drücke (mmHg)</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:800px">
+      <div class="section-body" style="padding:12px">
+        <table class="ptable">
+          <thead>
+            <tr>
+              <th style="text-align:left;width:52px"></th>
+              <th>Syst / a</th>
+              <th>Diast / v</th>
+              <th>MAP / Mittel / EDP</th>
+              <th style="text-align:right;width:130px">Normalwerte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AO</td>
+              <td><input class="p-inp" id="ao_s" type="number" placeholder="134" oninput="calc()"></td>
+              <td><input class="p-inp" id="ao_d" type="number" placeholder="75" oninput="calc()"></td>
+              <td><input class="p-inp" id="ao_m" type="number" placeholder="96" oninput="calc()"></td>
+              <td class="norm-cell">S 100-140 / D 60-90 / M 70-105</td>
+            </tr>
+            <tr>
+              <td>LV</td>
+              <td><input class="p-inp" id="lv_s" type="number" placeholder="143" oninput="calc()"></td>
+              <td><input class="p-inp" id="lv_d" type="number" placeholder="-17" oninput="calc()"></td>
+              <td><input class="p-inp" id="lv_edp" type="number" placeholder="LVEDP" oninput="calc()"></td>
+              <td class="norm-cell">S 90-140 / EDP 6-12</td>
+            </tr>
+            <tr>
+              <td>RA</td>
+              <td><input class="p-inp" id="ra_a" type="number" placeholder="a: 2" oninput="calc()"></td>
+              <td><input class="p-inp" id="ra_v" type="number" placeholder="v: 1" oninput="calc()"></td>
+              <td><input class="p-inp" id="ra_m" type="number" placeholder="M: 1" oninput="calc()"></td>
+              <td class="norm-cell">a 3-9 / v 2-6 / M 2-5</td>
+            </tr>
+            <tr>
+              <td>RV</td>
+              <td><input class="p-inp" id="rv_s" type="number" placeholder="37" oninput="calc()"></td>
+              <td><input class="p-inp" id="rv_d" type="number" placeholder="-2" oninput="calc()"></td>
+              <td><input class="p-inp" id="rv_edp" type="number" placeholder="RVEDP" oninput="calc()"></td>
+              <td class="norm-cell">S 20-30 / EDP 4-8</td>
+            </tr>
+            <tr>
+              <td>PA</td>
+              <td><input class="p-inp" id="pa_s" type="number" placeholder="41" oninput="calc()"></td>
+              <td><input class="p-inp" id="pa_d" type="number" placeholder="21" oninput="calc()"></td>
+              <td><input class="p-inp" id="pa_m" type="number" placeholder="mPAP" oninput="calc()"></td>
+              <td class="norm-cell">S 15-30 / D 5-16 / M 10-22</td>
+            </tr>
+            <tr>
+              <td>PCWP</td>
+              <td><input class="p-inp" id="pcwp_a" type="number" placeholder="a: 8" oninput="calc()"></td>
+              <td><input class="p-inp" id="pcwp_v" type="number" placeholder="v: 8" oninput="calc()"></td>
+              <td><input class="p-inp" id="pcwp_m" type="number" placeholder="M: 7" oninput="calc()"></td>
+              <td class="norm-cell">a ≤15 / v ≤20 / M 6-12</td>
+            </tr>
+            <tr>
+              <td>LA</td>
+              <td><input class="p-inp" id="la_a" type="number" placeholder="a" oninput="calc()"></td>
+              <td><input class="p-inp" id="la_v" type="number" placeholder="v" oninput="calc()"></td>
+              <td><input class="p-inp" id="la_m" type="number" placeholder="M" oninput="calc()"></td>
+              <td class="norm-cell">a 4-12 / v 5-15 / M 6-12</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="divider"></div>
+        <div class="grid3">
+          <div class="field"><label>LV max dP/dt (mmHg/s)</label><input class="inp" id="lv_dpdt" type="number" placeholder="1826" oninput="calc()"><span class="norm">Normal 1200-2000</span></div>
+          <div class="field"><label>LV dP/dt/P (1/s)</label><input class="inp" id="lv_dpdtp" type="number" placeholder="45" oninput="calc()"><span class="norm">Normal ≥44</span></div>
+          <div class="field"><label>RV max dP/dt (mmHg/s)</label><input class="inp" id="rv_dpdt" type="number" placeholder="" oninput="calc()"><span class="norm">Normal 400-1000</span></div>
+          <div class="field"><label>SEP LV (sec/min)</label><input class="inp" id="sep" type="number" step="0.01" placeholder="19.14" oninput="calc()"><span class="norm">Ejektionsdauer gesamt/min — auch für Gorlin</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THERMODILUTION (optional) -->
+  <div class="section" id="sec-thermo">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Thermodilution <span class="badge-opt">Optional</span></div>
+      <div class="section-actions">
+        <label class="toggle" onclick="event.stopPropagation()">
+          <input type="checkbox" id="tog-thermo" onchange="toggleMod('thermo');calc()">
+          <span class="slider"></span>
+        </label>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="collapsible closed" id="mod-thermo" style="max-height:0">
+      <div class="section-body">
+        <div class="grid2">
+          <div class="field"><label>HZV Thermodilution (l/min)</label><input class="inp" id="hzv_thermo" type="number" step="0.1" placeholder="z.B. 2.1" oninput="calc()"><span class="norm">Normal: 4,0-8,0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHUNT (optional) -->
+  <div class="section" id="sec-shunt">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Shunt-Diagnostik <span class="badge-opt">Optional</span></div>
+      <div class="section-actions">
+        <label class="toggle" onclick="event.stopPropagation()">
+          <input type="checkbox" id="tog-shunt" onchange="toggleMod('shunt');calc()">
+          <span class="slider"></span>
+        </label>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="collapsible closed" id="mod-shunt" style="max-height:0">
+      <div class="section-body">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Sättigungen SVC, IVC, RA, RV, LA werden oben im Sättigungsabschnitt eingegeben.</p>
+        <p style="font-size:11px;color:var(--faint)">PA &gt; 80% → verdächtig auf Links-Rechts-Shunt | SVC→PA ≥7% → ASD | RA→RV ≥5% → VSD</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VASOREAGIBILITAET (optional) -->
+  <div class="section" id="sec-vaso">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Vasoreagibilitätstest <span class="badge-opt">Optional</span></div>
+      <div class="section-actions">
+        <label class="toggle" onclick="event.stopPropagation()">
+          <input type="checkbox" id="tog-vaso" onchange="toggleMod('vaso');calc()">
+          <span class="slider"></span>
+        </label>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="collapsible closed" id="mod-vaso" style="max-height:0">
+      <div class="section-body">
+        <div class="field" style="max-width:280px;margin-bottom:14px">
+          <label>Substanz</label>
+          <select class="inp" id="vaso_subst" onchange="calc()">
+            <option value="iloprost">Iloprost inhalativ</option>
+            <option value="nitro">Nitrolingual i.v.</option>
+          </select>
+        </div>
+        <div class="sub-label">Drücke nach Substanz (mmHg)</div>
+        <table class="ptable">
+          <thead>
+            <tr><th style="text-align:left"></th><th>Syst / a</th><th>Diast / v</th><th>Mittel</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AO</td><td><input class="p-inp" id="v_ao_s" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_ao_d" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_ao_m" type="number" oninput="calc()"></td></tr>
+            <tr><td>PA</td><td><input class="p-inp" id="v_pa_s" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_pa_d" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_pa_m" type="number" oninput="calc()"></td></tr>
+            <tr><td>LV</td><td><input class="p-inp" id="v_lv_s" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_lv_d" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_lv_m" type="number" oninput="calc()"></td></tr>
+            <tr><td>PCWP</td><td><input class="p-inp" id="v_pcwp_a" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_pcwp_v" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_pcwp_m" type="number" oninput="calc()"></td></tr>
+            <tr><td>RA</td><td><input class="p-inp" id="v_ra_a" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_ra_v" type="number" oninput="calc()"></td><td><input class="p-inp" id="v_ra_m" type="number" oninput="calc()"></td></tr>
+          </tbody>
+        </table>
+        <div class="divider"></div>
+        <div class="sub-label">Sättigungen nach Substanz (%)</div>
+        <div class="grid3">
+          <div class="field"><label>AO (%)</label><input class="inp" id="v_sat_ao" type="number" oninput="calc()"></div>
+          <div class="field"><label>PA (%)</label><input class="inp" id="v_sat_pa" type="number" oninput="calc()"></div>
+          <div class="field"><label>PCW (%)</label><input class="inp" id="v_sat_pcw" type="number" oninput="calc()"></div>
+          <div class="field"><label>HF (/min)</label><input class="inp" id="v_hf" type="number" oninput="calc()"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GORLIN (optional) -->
+  <div class="section" id="sec-gorlin">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Gorlin-Formel <span class="badge-opt">Optional</span></div>
+      <div class="section-actions">
+        <label class="toggle" onclick="event.stopPropagation()">
+          <input type="checkbox" id="tog-gorlin" onchange="toggleMod('gorlin');calc()">
+          <span class="slider"></span>
+        </label>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="collapsible closed" id="mod-gorlin" style="max-height:0">
+      <div class="section-body">
+        <div class="grid3">
+          <div class="field"><label>Klappe</label><select class="inp" id="gorlin_klappe" onchange="calc()"><option value="AK">Aortenklappe (K=1,0)</option><option value="MK">Mitralklappe (K=0,85)</option></select></div>
+          <div class="field"><label>Pmean (mmHg)</label><input class="inp" id="gorlin_pmean" type="number" step="0.1" placeholder="Mittlerer Gradient" oninput="calc()"><span class="norm">SEP wird aus Drucktabelle oben verwendet</span></div>
+        </div>
+        <p style="font-size:11px;color:var(--faint);margin-top:10px">KÖF = HZV(ml/min) / (44,3 × K × SEP(sec/min) × √Pmean) — SEP im Drucktisch eingeben</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONSTRIKTION (optional) -->
+  <div class="section" id="sec-konst">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Konstriktion vs. Restriktion <span class="badge-opt">Optional</span></div>
+      <div class="section-actions">
+        <label class="toggle" onclick="event.stopPropagation()">
+          <input type="checkbox" id="tog-konst" onchange="toggleMod('konst');calc()">
+          <span class="slider"></span>
+        </label>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="collapsible closed" id="mod-konst" style="max-height:0">
+      <div class="section-body">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">LVEDP-RVEDP, RVSP, RVEDP/RVSP, PA syst. werden automatisch aus den Drücken berechnet.</p>
+        <div class="grid2">
+          <div class="field"><label>Dip-and-Plateau RV</label>
+            <select class="inp" id="kr_dip"><option value="">— nicht beurteilt —</option><option value="prominent">Prominent (≥5 mmHg) → Konstriktiv</option><option value="abgeschwaechtcht">Abgeschwächt / fehlend → Restriktiv</option></select>
+          </div>
+          <div class="field"><label>Kussmaul-Zeichen</label>
+            <select class="inp" id="kr_kuss"><option value="">— nicht beurteilt —</option><option value="positiv">Positiv (RA↑ bei Inspiration) → Konstriktiv</option><option value="negativ">Negativ → Restriktiv</option></select>
+          </div>
+          <div class="field"><label>Y-Descent</label>
+            <select class="inp" id="kr_ydesc"><option value="">— nicht beurteilt —</option><option value="prominent">Sehr prominent/steil → Konstriktiv</option><option value="weniger">Weniger prominent → Restriktiv</option></select>
+          </div>
+          <div class="field"><label>Systolic Area Index</label>
+            <select class="inp" id="kr_sai"><option value="">— nicht beurteilt —</option><option value="ge11">≥1,1 (97% Sens.) → Konstriktiv</option><option value="lt11">&lt;1,1 → Restriktiv</option></select>
+          </div>
+          <div class="field"><label>Ventrikuläre Diskordanz</label>
+            <select class="inp" id="kr_vdisk"><option value="">— nicht beurteilt —</option><option value="ausgepr">Ausgeprägt RV/LV diskordant → Konstriktiv</option><option value="fehlend">Fehlend → Restriktiv</option></select>
+          </div>
+          <div class="field"><label>PAWP-LVEDP Gradient</label>
+            <select class="inp" id="kr_pawp"><option value="">— nicht beurteilt —</option><option value="ge5">Differenz insp./exp. ≥5 mmHg → Konstriktiv</option><option value="lt5">&lt;5 mmHg → Restriktiv</option></select>
+          </div>
+          <div class="field"><label>Volumenchallenge</label>
+            <select class="inp" id="kr_vol"><option value="">— nicht beurteilt —</option><option value="diskordanz">Verstärkte Diskordanz → Konstriktiv</option><option value="pawp18">PAWP &gt;18 mmHg → Restriktiv</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUALITATIVE BEFUNDE (optional) -->
+  <div class="section" id="sec-qual">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Qualitative Befunde <span class="badge-opt">Optional</span></div>
+      <div class="section-actions">
+        <label class="toggle" onclick="event.stopPropagation()">
+          <input type="checkbox" id="tog-qual" onchange="toggleMod('qual');calc()">
+          <span class="slider"></span>
+        </label>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="collapsible closed" id="mod-qual" style="max-height:0">
+      <div class="section-body">
+        <div class="grid2">
+          <div class="field">
+            <label>v-Welle PCWP-Kurve (bei MI)</label>
+            <select class="inp" id="q_vwelle">
+              <option value="">— nicht beurteilt —</option>
+              <option value="keine">Keine prominente v-Welle</option>
+              <option value="prominent">Prominente v-Welle (&gt;10 mmHg über mPCWP)</option>
+            </select>
+            <span class="norm">Prominent = v-Welle ≥10 mmHg über mittlerem PCWP; hohe Spez. (90-95%) für schwere MI</span>
+          </div>
+          <div class="field">
+            <label>Dip-Plateau RV-Kurve</label>
+            <select class="inp" id="q_dipplateau">
+              <option value="">— nicht beurteilt —</option>
+              <option value="vorhanden">Dip-Plateau vorhanden (Square-root-Zeichen)</option>
+              <option value="fehlend">Nicht vorhanden</option>
+            </select>
+            <span class="norm">Typisch für Konstriktion; RVEDP-Dip gefolgt von Plateau ≥5 mmHg</span>
+          </div>
+          <div class="field">
+            <label>Kussmaul-Zeichen</label>
+            <select class="inp" id="q_kussmaul">
+              <option value="">— nicht beurteilt —</option>
+              <option value="positiv">Positiv (RA-Druck steigt bei Inspiration)</option>
+              <option value="negativ">Negativ</option>
+            </select>
+            <span class="norm">Positiv bei Konstriktion, nicht bei Tamponade; pathophysiologisch: gestörte inspiratorische Füllung</span>
+          </div>
+          <div class="field">
+            <label>RA-Kurvenform</label>
+            <select class="inp" id="q_ra_kurve">
+              <option value="">— nicht beurteilt —</option>
+              <option value="m_w">M/W-Morphologie (prominente x- und y-Descents)</option>
+              <option value="x_dominant">x-Descent dominant (Tamponade)</option>
+              <option value="normal">Normal</option>
+            </select>
+            <span class="norm">M/W-Bild: konstriktive Perikarditis; x-dominant: Tamponade</span>
+          </div>
+          <div class="field">
+            <label>PA-Kurve</label>
+            <select class="inp" id="q_pa_kurve">
+              <option value="">— nicht beurteilt —</option>
+              <option value="normal">Normal</option>
+              <option value="erhoehter_wd">Erhöhter Widerstand (steil abfallende Diastole)</option>
+              <option value="pulsatil">Hyperpulsatil</option>
+            </select>
+            <span class="norm">Steil abfallende diastolische Phase: erhöhter PVR</span>
+          </div>
+          <div class="field">
+            <label>PCWP-Kurve</label>
+            <select class="inp" id="q_pcwp_kurve">
+              <option value="">— nicht beurteilt —</option>
+              <option value="normal">Normal</option>
+              <option value="grosse_vwelle">Große v-Welle (MI/VSD)</option>
+              <option value="grosse_awelle">Große a-Welle (MS/reduzierte Compliance)</option>
+              <option value="cv_fusion">CV-Wellen-Fusion (schwere TR)</option>
+            </select>
+            <span class="norm">Große v-Welle: MI/VSD; Große a-Welle: MS, eingeschränkte LV-Compliance; CV-Fusion: schwere TI</span>
+          </div>
+          <div class="field">
+            <label>Tamponade-Zeichen</label>
+            <select class="inp" id="q_tamponade">
+              <option value="">— nicht beurteilt —</option>
+              <option value="keine">Keine Tamponade-Zeichen</option>
+              <option value="druck_equilibrium">Druckausgleich RA/RV/PA/PCWP</option>
+              <option value="pulsus_paradoxus">Pulsus paradoxus &gt;10 mmHg</option>
+            </select>
+            <span class="norm">Tamponade: RA=RV diastolisch=PCWP; Druckausgleich aller Höhlen, x-Descent dominant, y-Descent aufgehoben</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATE -->
+  <div class="calc-wrap" style="margin-top:20px">
+    <button class="calc-btn" onclick="neueBerechnung()" style="flex:0.35;background:var(--surface2);color:var(--text);border:1px solid var(--border)">🗑 Neue Berechnung</button>
+    <button class="calc-btn" onclick="showStep(2)" style="flex:0.65">Berechnungen anzeigen →</button>
+  </div>
+
+</main>
+
+<!-- ================================================================ STEP 2 ================================================================ -->
+<main id="step2" class="hidden">
+
+  <!-- BASISDATEN RESULTS -->
+  <div class="section">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Basisdaten & O₂-Parameter</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:600px">
+      <div class="section-body">
+        <div class="res-grid">
+          <div class="res-card blue"><div class="r-label">Hb</div><div class="r-val" id="r_hb_gdl">—</div><div class="r-unit">g/dl</div></div>
+          <div class="res-card blue"><div class="r-label">KOF (Mosteller)</div><div class="r-val" id="r_kof">—</div><div class="r-unit">m²</div><div class="r-ref">√(Größe×Gewicht/3600)</div></div>
+          <div class="res-card blue"><div class="r-label">VO₂ (LaFarge)</div><div class="r-val" id="r_vo2">—</div><div class="r-unit">ml/min</div><div class="r-ref">Geschlechtskorrigiert</div></div>
+          <div class="res-card blue"><div class="r-label">O₂art</div><div class="r-val" id="r_o2art">—</div><div class="r-unit">ml O₂/dl</div><div class="r-ref">Hb×1,34×SatAO/100</div></div>
+          <div class="res-card blue"><div class="r-label">O₂zv (PA)</div><div class="r-val" id="r_o2zv">—</div><div class="r-unit">ml O₂/dl</div><div class="r-ref">Hb×1,34×SatPA/100</div></div>
+          <div class="res-card blue"><div class="r-label">AVDO₂</div><div class="r-val" id="r_avdo2">—</div><div class="r-unit">ml O₂/dl</div><div class="r-ref">Normal: 4–6 ml/dl</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HZV & WIDERSTAENDE -->
+  <div class="section">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>HZV, CI, SV & Widerstände</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:900px">
+      <div class="section-body">
+        <!-- FICK -->
+        <div class="sub-label">Fick-Methode</div>
+        <div class="res-grid">
+          <div class="res-card blue" id="rc_hzv"><div class="r-label">HZV (Fick)</div><div class="r-val" id="r_hzv">—</div><div class="r-unit">l/min</div><div class="r-ref">Normal: 4,0–8,0</div></div>
+          <div class="res-card blue" id="rc_ci"><div class="r-label">CI (Fick)</div><div class="r-val" id="r_ci">—</div><div class="r-unit">l/min/m²</div><div class="r-ref">Normal: 2,5–4,0</div></div>
+          <div class="res-card blue" id="rc_sv"><div class="r-label">SV (Fick)</div><div class="r-val" id="r_sv">—</div><div class="r-unit">ml</div><div class="r-ref">Normal: 60–100</div></div>
+          <div class="res-card blue" id="rc_svi"><div class="r-label">SVI (Fick)</div><div class="r-val" id="r_svi">—</div><div class="r-unit">ml/m²</div><div class="r-ref">Normal: 33–47</div></div>
+        </div>
+        <!-- THERMO -->
+        <div id="res_thermo_block" class="hidden">
+          <div class="divider"></div>
+          <div class="sub-label">Thermodilution</div>
+          <div class="res-grid">
+            <div class="res-card blue" id="rc_hzv_t"><div class="r-label">HZV (Thermo)</div><div class="r-val" id="r_hzv_t">—</div><div class="r-unit">l/min</div><div class="r-ref">Normal: 4,0–8,0</div></div>
+            <div class="res-card blue" id="rc_ci_t"><div class="r-label">CI (Thermo)</div><div class="r-val" id="r_ci_t">—</div><div class="r-unit">l/min/m²</div><div class="r-ref">Normal: 2,5–4,0</div></div>
+            <div class="res-card blue" id="rc_sv_t"><div class="r-label">SV (Thermo)</div><div class="r-val" id="r_sv_t">—</div><div class="r-unit">ml</div><div class="r-ref">Normal: 60–100</div></div>
+            <div class="res-card blue" id="rc_svi_t"><div class="r-label">SVI (Thermo)</div><div class="r-val" id="r_svi_t">—</div><div class="r-unit">ml/m²</div><div class="r-ref">Normal: 33–47</div></div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <!-- WIDERSTAENDE FICK -->
+        <div class="sub-label">Widerstände & Leistung — Fick</div>
+        <div class="res-grid">
+          <div class="res-card" id="rc_svr"><div class="r-label">SVR</div><div class="r-val" id="r_svr">—</div><div class="r-unit">dyn·s·cm⁻⁵</div><div class="r-ref">Normal: 900–1400</div></div>
+          <div class="res-card" id="rc_svr_wu"><div class="r-label">SVR (WU)</div><div class="r-val" id="r_svr_wu">—</div><div class="r-unit">WU</div><div class="r-ref">Normal: 8,8–20</div></div>
+          <div class="res-card" id="rc_pvr"><div class="r-label">PVR</div><div class="r-val" id="r_pvr">—</div><div class="r-unit">dyn·s·cm⁻⁵</div><div class="r-ref">Normal: 45–120</div></div>
+          <div class="res-card" id="rc_pvr_wu"><div class="r-label">PVR (WU)</div><div class="r-val" id="r_pvr_wu">—</div><div class="r-unit">WU</div><div class="r-ref">Normal: &lt;2</div></div>
+          <div class="res-card" id="rc_pvr_svr"><div class="r-label">PVR/SVR</div><div class="r-val" id="r_pvr_svr">—</div><div class="r-unit"></div><div class="r-ref">Normal: &lt;0,75</div></div>
+        </div>
+        <!-- WIDERSTAENDE THERMO -->
+        <div id="res_thermo_resist" class="hidden">
+          <div class="divider"></div>
+          <div class="sub-label">Widerstände & Leistung — Thermodilution</div>
+          <div class="res-grid">
+            <div class="res-card" id="rc_svr_t"><div class="r-label">SVR (Thermo)</div><div class="r-val" id="r_svr_t">—</div><div class="r-unit">dyn·s·cm⁻⁵</div><div class="r-ref">Normal: 900–1400</div></div>
+            <div class="res-card" id="rc_svr_wu_t"><div class="r-label">SVR WU (Thermo)</div><div class="r-val" id="r_svr_wu_t">—</div><div class="r-unit">WU</div><div class="r-ref">Normal: 8,8–20</div></div>
+            <div class="res-card" id="rc_pvr_t"><div class="r-label">PVR (Thermo)</div><div class="r-val" id="r_pvr_t">—</div><div class="r-unit">dyn·s·cm⁻⁵</div><div class="r-ref">Normal: 45–120</div></div>
+            <div class="res-card" id="rc_pvr_wu_t"><div class="r-label">PVR WU (Thermo)</div><div class="r-val" id="r_pvr_wu_t">—</div><div class="r-unit">WU</div><div class="r-ref">Normal: &lt;2</div></div>
+            <div class="res-card" id="rc_pvr_svr_t"><div class="r-label">PVR/SVR (Thermo)</div><div class="r-val" id="r_pvr_svr_t">—</div><div class="r-unit"></div><div class="r-ref">Normal: &lt;0,75</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRADIENTEN & INDIZES -->
+  <div class="section">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Pulmonale Gradienten & Indizes</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:1000px">
+      <div class="section-body">
+        <div class="res-grid">
+          <div class="res-card" id="rc_tpg"><div class="r-label">TPG</div><div class="r-val" id="r_tpg">—</div><div class="r-unit">mmHg</div><div class="r-ref">≤12 mmHg normal. &gt;12: präkapilläre Komponente; mPAP − PCWP</div></div>
+          <div class="res-card" id="rc_dpg"><div class="r-label">DPG</div><div class="r-val" id="r_dpg">—</div><div class="r-unit">mmHg</div><div class="r-ref">&lt;7 mmHg normal. ≥7: präkapilläre PH; PA diast − PCWP</div></div>
+          <div class="res-card" id="rc_papp"><div class="r-label">PAPP</div><div class="r-val" id="r_papp">—</div><div class="r-unit">mmHg</div><div class="r-ref">PA-Pulsdruck; Steifigkeit pulmonal. PA syst − PA diast</div></div>
+          <div class="res-card" id="rc_cpo"><div class="r-label">CPO</div><div class="r-val" id="r_cpo">—</div><div class="r-unit">Watt</div><div class="r-ref">&gt;0,6 W normal. &lt;0,6: starker Mortalitätsprädiktor (SHOCK Trial). MAP×HZV/451</div></div>
+          <div class="res-card" id="rc_cpi"><div class="r-label">CPI</div><div class="r-val" id="r_cpi">—</div><div class="r-unit">W/m²</div><div class="r-ref">&gt;0,4 W/m² normal. MAP×CI/451</div></div>
+          <div class="res-card" id="rc_lvswi"><div class="r-label">LVSWI</div><div class="r-val" id="r_lvswi">—</div><div class="r-unit">g·m/m²</div><div class="r-ref">Normal 50–62; Grenzwertig 35–49; Reduziert &lt;35; Kritisch &lt;20</div></div>
+          <div class="res-card" id="rc_rvswi"><div class="r-label">RVSWI</div><div class="r-val" id="r_rvswi">—</div><div class="r-unit">g·m/m²</div><div class="r-ref">&gt;450 normal. &lt;450: RV-Dysfunktion. (mPAP−RAm)×SVI</div></div>
+          <div class="res-card" id="rc_papi"><div class="r-label">PAPI</div><div class="r-val" id="r_papi">—</div><div class="r-unit"></div><div class="r-ref">&gt;2,0 normal; &lt;0,9: RV-Failure (Detroit). (PA syst−PA diast)/RAm</div></div>
+          <div class="res-card" id="rc_pac"><div class="r-label">PAC</div><div class="r-val" id="r_pac">—</div><div class="r-unit">ml/mmHg</div><div class="r-ref">&gt;2,3 normal. RV-Nachlast; SVI/PAPP</div></div>
+          <div class="res-card" id="rc_zvd_pcwp"><div class="r-label">ZVD/PCWP</div><div class="r-val" id="r_zvd_pcwp">—</div><div class="r-unit"></div><div class="r-ref">&lt;0,63 normal. &gt;0,63: RV-Dysfunktion AMICS; RAm/PCWPm</div></div>
+          <div class="res-card" id="rc_lvedp_rvedp"><div class="r-label">LVEDP − RVEDP</div><div class="r-val" id="r_lvedp_rvedp">—</div><div class="r-unit">mmHg</div><div class="r-ref">≤5: Konstriktiv; &gt;5: Restriktiv</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHUNT ERGEBNISSE -->
+  <div class="section hidden" id="res_shunt_sec">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Shunt-Diagnostik</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:500px">
+      <div class="section-body">
+        <div class="res-grid">
+          <div class="res-card blue"><div class="r-label">Qs (systemisch)</div><div class="r-val" id="r_qs">—</div><div class="r-unit">l/min</div></div>
+          <div class="res-card blue"><div class="r-label">Qp (pulmonal)</div><div class="r-val" id="r_qp">—</div><div class="r-unit">l/min</div></div>
+          <div class="res-card" id="rc_qpqs"><div class="r-label">Qp:Qs</div><div class="r-val" id="r_qpqs">—</div><div class="r-unit"></div><div class="r-ref">Relevant ab ≥1,5:1 (LR-Shunt)</div></div>
+        </div>
+        <div id="shunt_hints" style="margin-top:12px;font-size:12px;color:var(--muted)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VASOREAGIBILITAET ERGEBNISSE -->
+  <div class="section hidden" id="res_vaso_sec">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Vasoreagibilität — Ergebnisse</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:600px">
+      <div class="section-body">
+        <div class="res-grid">
+          <div class="res-card blue"><div class="r-label">HZV nach Subst. (Fick)</div><div class="r-val" id="r_vaso_hzv">—</div><div class="r-unit">l/min</div></div>
+          <div class="res-card blue"><div class="r-label">CI nach Subst.</div><div class="r-val" id="r_vaso_ci">—</div><div class="r-unit">l/min/m²</div></div>
+          <div class="res-card" id="rc_vaso_pvr"><div class="r-label">PVR nach Subst.</div><div class="r-val" id="r_vaso_pvr">—</div><div class="r-unit">WU</div><div class="r-ref">Ziel: &lt;3 WU</div></div>
+          <div class="res-card" id="rc_vaso_tpg"><div class="r-label">TPG nach Subst.</div><div class="r-val" id="r_vaso_tpg">—</div><div class="r-unit">mmHg</div><div class="r-ref">Ziel: ≤12 mmHg</div></div>
+          <div class="res-card" id="rc_vaso_dpg"><div class="r-label">DPG nach Subst.</div><div class="r-val" id="r_vaso_dpg">—</div><div class="r-unit">mmHg</div><div class="r-ref">Ziel: &lt;7 mmHg</div></div>
+          <div class="res-card" id="rc_vaso_resp"><div class="r-label">ESC-Ansprechen</div><div class="r-val" id="r_vaso_resp" style="font-size:14px">—</div><div class="r-unit"></div><div class="r-ref">mPAP-Red. ≥10 auf ≤40 mmHg bei unveränd./gesteigertem CO</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GORLIN ERGEBNISSE -->
+  <div class="section hidden" id="res_gorlin_sec">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Gorlin — Klappenöffnungsfläche</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:400px">
+      <div class="section-body">
+        <div class="res-grid">
+          <div class="res-card" id="rc_gorlin_fick"><div class="r-label">KÖF — Fick</div><div class="r-val" id="r_gorlin_fick">—</div><div class="r-unit">cm²</div><div class="r-ref" id="r_gorlin_ref_fick">AK: schwer &lt;1,0 / mittel 1,0-1,5</div></div>
+          <div class="res-card hidden" id="res_gorlin_thermo_card" style=""><div class="r-label">KÖF — Thermo</div><div class="r-val" id="r_gorlin_thermo">—</div><div class="r-unit">cm²</div><div class="r-ref" id="r_gorlin_ref_thermo">AK: schwer &lt;1,0 / mittel 1,0-1,5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONSTRIKTION ERGEBNISSE -->
+  <div class="section hidden" id="res_konst_sec">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Konstriktion vs. Restriktion</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:700px">
+      <div class="section-body">
+        <div class="res-grid">
+          <div class="res-card" id="rc_kr_lvedp"><div class="r-label">LVEDP − RVEDP</div><div class="r-val" id="r_kr_lvedp">—</div><div class="r-unit">mmHg</div><div class="r-ref">≤5: Konstriktiv | &gt;5: Restriktiv</div></div>
+          <div class="res-card" id="rc_kr_rvsp"><div class="r-label">RVSP (RV syst.)</div><div class="r-val" id="r_kr_rvsp">—</div><div class="r-unit">mmHg</div><div class="r-ref">&lt;55: Konstriktiv | &gt;55: Restriktiv</div></div>
+          <div class="res-card" id="rc_kr_ratio"><div class="r-label">RVEDP/RVSP</div><div class="r-val" id="r_kr_ratio">—</div><div class="r-unit"></div><div class="r-ref">≥1/3: Konstriktiv | &lt;1/3: Restriktiv</div></div>
+          <div class="res-card" id="rc_kr_pas"><div class="r-label">PA syst.</div><div class="r-val" id="r_kr_pas">—</div><div class="r-unit">mmHg</div><div class="r-ref">&lt;55: Konstriktiv | &gt;55: Restriktiv</div></div>
+        </div>
+        <div id="kr_qual_results" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUALITATIVE ERGEBNISSE -->
+  <div class="section hidden" id="res_qual_sec">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Qualitative Befunde</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:600px">
+      <div class="section-body" id="qual_results_body">
+      </div>
+    </div>
+  </div>
+
+  <!-- FREITEXT -->
+  <div class="section" style="margin-top:20px">
+    <div class="section-head" onclick="toggleSec(this)">
+      <div class="section-title"><span class="section-dot"></span>Befund (Freitext)</div>
+      <span class="chevron open">▼</span>
+    </div>
+    <div class="collapsible" style="max-height:400px">
+      <div class="section-body">
+        <textarea class="befund-ta" id="befundtext" placeholder="Freitextbefund für SAP..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-wrap" style="margin-top:20px">
+    <button class="calc-btn" onclick="showStep(1)" style="flex:0.25;background:var(--surface2);color:var(--text);border:1px solid var(--border)">← Eingabe</button>
+    <button class="calc-btn" onclick="neueBerechnung()" style="flex:0.35;background:var(--red-dim);color:var(--red);border:1px solid var(--red-dim)">🗑 Neue Berechnung</button>
+    <button class="calc-btn" onclick="copyBefund()" style="flex:0.4">
+      <span id="copy-label2">📋 Kopieren</span>
+    </button>
+  </div>
+
+</main>
+
+<script>
+// ===== HELPERS =====
+function n(id){ const e=document.getElementById(id); if(!e) return null; const v=parseFloat(e.value); return isNaN(v)?null:v; }
+function s(id){ const e=document.getElementById(id); return e?e.value:''; }
+function fmt(v,d=1){ return v===null?'—':v.toFixed(d); }
+function setV(id,v,d=1){ const e=document.getElementById(id); if(e) e.textContent=v===null?'—':v.toFixed(d); }
+
+function colorCard(cardId,val,lo,hi,inverted=false){
+  const c=document.getElementById(cardId); if(!c||val===null) return;
+  c.classList.remove('normal','patho','blue');
+  const ok = inverted ? (val<=hi) : (val>=lo && val<=hi);
+  c.classList.add(ok?'normal':'patho');
+}
+function colorCardLo(cardId,val,threshold,belowIsGood=false){
+  const c=document.getElementById(cardId); if(!c||val===null) return;
+  c.classList.remove('normal','patho','blue');
+  const ok = belowIsGood ? val<=threshold : val>=threshold;
+  c.classList.add(ok?'normal':'patho');
+}
+
+// ===== TOGGLE =====
+function toggleSec(head){
+  const cont=head.nextElementSibling;
+  const chev=head.querySelector('.chevron');
+  const isOpen=cont.style.maxHeight&&cont.style.maxHeight!=='0px'&&!cont.classList.contains('closed');
+  if(isOpen){ cont.style.maxHeight='0px'; if(chev)chev.classList.remove('open'); }
+  else { cont.style.maxHeight=cont.scrollHeight+'px'; if(chev)chev.classList.add('open'); }
+}
+function toggleMod(id){
+  const tog=document.getElementById('tog-'+id);
+  const mod=document.getElementById('mod-'+id);
+  if(!mod) return;
+  if(tog.checked){ mod.classList.remove('closed'); mod.style.maxHeight=mod.scrollHeight+600+'px'; }
+  else { mod.classList.add('closed'); mod.style.maxHeight='0px'; }
+}
+function showStep(n){
+  calc();
+  document.getElementById('step1').classList.toggle('hidden',n!==1);
+  document.getElementById('step2').classList.toggle('hidden',n!==2);
+  document.getElementById('pill1').classList.toggle('active',n===1);
+  document.getElementById('pill2').classList.toggle('active',n===2);
+  if(n===2) window.scrollTo(0,0);
+}
+function toggleTheme(){
+  const h=document.documentElement;
+  const t=h.getAttribute('data-theme')==='dark'?'light':'dark';
+  h.setAttribute('data-theme',t);
+}
+
+// ===== CALCULATE =====
+function calc(){
+  // --- Basisdaten ---
+  const gr=n('groesse'), gw=n('gewicht'), al=n('alter'), hf=n('hf');
+  const hb_mmol=n('hb_mmol'), sex=s('geschlecht');
+  const hb_gdl = hb_mmol!==null ? hb_mmol*0.6206*16.11/10 : null;
+  // Actually: 1 mmol/l Hb = 1.6113 g/dl (based on MW=64500, 4 hemes)
+  // Simpler: hb_gdl = hb_mmol * 1.6113
+  const hb = hb_mmol!==null ? hb_mmol*1.6113 : null;
+  setV('r_hb_gdl', hb, 1);
+
+  let kof=null, vo2=null;
+  if(gr&&gw) kof=Math.sqrt(gr*gw/3600);
+  setV('r_kof',kof,2);
+
+  if(al&&hf&&kof){
+    const coeff = sex==='m' ? 11.49 : 17.04;
+    const vo2_m2 = 138.1 - coeff*Math.log(al) + 0.378*hf;
+    vo2 = vo2_m2 * kof;
+  }
+  setV('r_vo2',vo2,1);
+
+  // --- Sättigungen ---
+  const sat_ao=n('sat_ao'), sat_pa=n('sat_pa'), sat_ra=n('sat_ra');
+  const sat_svc=n('sat_svc'), sat_ivc=n('sat_ivc'), sat_rv=n('sat_rv'), sat_la=n('sat_la'), sat_pcw=n('sat_pcw');
+
+  let o2art=null, o2zv=null, avdo2=null;
+  if(hb&&sat_ao) o2art = hb*1.34*sat_ao/100;
+  if(hb&&sat_pa) o2zv  = hb*1.34*sat_pa/100;
+  if(o2art&&o2zv) avdo2 = o2art-o2zv;
+  setV('r_o2art',o2art,2);
+  setV('r_o2zv',o2zv,2);
+  setV('r_avdo2',avdo2,2);
+
+  // --- HZV Fick ---
+  let hzv=null, ci=null, sv=null, svi=null;
+  if(vo2&&avdo2&&avdo2>0){ hzv = vo2/(avdo2*10); }
+  if(hzv&&kof) ci=hzv/kof;
+  const hf_val=hf;
+  if(hzv&&hf_val) sv=(hzv*1000)/hf_val;
+  if(sv&&kof) svi=sv/kof;
+  setV('r_hzv',hzv,2); setV('r_ci',ci,2); setV('r_sv',sv,0); setV('r_svi',svi,0);
+
+  // --- Pressures ---
+  const ao_s=n('ao_s'), ao_d=n('ao_d'), ao_m=n('ao_m');
+  const lv_s=n('lv_s'), lv_edp=n('lv_edp');
+  const ra_m=n('ra_m');
+  const rv_s=n('rv_s'), rv_edp=n('rv_edp');
+  const pa_s=n('pa_s'), pa_d=n('pa_d'), pa_m=n('pa_m');
+  const pcwp_m=n('pcwp_m');
+  const sep=n('sep');
+
+  // --- SVR/PVR Fick ---
+  let svr=null,svr_wu=null,pvr=null,pvr_wu=null,pvr_svr=null;
+  if(ao_m&&ra_m!=null&&hzv){ svr=(ao_m-ra_m)*80/hzv; svr_wu=svr/80; }
+  if(pa_m&&pcwp_m!=null&&hzv){ pvr=(pa_m-pcwp_m)*80/hzv; pvr_wu=pvr/80; }
+  if(pvr&&svr) pvr_svr=pvr/svr;
+  setV('r_svr',svr,1); setV('r_svr_wu',svr_wu,2);
+  setV('r_pvr',pvr,1); setV('r_pvr_wu',pvr_wu,2);
+  setV('r_pvr_svr',pvr_svr,2);
+  colorCard('rc_svr',svr,900,1400); colorCard('rc_svr_wu',svr_wu,8.8,20);
+  colorCardLo('rc_pvr',pvr,120,true); colorCardLo('rc_pvr_wu',pvr_wu,2,true);
+  colorCardLo('rc_pvr_svr',pvr_svr,0.75,true);
+
+  // --- Thermodilution ---
+  const thermoOn=document.getElementById('tog-thermo').checked;
+  document.getElementById('res_thermo_block').classList.toggle('hidden',!thermoOn);
+  document.getElementById('res_thermo_resist').classList.toggle('hidden',!thermoOn);
+  let hzv_t=n('hzv_thermo'), ci_t=null, sv_t=null, svi_t=null;
+  let svr_t=null,svr_wu_t=null,pvr_t=null,pvr_wu_t=null,pvr_svr_t=null;
+  if(thermoOn&&hzv_t){
+    if(kof) ci_t=hzv_t/kof;
+    if(hf_val) sv_t=(hzv_t*1000)/hf_val;
+    if(sv_t&&kof) svi_t=sv_t/kof;
+    if(ao_m&&ra_m!=null){ svr_t=(ao_m-ra_m)*80/hzv_t; svr_wu_t=svr_t/80; }
+    if(pa_m&&pcwp_m!=null){ pvr_t=(pa_m-pcwp_m)*80/hzv_t; pvr_wu_t=pvr_t/80; }
+    if(pvr_t&&svr_t) pvr_svr_t=pvr_t/svr_t;
+  }
+  setV('r_hzv_t',hzv_t,2); setV('r_ci_t',ci_t,2); setV('r_sv_t',sv_t,0); setV('r_svi_t',svi_t,0);
+  setV('r_svr_t',svr_t,1); setV('r_svr_wu_t',svr_wu_t,2);
+  setV('r_pvr_t',pvr_t,1); setV('r_pvr_wu_t',pvr_wu_t,2);
+  setV('r_pvr_svr_t',pvr_svr_t,2);
+  colorCard('rc_svr_t',svr_t,900,1400); colorCard('rc_svr_wu_t',svr_wu_t,8.8,20);
+  colorCardLo('rc_pvr_t',pvr_t,120,true); colorCardLo('rc_pvr_wu_t',pvr_wu_t,2,true);
+  colorCardLo('rc_pvr_svr_t',pvr_svr_t,0.75,true);
+  if(thermoOn){ colorHZV('rc_hzv_t',hzv_t,4.0,8.0); colorHZV('rc_ci_t',ci_t,2.5,4.0); colorHZV('rc_sv_t',sv_t,60,100); colorHZV('rc_svi_t',svi_t,33,47); }
+
+  // --- Pulmonale Gradienten ---
+  let tpg=null,dpg=null,papp=null,cpo=null,cpi=null,lvswi=null,rvswi=null,papi=null,pac=null,zvd_pcwp=null;
+  if(pa_m&&pcwp_m!=null) tpg=pa_m-pcwp_m;
+  if(pa_d&&pcwp_m!=null) dpg=pa_d-pcwp_m;
+  if(pa_s&&pa_d) papp=pa_s-pa_d;
+  if(ao_m&&hzv) cpo=ao_m*hzv/451;
+  if(ao_m&&ci) cpi=ao_m*ci/451;
+  if(ao_m&&svi) lvswi=ao_m*svi*0.0136;
+  if(pa_m&&ra_m!=null&&svi) rvswi=(pa_m-ra_m)*svi*0.0136;
+  if(pa_s&&pa_d&&ra_m&&ra_m>0) papi=(pa_s-pa_d)/ra_m;
+  if(svi&&papp&&papp>0) pac=svi/papp;
+  if(ra_m&&pcwp_m&&pcwp_m>0) zvd_pcwp=ra_m/pcwp_m;
+  let lvedp_rvedp=null;
+  if(lv_edp!=null&&rv_edp!=null) lvedp_rvedp=lv_edp-rv_edp;
+  setV('r_tpg',tpg,1); setV('r_dpg',dpg,1); setV('r_papp',papp,1);
+  setV('r_cpo',cpo,2); setV('r_cpi',cpi,2);
+  setV('r_lvswi',lvswi,1); setV('r_rvswi',rvswi,1);
+  setV('r_papi',papi,1); setV('r_pac',pac,2); setV('r_zvd_pcwp',zvd_pcwp,2);
+  setV('r_lvedp_rvedp',lvedp_rvedp,1);
+  colorCardLo('rc_tpg',tpg,12,true); colorCardLo('rc_dpg',dpg,7,true);
+  colorCardLo('rc_cpo',cpo,0.6,false); colorCardLo('rc_cpi',cpi,0.4,false);
+  // LVSWI: normal 50-62
+  if(lvswi!=null){ const c=document.getElementById('rc_lvswi'); c.classList.remove('normal','patho'); c.classList.add(lvswi>=35?'normal':'patho'); }
+  colorCardLo('rc_rvswi',rvswi,450,false);
+  colorCardLo('rc_papi',papi,2.0,false);
+  colorCardLo('rc_pac',pac,2.3,false);
+  colorCardLo('rc_zvd_pcwp',zvd_pcwp,0.63,true);
+  // LVEDP-RVEDP: ≤5 = Konstriktiv
+  if(lvedp_rvedp!=null){ const c=document.getElementById('rc_lvedp_rvedp'); c.classList.remove('normal','patho'); c.classList.add(Math.abs(lvedp_rvedp)<=5?'normal':'patho'); }
+
+  // Color HZV/CI/SV/SVI Fick
+  function colorHZV(cid,val,lo,hi){ const c=document.getElementById(cid); if(!c||val===null) return; c.classList.remove('normal','patho','blue'); c.classList.add(val>=lo&&val<=hi?'normal':'patho'); }
+  colorHZV('rc_hzv',hzv,4.0,8.0); colorHZV('rc_ci',ci,2.5,4.0); colorHZV('rc_sv',sv,60,100); colorHZV('rc_svi',svi,33,47);
+
+  // --- Shunt ---
+  const shuntOn=document.getElementById('tog-shunt').checked;
+  document.getElementById('res_shunt_sec').classList.toggle('hidden',!shuntOn);
+  if(shuntOn){
+    let qs=null,qp=null,qpqs=null;
+    // MVO2 = (3*SVC + IVC)/4 if available, else use RA
+    const mvo2_o2 = (sat_svc&&sat_ivc) ? hb*1.34*((3*sat_svc+sat_ivc)/4)/100 :
+                    (sat_ra&&hb) ? hb*1.34*sat_ra/100 : null;
+    const o2_pcw = (sat_pcw&&hb) ? hb*1.34*sat_pcw/100 : (o2art);
+    if(vo2&&o2art&&mvo2_o2&&o2art-mvo2_o2>0) qs=vo2/((o2art-mvo2_o2)*10);
+    const o2_pv = (sat_la&&hb)?hb*1.34*sat_la/100: o2_pcw;
+    const o2_pa = o2zv;
+    if(vo2&&o2_pv&&o2_pa&&o2_pv-o2_pa>0) qp=vo2/((o2_pv-o2_pa)*10);
+    if(qs&&qp&&qs>0) qpqs=qp/qs;
+    setV('r_qs',qs,2); setV('r_qp',qp,2); setV('r_qpqs',qpqs,2);
+    colorCardLo('rc_qpqs',qpqs,1.5,true);
+    // Hints
+    let hints=[];
+    if(sat_pa&&sat_pa>80) hints.push('⚠ PA-Sat >80% → verdächtig auf Links-Rechts-Shunt');
+    if(sat_svc&&sat_pa&&sat_pa-sat_svc>=7) hints.push('⚠ SVC→PA Sprung ≥7% → ASD?');
+    if(sat_ra&&sat_rv&&sat_rv-sat_ra>=5) hints.push('⚠ RA→RV Sprung ≥5% → VSD?');
+    document.getElementById('shunt_hints').innerHTML=hints.join('<br>');
+  }
+
+  // --- Vasoreagibilitaet ---
+  const vasoOn=document.getElementById('tog-vaso').checked;
+  document.getElementById('res_vaso_sec').classList.toggle('hidden',!vasoOn);
+  if(vasoOn){
+    const v_sat_ao=n('v_sat_ao'), v_sat_pa=n('v_sat_pa');
+    const v_pa_m=n('v_pa_m'), v_pcwp_m=n('v_pcwp_m'), v_ra_m=n('v_ra_m'), v_ao_m=n('v_ao_m');
+    const v_pa_s=n('v_pa_s'), v_pa_d=n('v_pa_d');
+    let v_o2art=null,v_o2zv=null,v_avdo2=null,v_hzv=null,v_ci=null,v_pvr_wu=null,v_tpg=null,v_dpg=null;
+    if(hb&&v_sat_ao) v_o2art=hb*1.34*v_sat_ao/100;
+    if(hb&&v_sat_pa) v_o2zv=hb*1.34*v_sat_pa/100;
+    if(v_o2art&&v_o2zv) v_avdo2=v_o2art-v_o2zv;
+    if(vo2&&v_avdo2&&v_avdo2>0) v_hzv=vo2/(v_avdo2*10);
+    if(v_hzv&&kof) v_ci=v_hzv/kof;
+    if(v_pa_m!=null&&v_pcwp_m!=null&&v_hzv) v_pvr_wu=((v_pa_m-v_pcwp_m)*80/v_hzv)/80;
+    if(v_pa_m!=null&&v_pcwp_m!=null) v_tpg=v_pa_m-v_pcwp_m;
+    if(v_pa_d!=null&&v_pcwp_m!=null) v_dpg=v_pa_d-v_pcwp_m;
+    setV('r_vaso_hzv',v_hzv,2); setV('r_vaso_ci',v_ci,2);
+    setV('r_vaso_pvr',v_pvr_wu,2); setV('r_vaso_tpg',v_tpg,1); setV('r_vaso_dpg',v_dpg,1);
+    // ESC response
+    let resp='—';
+    if(v_pa_m!=null&&pa_m!=null&&v_hzv!=null&&hzv!=null){
+      const mpap_red=pa_m-v_pa_m;
+      if(mpap_red>=10&&v_pa_m<=40&&v_hzv>=hzv-0.5) resp='✓ Positiv (ESC 2022)';
+      else resp='✗ Negativ';
+    }
+    document.getElementById('r_vaso_resp').textContent=resp;
+    colorCardLo('rc_vaso_pvr',v_pvr_wu,3,true);
+    colorCardLo('rc_vaso_tpg',v_tpg,12,true);
+    colorCardLo('rc_vaso_dpg',v_dpg,7,true);
+    if(resp.startsWith('✓')){ document.getElementById('rc_vaso_resp').classList.remove('patho'); document.getElementById('rc_vaso_resp').classList.add('normal'); }
+    else if(resp.startsWith('✗')){ document.getElementById('rc_vaso_resp').classList.remove('normal'); document.getElementById('rc_vaso_resp').classList.add('patho'); }
+  }
+
+  // --- Gorlin ---
+  const gorlinOn=document.getElementById('tog-gorlin').checked;
+  document.getElementById('res_gorlin_sec').classList.toggle('hidden',!gorlinOn);
+  if(gorlinOn){
+    const klappe=s('gorlin_klappe'), pmean=n('gorlin_pmean');
+    const K = klappe==='AK' ? 1.0 : 0.85;
+    const ref_ak='AK: schwer &lt;1,0 / mittel 1,0–1,5 / normal &gt;2,0';
+    const ref_mk='MK: schwer &lt;1,5 / mittel 1,5–2,0 / normal &gt;2,5';
+    const ref_str = klappe==='AK'?ref_ak:ref_mk;
+    document.getElementById('r_gorlin_ref_fick').innerHTML=ref_str;
+    document.getElementById('r_gorlin_ref_thermo').innerHTML=ref_str;
+    let koef_fick=null, koef_thermo=null;
+    if(hzv&&sep&&pmean&&pmean>0)
+      koef_fick=(hzv*1000)/(44.3*K*sep*Math.sqrt(pmean));
+    if(gorlinOn&&hzv_t&&sep&&pmean&&pmean>0)
+      koef_thermo=(hzv_t*1000)/(44.3*K*sep*Math.sqrt(pmean));
+    setV('r_gorlin_fick',koef_fick,2);
+    setV('r_gorlin_thermo',koef_thermo,2);
+    // Color
+    const threshSevere = klappe==='AK'?1.0:1.5;
+    const threshMild   = klappe==='AK'?2.0:2.5;
+    function colorGorlin(cardEl, val){ if(!cardEl||val===null) return; cardEl.classList.remove('normal','patho','blue'); cardEl.classList.add(val<threshSevere?'patho':val>threshMild?'normal':'blue'); }
+    colorGorlin(document.getElementById('rc_gorlin_fick'), koef_fick);
+    const thermoCard=document.getElementById('res_gorlin_thermo_card');
+    const showThermo=thermoOn&&hzv_t!=null;
+    thermoCard.classList.toggle('hidden',!showThermo);
+    if(showThermo){ colorGorlin(thermoCard, koef_thermo); }
+  }
+
+  // --- Konstriktion ---
+  const konstOn=document.getElementById('tog-konst').checked;
+  document.getElementById('res_konst_sec').classList.toggle('hidden',!konstOn);
+  if(konstOn){
+    setV('r_kr_lvedp',lvedp_rvedp,1);
+    setV('r_kr_rvsp',rv_s,0);
+    let kr_ratio=null; if(rv_edp!=null&&rv_s&&rv_s>0) kr_ratio=rv_edp/rv_s;
+    setV('r_kr_ratio',kr_ratio,3);
+    setV('r_kr_pas',pa_s,0);
+    if(lvedp_rvedp!=null){ const c=document.getElementById('rc_kr_lvedp'); c.classList.remove('normal','patho'); c.classList.add(Math.abs(lvedp_rvedp)<=5?'normal':'patho'); }
+    if(rv_s!=null){ const c=document.getElementById('rc_kr_rvsp'); c.classList.remove('normal','patho'); c.classList.add(rv_s<55?'normal':'patho'); }
+    if(kr_ratio!=null){ const c=document.getElementById('rc_kr_ratio'); c.classList.remove('normal','patho'); c.classList.add(kr_ratio>=1/3?'normal':'patho'); }
+    if(pa_s!=null){ const c=document.getElementById('rc_kr_pas'); c.classList.remove('normal','patho'); c.classList.add(pa_s<55?'normal':'patho'); }
+    // Qual results
+    const fields=[['kr_dip','Dip-Plateau'],['kr_kuss','Kussmaul'],['kr_ydesc','Y-Descent'],['kr_sai','Systolic Area Index'],['kr_vdisk','Ventr. Diskordanz'],['kr_pawp','PAWP-LVEDP'],['kr_vol','Volumenchallenge']];
+    let html='';
+    fields.forEach(([id,lbl])=>{ const v=s(id); if(v){ html+=`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted);min-width:160px;display:inline-block">${lbl}:</span> ${document.getElementById(id).options[document.getElementById(id).selectedIndex].text}</div>`; } });
+    document.getElementById('kr_qual_results').innerHTML=html;
+  }
+
+  // --- Qualitative Befunde ---
+  const qualOn=document.getElementById('tog-qual').checked;
+  document.getElementById('res_qual_sec').classList.toggle('hidden',!qualOn);
+  if(qualOn){
+    const qFields=[['q_vwelle','v-Welle PCWP'],['q_dipplateau','Dip-Plateau RV'],['q_kussmaul','Kussmaul-Zeichen'],['q_ra_kurve','RA-Kurvenform'],['q_pa_kurve','PA-Kurve'],['q_pcwp_kurve','PCWP-Kurve'],['q_tamponade','Tamponade']];
+    let html='<div class="res-grid">';
+    qFields.forEach(([id,lbl])=>{
+      const el=document.getElementById(id); if(!el) return;
+      const v=el.value; if(!v) return;
+      const txt=el.options[el.selectedIndex].text;
+      html+=`<div class="res-card blue"><div class="r-label">${lbl}</div><div class="r-val" style="font-size:13px;line-height:1.3">${txt}</div></div>`;
+    });
+    html+='</div>';
+    document.getElementById('qual_results_body').innerHTML=html;
+  }
+}
+
+// ===== COPY BEFUND =====
+function copyBefund(){
+  calc();
+  const lines=[];
+  const sep60='='.repeat(60), dash40='-'.repeat(40);
+  function g(id){ const e=document.getElementById(id); return e&&e.textContent&&e.textContent.trim()&&e.textContent.trim()!=='—'?e.textContent.trim():null; }
+  function inp(id){ const e=document.getElementById(id); return e&&e.value&&e.value.trim()?e.value.trim():null; }
+  function row(lbl,val,unit,ref){ let l='  '+lbl.padEnd(26)+val; if(unit) l+=' '+unit; if(ref) l+='   ['+ref+']'; return l; }
+
+  lines.push('RECHTSHERZKATHETER-BEFUND');
+  lines.push(sep60);
+  lines.push('');
+
+  // Patientendaten
+  lines.push('PATIENTENDATEN');
+  lines.push(dash40);
+  if(inp('groesse')) lines.push(row('Größe:',inp('groesse'),'cm',''));
+  if(inp('gewicht')) lines.push(row('Gewicht:',inp('gewicht'),'kg',''));
+  if(inp('alter')) lines.push(row('Alter:',inp('alter'),'Jahre',''));
+  lines.push(row('Geschlecht:',document.getElementById('geschlecht').value==='m'?'Männlich':'Weiblich','',''));
+  if(inp('hb_mmol')) lines.push(row('Hb:',inp('hb_mmol'),'mmol/l  ('+( g('r_hb_gdl')||'?')+' g/dl)',''));
+  if(inp('hf')) lines.push(row('Herzfrequenz:',inp('hf'),'/min',''));
+  if(g('r_kof')) lines.push(row('KOF:',g('r_kof'),'m²',''));
+  if(g('r_vo2')) lines.push(row('VO₂ (LaFarge):',g('r_vo2'),'ml/min',''));
+  lines.push('');
+
+  // Sättigungen
+  const satMap=[['sat_ao','AO','%','>95%'],['sat_pa','PA','%','>65% (gemischtvenös)'],['sat_pcw','PCW','%',''],['sat_ra','RA','%','>70% (zentralvenös)'],['sat_svc','SVC','%',''],['sat_ivc','IVC','%',''],['sat_rv','RV','%',''],['sat_la','LA','%','']];
+  const satRows=satMap.filter(r=>inp(r[0]));
+  if(satRows.length){
+    lines.push('SAUERSTOFFSÄTTIGUNGEN');
+    lines.push(dash40);
+    satRows.forEach(r=>lines.push(row(r[0].replace('sat_','').toUpperCase()+':',inp(r[0]),r[2],r[3])));
+    if(g('r_o2art')) lines.push(row('O₂art:',g('r_o2art'),'ml/dl','Normal ~19-20'));
+    if(g('r_o2zv')) lines.push(row('O₂zv:',g('r_o2zv'),'ml/dl','Normal ~14-15'));
+    if(g('r_avdo2')) lines.push(row('AVDO₂:',g('r_avdo2'),'ml/dl','Normal 4-6'));
+    lines.push('');
+  }
+
+  // Drücke
+  const pMap=[['AO','ao_s','ao_d','ao_m','S/D/MAP'],['LV','lv_s','lv_d','lv_edp','S/D/LVEDP'],['RA','ra_a','ra_v','ra_m','a/v/M'],['RV','rv_s','rv_d','rv_edp','S/D/RVEDP'],['PA','pa_s','pa_d','pa_m','S/D/mPAP'],['PCWP','pcwp_a','pcwp_v','pcwp_m','a/v/M'],['LA','la_a','la_v','la_m','a/v/M']];
+  const pRows=pMap.filter(r=>inp(r[1])||inp(r[2])||inp(r[3]));
+  if(pRows.length){
+    lines.push('DRÜCKE (mmHg)');
+    lines.push(dash40);
+    pRows.forEach(r=>{
+      const vals=[inp(r[1]),inp(r[2]),inp(r[3])].filter(Boolean).join(' / ');
+      lines.push(row(r[0]+' ('+r[4]+'):',vals,'mmHg',''));
+    });
+    if(inp('lv_dpdt')) lines.push(row('LV max dP/dt:',inp('lv_dpdt'),'mmHg/s','Normal 1200-2000'));
+    if(inp('lv_dpdtp')) lines.push(row('LV dP/dt/P:',inp('lv_dpdtp'),'1/s','Normal ≥44'));
+    if(inp('rv_dpdt')) lines.push(row('RV max dP/dt:',inp('rv_dpdt'),'mmHg/s','Normal 400-1000'));
+    if(inp('sep')) lines.push(row('SEP LV:',inp('sep'),'sec/min',''));
+    lines.push('');
+  }
+
+  // HZV Fick
+  lines.push('HZV, CI, SV & WIDERSTÄNDE — FICK');
+  lines.push(dash40);
+  if(g('r_hzv')) lines.push(row('HZV:',g('r_hzv'),'l/min','Normal 4,0-8,0'));
+  if(g('r_ci')) lines.push(row('CI:',g('r_ci'),'l/min/m²','Normal 2,5-4,0'));
+  if(g('r_sv')) lines.push(row('SV:',g('r_sv'),'ml','Normal 60-100'));
+  if(g('r_svi')) lines.push(row('SVI:',g('r_svi'),'ml/m²','Normal 33-47'));
+  if(g('r_svr')) lines.push(row('SVR:',g('r_svr'),'dyn*s*cm-5','Normal 900-1400'));
+  if(g('r_svr_wu')) lines.push(row('SVR (WU):',g('r_svr_wu'),'WU','Normal 8,8-20'));
+  if(g('r_pvr')) lines.push(row('PVR:',g('r_pvr'),'dyn*s*cm-5','Normal 45-120'));
+  if(g('r_pvr_wu')) lines.push(row('PVR (WU):',g('r_pvr_wu'),'WU','Normal <2'));
+  if(g('r_pvr_svr')) lines.push(row('PVR/SVR:',g('r_pvr_svr'),'','Normal <0,75'));
+  lines.push('');
+
+  // Thermo
+  if(document.getElementById('tog-thermo').checked&&g('r_hzv_t')){
+    lines.push('HZV, CI, SV & WIDERSTÄNDE — THERMODILUTION');
+    lines.push(dash40);
+    if(g('r_hzv_t')) lines.push(row('HZV (Thermo):',g('r_hzv_t'),'l/min','Normal 4,0-8,0'));
+    if(g('r_ci_t')) lines.push(row('CI (Thermo):',g('r_ci_t'),'l/min/m²','Normal 2,5-4,0'));
+    if(g('r_sv_t')) lines.push(row('SV (Thermo):',g('r_sv_t'),'ml','Normal 60-100'));
+    if(g('r_svi_t')) lines.push(row('SVI (Thermo):',g('r_svi_t'),'ml/m²','Normal 33-47'));
+    if(g('r_svr_t')) lines.push(row('SVR (Thermo):',g('r_svr_t'),'dyn*s*cm-5','Normal 900-1400'));
+    if(g('r_pvr_t')) lines.push(row('PVR (Thermo):',g('r_pvr_t'),'dyn*s*cm-5','Normal 45-120'));
+    if(g('r_pvr_wu_t')) lines.push(row('PVR WU (Thermo):',g('r_pvr_wu_t'),'WU','Normal <2'));
+    lines.push('');
+  }
+
+  // Gradienten
+  const gradMap=[['r_tpg','TPG','mmHg','<=12'],['r_dpg','DPG','mmHg','<7'],['r_papp','PAPP','mmHg',''],['r_cpo','CPO','Watt','>0,6'],['r_cpi','CPI','W/m²','>0,4'],['r_lvswi','LVSWI','g*m/m²','50-62'],['r_rvswi','RVSWI','g*m/m²','>450'],['r_papi','PAPI','','>2,0'],['r_pac','PAC','ml/mmHg','>2,3'],['r_zvd_pcwp','ZVD/PCWP','','<0,63'],['r_lvedp_rvedp','LVEDP-RVEDP','mmHg','<=5 Konstriktiv']];
+  const gradRows=gradMap.filter(r=>g(r[0]));
+  if(gradRows.length){
+    lines.push('PULMONALE GRADIENTEN & INDIZES');
+    lines.push(dash40);
+    gradRows.forEach(r=>lines.push(row(r[1]+':',g(r[0]),r[2],r[3])));
+    lines.push('');
+  }
+
+  // Shunt
+  if(document.getElementById('tog-shunt').checked&&g('r_qs')){
+    lines.push('SHUNT-DIAGNOSTIK');
+    lines.push(dash40);
+    if(g('r_qs')) lines.push(row('Qs:',g('r_qs'),'l/min',''));
+    if(g('r_qp')) lines.push(row('Qp:',g('r_qp'),'l/min',''));
+    if(g('r_qpqs')) lines.push(row('Qp:Qs:',g('r_qpqs'),'','Relevant ab >=1,5:1'));
+    lines.push('');
+  }
+
+  // Vaso
+  if(document.getElementById('tog-vaso').checked){
+    const subst=document.getElementById('vaso_subst').value==='iloprost'?'Iloprost inhalativ':'Nitrolingual i.v.';
+    lines.push('VASOREAGIBILITÄTSTEST ('+subst+')');
+    lines.push(dash40);
+    const vm=[['v_pa_s','PA Syst nach','mmHg'],['v_pa_d','PA Diast nach','mmHg'],['v_pa_m','mPAP nach','mmHg'],['v_pcwp_m','PCWP Mittel nach','mmHg'],['v_ra_m','RA Mittel nach','mmHg'],['v_ao_m','AO MAP nach','mmHg'],['v_sat_ao','AO-Sat nach','%'],['v_sat_pa','PA-Sat nach','%']];
+    vm.forEach(r=>{if(inp(r[0]))lines.push(row(r[1]+':',inp(r[0]),r[2],''))});
+    if(g('r_vaso_pvr')) lines.push(row('PVR nach:',g('r_vaso_pvr'),'WU','<2'));
+    const respEl=document.getElementById('r_vaso_resp');
+    if(respEl&&respEl.textContent&&respEl.textContent!=='—') lines.push(row('Ansprechen:',respEl.textContent,'','ESC 2022'));
+    lines.push('');
+  }
+
+  // Gorlin
+  if(document.getElementById('tog-gorlin').checked&&g('r_gorlin_fick')){
+    const kl=document.getElementById('gorlin_klappe').value;
+    lines.push('GORLIN — '+kl);
+    lines.push(dash40);
+    lines.push(row('KÖF (Fick):',g('r_gorlin_fick'),'cm²',kl==='AK'?'schwer <1,0':'schwer <1,5'));
+    if(g('r_gorlin_thermo')) lines.push(row('KÖF (Thermo):',g('r_gorlin_thermo'),'cm²',''));
+    lines.push('');
+  }
+
+  // Freitext
+  const ft=document.getElementById('befundtext').value.trim();
+  if(ft){ lines.push('BEFUND'); lines.push(dash40); lines.push(ft); lines.push(''); }
+
+  lines.push(sep60);
+  const text=lines.join('\n');
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>flashCopy()).catch(()=>fallbackCopy(text));
+  } else { fallbackCopy(text); }
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.style.cssText='position:fixed;opacity:0'; document.body.appendChild(ta);
+  ta.select(); document.execCommand('copy'); document.body.removeChild(ta); flashCopy();
+}
+function flashCopy(){
+  ['copy-label','copy-label2'].forEach(id=>{ const e=document.getElementById(id); if(e){ const orig=e.textContent; e.textContent='✓ Kopiert!'; setTimeout(()=>e.textContent=orig,2000); } });
+}
+
+// ===== NEUE BERECHNUNG =====
+function neueBerechnung(){
+  if(!confirm('Alle Eingaben löschen und neu beginnen?')) return;
+  // Clear all inputs
+  document.querySelectorAll('input[type="number"], input[type="text"]').forEach(el=>el.value='');
+  document.querySelectorAll('textarea').forEach(el=>el.value='');
+  document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
+  // Reset toggles
+  ['thermo','shunt','vaso','gorlin','konst','qual'].forEach(id=>{
+    const tog=document.getElementById('tog-'+id);
+    if(tog&&tog.checked){ tog.checked=false; toggleMod(id); }
+  });
+  // Reset all result cards to blue
+  document.querySelectorAll('.res-card').forEach(c=>{ c.classList.remove('normal','patho'); c.classList.add('blue'); });
+  calc();
+  showStep(1);
+}
+
+// Init
+calc();
+</script>
+</body>
+</html>
