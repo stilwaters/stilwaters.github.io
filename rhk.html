@@ -833,7 +833,7 @@ function calc(){
 
   if(al&&hf&&kof){
     const coeff = sex==='m' ? 11.49 : 17.04;
-    const vo2_m2 = 138.1 - coeff*Math.log(al) + 0.378*hf;
+    const vo2_m2 = 138.1 - coeff*Math.log10(al) + 0.378*hf;
     vo2 = vo2_m2 * kof;
   }
   setV('r_vo2',vo2,1);
@@ -910,7 +910,7 @@ function calc(){
   if(pa_s&&pa_d) papp=pa_s-pa_d;
   if(ao_m&&hzv) cpo=ao_m*hzv/451;
   if(ao_m&&ci) cpi=ao_m*ci/451;
-  if(ao_m&&svi) lvswi=ao_m*svi*0.0136;
+  if(ao_m&&pcwp_m!=null&&svi) lvswi=(ao_m-pcwp_m)*svi*0.0136;
   if(pa_m&&ra_m!=null&&svi) rvswi=(pa_m-ra_m)*svi*0.0136;
   if(pa_s&&pa_d&&ra_m&&ra_m>0) papi=(pa_s-pa_d)/ra_m;
   if(svi&&papp&&papp>0) pac=svi/papp;
