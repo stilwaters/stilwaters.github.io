@@ -127,6 +127,27 @@
       transform: translateX(3px);
     }
 
+    .disclaimer {
+      margin-top: 28px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      background: rgba(251, 191, 36, 0.05);
+      font-size: 12px;
+      color: #fbbf24;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .disclaimer strong {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+      color: #f59e0b;
+    }
+
     footer {
       text-align: center;
       margin-top: 28px;
@@ -183,7 +204,7 @@
               <span class="badge">Tool</span>
             </h3>
             <p class="card-desc">
-              !Berechnung hämodynamischer Parameter noch in Bearbeitung!
+              Berechnung hämodynamischer Parameter
             </p>
           </div>
           <span class="card-arrow">›</span>
@@ -204,23 +225,16 @@
           </div>
           <span class="card-arrow">↗</span>
         </a>
-<!-- ESC HCM Risk Calculator (externer Link) -->
-        <a class="card"
-           href="https://qxmd.com/calculate/calculator_303/hcm-risk-scd"
-           target="_blank" rel="noopener">
-          <div>
-            <h3 class="card-title">
-              HCM Risk Calculator
-              <span class="badge">Extern</span>
-            </h3>
-            <p class="card-desc">
-              der von den europäischen Leitlinien empfohlene Rechner
-            </p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+
       </section>
     </main>
+
+    <div class="disclaimer">
+      <strong>⚠ Disclaimer</strong>
+      Alle auf dieser Seite verfügbaren Tools dienen ausschließlich zu <strong style="display:inline; text-transform:none; letter-spacing:normal; font-size:inherit;">Forschungs- und Lernzwecken</strong>.
+      Sie ersetzen keine ärztliche Beurteilung und sind nicht für den klinischen Einsatz bestimmt.
+      Keine Haftung für die Richtigkeit der Berechnungen oder Entscheidungsempfehlungen.
+    </div>
 
     <footer>
        <span id="year"></span>
