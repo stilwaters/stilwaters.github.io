@@ -1,14 +1,29 @@
- <!DOCTYPE html>
-<html lang="de" data-theme="light">
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rostock HKU-Entscheidungshilfe – ESC 2024 &amp; NVL KHK</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root,[data-theme="light"]{
+:root,[data-theme="dark"]{
+  --bg:#020617;--surface:rgba(15, 23, 42, 0.9);--surface-2:rgba(15, 23, 42, 0.7);--surface-off:rgba(15, 23, 42, 0.5);
+  --divider:rgba(148, 163, 184, 0.15);--border:rgba(148, 163, 184, 0.25);
+  --text:#e5e7eb;--muted:#9ca3af;--faint:#6b7280;
+  --primary:#38bdf8;--primary-h:#2d8ae0;--primary-l:rgba(56, 189, 248, 0.1);--primary-hl:rgba(56, 189, 248, 0.2);
+  --ok:#22c55e;--ok-l:rgba(34, 197, 94, 0.1);
+  --warn:#f59e0b;--warn-l:rgba(245, 158, 11, 0.1);
+  --err:#ef4444;--err-l:rgba(239, 68, 68, 0.1);
+  --orange:#fb923c;--orange-l:rgba(251, 146, 60, 0.1);
+  --purple:#a78bfa;--purple-l:rgba(167, 139, 250, 0.1);
+  --teal:#2dd4bf;--teal-l:rgba(45, 212, 191, 0.1);
+  --blue2:#38bdf8;--blue2-l:rgba(56, 189, 248, 0.1);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:0 4px 14px rgba(0,0,0,0.4);
+  --shadow-lg:0 12px 36px rgba(0,0,0,0.5);
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:20px;
+  --tr:180ms cubic-bezier(.16,1,.3,1);
+}
+[data-theme="light"]{
   --bg:#f3f6fb;--surface:#fff;--surface-2:#f8fafc;--surface-off:#eef2f7;
   --divider:#e2e8f0;--border:#cbd5e1;
   --text:#0f172a;--muted:#64748b;--faint:#94a3b8;
@@ -20,48 +35,26 @@
   --purple:#7c3aed;--purple-l:#ede9fe;
   --teal:#0d9488;--teal-l:#ccfbf1;
   --blue2:#0369a1;--blue2-l:#e0f2fe;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.07);
-  --shadow-md:0 4px 14px rgba(0,0,0,.09);
-  --shadow-lg:0 12px 36px rgba(0,0,0,.11);
-  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:20px;
-  --tr:180ms cubic-bezier(.16,1,.3,1);
-}
-[data-theme="dark"]{
-  --bg:#0f172a;--surface:#1e293b;--surface-2:#263548;--surface-off:#1a2840;
-  --divider:#2d3f55;--border:#334155;
-  --text:#e2e8f0;--muted:#94a3b8;--faint:#64748b;
-  --primary:#60a5fa;--primary-h:#93c5fd;--primary-l:#1e3a5f;--primary-hl:#1e40af;
-  --ok:#4ade80;--ok-l:#14532d;
-  --warn:#fbbf24;--warn-l:#451a03;
-  --err:#f87171;--err-l:#450a0a;
-  --orange:#fb923c;--orange-l:#431407;
-  --purple:#a78bfa;--purple-l:#2e1065;
-  --teal:#2dd4bf;--teal-l:#042f2e;
-  --blue2:#38bdf8;--blue2-l:#0c4a6e;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:'Inter',system-ui,sans-serif;font-size:15px;color:var(--text);background:var(--bg);min-height:100dvh;line-height:1.6;padding-bottom:4rem}
+body{font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;font-size:15px;color:var(--text);background:radial-gradient(circle at top, #0f172a 0, #020617 50%, #000 100%) fixed;min-height:100dvh;line-height:1.6;padding-bottom:4rem}
 a,button,input,select{font:inherit;color:inherit;transition:color var(--tr),background var(--tr),border-color var(--tr),box-shadow var(--tr)}
 button{cursor:pointer;border:none;background:none}
 :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--r-sm)}
 
-/* HEADER */
-.app-header{background:var(--surface);border-bottom:1px solid var(--divider);padding:.9rem 1.5rem;position:sticky;top:0;z-index:50;box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.header-logo{display:flex;align-items:center;gap:.75rem}
-.logo-svg{width:42px;height:42px;flex-shrink:0}
-.header-title{font-family:'Instrument Serif',Georgia,serif;font-size:1.15rem;font-weight:400;line-height:1.2}
-.header-sub{font-size:.72rem;color:var(--muted)}
-.header-actions{display:flex;align-items:center;gap:.6rem}
-.badge{background:var(--primary-l);color:var(--primary);font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase}
-.badge.nvl{background:var(--teal-l);color:var(--teal)}
+.sw-header{position:sticky;top:0;z-index:100;background:rgba(2, 6, 23, 0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(148, 163, 184, 0.15);padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sw-back{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#38bdf8;text-decoration:none;transition:opacity 0.15s}
+.sw-back:hover{opacity:0.75}
+.sw-page-title{font-size:13px;color:#9ca3af}
+.sw-header-right{display:flex;align-items:center;gap:8px}
 .btn-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-md);color:var(--muted);background:var(--surface-off);border:1px solid var(--border)}
 .btn-icon:hover{background:var(--divider);color:var(--text)}
-
+.app-header{display:none \!important}
 /* LAYOUT */
 .container{max-width:840px;margin:0 auto;padding:0 1rem}
 .page-hero{padding:2.5rem 1rem 1.5rem;max-width:840px;margin:0 auto}
-.page-hero h1{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:400;color:var(--text);margin-bottom:.5rem;line-height:1.2}
+.page-hero h1{font-family:Georgia, serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:400;color:var(--text);margin-bottom:.5rem;line-height:1.2}
 .page-hero p{font-size:.9rem;color:var(--muted);max-width:65ch}
 .guideline-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
 .gl-badge{padding:4px 12px;border-radius:99px;font-size:.75rem;font-weight:600;border:1px solid}
@@ -164,7 +157,7 @@ button{cursor:pointer;border:none;background:none}
 .result-icon-wrap.orange{background:var(--orange-l)}
 .result-icon-wrap.blue{background:var(--primary-l)}
 .result-icon-wrap.teal{background:var(--teal-l)}
-.result-title{font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;font-weight:400;line-height:1.2;margin-bottom:.2rem}
+.result-title{font-family:Georgia, serif;font-size:1.35rem;font-weight:400;line-height:1.2;margin-bottom:.2rem}
 .result-title.green{color:var(--ok)}
 .result-title.red{color:var(--err)}
 .result-title.orange{color:var(--orange)}
@@ -234,37 +227,18 @@ button{cursor:pointer;border:none;background:none}
 </head>
 <body>
 
-<header class="app-header">
-  <div class="header-logo">
-    <svg class="logo-svg" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Universitätsmedizin Rostock – Kardiovaskuläre Diagnostik">
-      <rect width="42" height="42" rx="11" fill="#1d4ed8"/>
-      <!-- Herzsilhouette mit EKG-Linie -->
-      <path d="M21 31s-10-6-10-14a7 7 0 0 1 10-6.26A7 7 0 0 1 31 17c0 8-10 14-10 14z" fill="none" stroke="#93c5fd" stroke-width="1.5"/>
-      <path d="M11 21h4l2-4.5 3.5 8 2.5-3.5H27" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <div>
-      <div class="header-title">Rostock – HKU-Entscheidungshilfe</div>
-      <div class="header-sub">Kardiovaskuläre Diagnostik | Chronisches Koronarsyndrom</div>
-    </div>
-  </div>
-  <div class="header-actions">
-    <span class="badge">ESC 2024</span>
-    <span class="badge nvl">NVL 2024</span>
+<header class="sw-header">
+  <a class="sw-back" href="index-2.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    STILWATERS
+  </a>
+  <span class="sw-page-title">HKU Entscheidungshilfe</span>
+  <div class="sw-header-right">
     <button class="btn-icon" data-theme-toggle aria-label="Farbschema wechseln">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
     </button>
   </div>
 </header>
-
-<div class="page-hero">
-  <h1>Sollte eine HKU durchgeführt werden?</h1>
-  <p>Strukturierte Entscheidungshilfe auf Basis der aktuellen Leitlinien – speziell für die Zuweisung aus dem Raum Rostock.</p>
-  <div class="guideline-badges">
-    <span class="gl-badge esc">ESC 2024 CCS-Leitlinie</span>
-    <span class="gl-badge nvl">NVL Chronische KHK 2024</span>
-    <span class="gl-badge discharge">DISCHARGE-Kalkulator</span>
-  </div>
-</div>
 
 <div class="progress-wrap">
   <div class="progress-header">
