@@ -1,168 +1,656 @@
-<!DOCTYPE html>
+<\!DOCTYPE html>
 <html lang="de" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rostocker Rechtsherzkatheter</title>
-<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <style>
-/* ===== TOKENS ===== */
+/* ===== DESIGN SYSTEM (index-2 Dark Theme) ===== */
 :root {
-  --bg:#0a0c10; --surface:#111418; --surface2:#181c22; --surface3:#1e242c;
-  --border:#2a3040; --border2:#38424f;
-  --text:#e8eaed; --muted:#8b95a1; --faint:#4a5568;
-  --blue:#3b9eff; --blue-dim:#1a4a7a; --blue-bg:#0d1f35; --blue-glow:rgba(59,158,255,.15);
-  --green:#22c55e; --green-bg:#0a2e1a; --green-dim:#14532d;
-  --red:#ef4444; --red-bg:#2d0a0a; --red-dim:#7f1d1d;
-  --amber:#f59e0b; --amber-bg:#2d1f0a;
-  --radius:8px; --radius-lg:12px;
-  --trans:160ms cubic-bezier(.16,1,.3,1);
+  --bg: radial-gradient(circle at top, #0f172a 0, #020617 50%, #000 100%);
+  --surface: rgba(15, 23, 42, 0.9);
+  --surface-2: rgba(15, 23, 42, 0.7);
+  --border: rgba(148, 163, 184, 0.25);
+  --text: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --accent: #38bdf8;
+  --accent-hover: #2d8ae0;
+  --green: #22c55e;
+  --green-bg: rgba(34, 197, 94, 0.1);
+  --red: #ef4444;
+  --red-bg: rgba(239, 68, 68, 0.1);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245, 158, 11, 0.1);
+  --radius: 8px;
+  --radius-lg: 16px;
+  --trans: 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 [data-theme="light"] {
-  --bg:#f0f4f8; --surface:#fff; --surface2:#f7f9fc; --surface3:#eef2f7;
-  --border:#d1d9e0; --border2:#b8c4cf;
-  --text:#1a202c; --muted:#4a5568; --faint:#a0aec0;
-  --blue:#1a6fcf; --blue-dim:#bfdbfe; --blue-bg:#eff6ff; --blue-glow:rgba(26,111,207,.1);
-  --green:#16a34a; --green-bg:#f0fdf4; --green-dim:#bbf7d0;
-  --red:#dc2626; --red-bg:#fff5f5; --red-dim:#fecaca;
-  --amber:#d97706; --amber-bg:#fffbeb;
+  --bg: #f0f4f8;
+  --surface: #fff;
+  --surface-2: #f7f9fc;
+  --border: #d1d9e0;
+  --text: #1a202c;
+  --text-secondary: #4a5568;
+  --accent: #1a6fcf;
+  --accent-hover: #1459bc;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --red: #dc2626;
+  --red-bg: #fff5f5;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
 }
+
 /* ===== RESET ===== */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Satoshi',system-ui,sans-serif;font-size:14px;line-height:1.5;
-  background:var(--bg);color:var(--text);min-height:100dvh;-webkit-font-smoothing:antialiased}
-input,button,select,textarea{font:inherit;color:inherit}
-button{cursor:pointer;background:none;border:none}
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, button, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
 /* ===== HEADER ===== */
-header{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);
-  padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.3px}
-.logo svg{color:var(--blue)}
-.header-right{display:flex;align-items:center;gap:8px}
-.theme-btn{width:36px;height:36px;border-radius:var(--radius);border:1px solid var(--border);
-  background:var(--surface2);color:var(--muted);display:flex;align-items:center;justify-content:center;
-  transition:all var(--trans)}
-.theme-btn:hover{color:var(--text);border-color:var(--border2)}
-.copy-btn{display:flex;align-items:center;gap:6px;padding:0 14px;height:36px;border-radius:var(--radius);
-  background:var(--blue);color:#fff;font-weight:600;font-size:13px;
-  transition:all var(--trans);white-space:nowrap}
-.copy-btn:hover{background:#2d8ae0;transform:translateY(-1px)}
-.copy-btn:active{transform:none}
+.sw-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 12, 16, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  padding: 0 16px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sw-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.sw-back:hover {
+  opacity: 0.75;
+}
+
+.sw-page-title {
+  font-size: 13px;
+  color: var(--text-secondary);
+  flex: 1;
+  text-align: center;
+}
+
+.sw-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--trans);
+}
+
+.theme-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  height: 36px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all var(--trans);
+  white-space: nowrap;
+}
+
+.copy-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.copy-btn:active {
+  transform: none;
+}
+
 /* ===== STEP BAR ===== */
-.step-bar{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);
-  display:flex;gap:4px}
-.step-pill{flex:1;max-width:200px;padding:8px 14px;border-radius:var(--radius);
-  background:var(--surface2);border:1px solid var(--border);color:var(--muted);
-  font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:all var(--trans)}
-.step-pill.active{background:var(--blue-bg);border-color:var(--blue);color:var(--blue);font-weight:600}
+.step-bar {
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+}
+
+.step-pill {
+  flex: 1;
+  max-width: 200px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--trans);
+}
+
+.step-pill.active {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ===== MAIN ===== */
-main{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
 /* ===== SECTION ===== */
-.section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
-  margin-bottom:12px;overflow:hidden}
-.section-head{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
-  cursor:pointer;user-select:none;transition:background var(--trans)}
-.section-head:hover{background:var(--surface2)}
-.section-title{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
-.section-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0}
-.section-actions{display:flex;align-items:center;gap:10px}
-.chevron{color:var(--muted);font-size:12px;transition:transform .2s;flex-shrink:0}
-.chevron.open{transform:rotate(180deg)}
-.collapsible{transition:max-height .3s ease,padding .3s ease;overflow:hidden}
-.collapsible.closed{max-height:0!important}
-.section-body{padding:16px}
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.section-head {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--trans);
+}
+
+.section-head:hover {
+  background: var(--surface-2);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.section-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chevron {
+  color: var(--text-secondary);
+  font-size: 12px;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.collapsible {
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+}
+
+.collapsible.closed {
+  max-height: 0 \!important;
+}
+
+.section-body {
+  padding: 16px;
+}
+
 /* ===== OPTIONAL TOGGLE ===== */
-.badge-opt{font-size:10px;font-weight:600;padding:2px 7px;border-radius:9999px;
-  background:var(--surface3);color:var(--muted);border:1px solid var(--border);letter-spacing:.3px;text-transform:uppercase}
-.toggle{position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0}
-.toggle input{opacity:0;width:0;height:0}
-.slider{position:absolute;inset:0;border-radius:11px;background:var(--border2);
-  cursor:pointer;transition:background var(--trans)}
-.slider::before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;
-  border-radius:50%;background:#fff;transition:transform var(--trans)}
-.toggle input:checked + .slider{background:var(--blue)}
-.toggle input:checked + .slider::before{transform:translateX(16px)}
+.badge-opt {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  background: var(--border);
+  cursor: pointer;
+  transition: background var(--trans);
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform var(--trans);
+}
+
+.toggle input:checked + .slider {
+  background: var(--accent);
+}
+
+.toggle input:checked + .slider::before {
+  transform: translateX(16px);
+}
+
 /* ===== GRID INPUTS ===== */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:600px){.grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}}
-@media(max-width:400px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .grid2, .grid3, .grid4 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .grid2, .grid3, .grid4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===== FIELD ===== */
-.field{display:flex;flex-direction:column;gap:4px}
-.field label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.field .norm{font-size:10px;color:var(--faint);margin-top:1px}
-.inp{width:100%;padding:7px 10px;border-radius:var(--radius);border:1px solid var(--border);
-  background:var(--blue-bg);color:var(--text);font-size:14px;
-  transition:border-color var(--trans),box-shadow var(--trans)}
-.inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
-.inp::placeholder{color:var(--faint)}
-select.inp{cursor:pointer}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field .norm {
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  margin-top: 1px;
+}
+
+.inp {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(56, 189, 248, 0.05);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color var(--trans), box-shadow var(--trans);
+}
+
+.inp:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+.inp::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+select.inp {
+  cursor: pointer;
+}
+
 /* ===== PRESSURE TABLE ===== */
-.ptable{width:100%;border-collapse:collapse;font-size:13px}
-.ptable th{padding:6px 8px;text-align:center;color:var(--muted);font-size:11px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border)}
-.ptable td{padding:4px 6px;border-bottom:1px solid var(--border)}
-.ptable td:first-child{font-weight:600;color:var(--text);font-size:13px;white-space:nowrap;padding-left:8px}
-.ptable .p-inp{width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border);
-  background:var(--blue-bg);color:var(--text);font-size:13px;text-align:center;
-  transition:border-color var(--trans)}
-.ptable .p-inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-glow)}
-.ptable .norm-cell{font-size:10px;color:var(--faint);text-align:right;padding-right:8px;white-space:nowrap}
+.ptable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ptable th {
+  padding: 6px 8px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ptable td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ptable td:first-child {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 13px;
+  white-space: nowrap;
+  padding-left: 8px;
+}
+
+.ptable .p-inp {
+  width: 100%;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: rgba(56, 189, 248, 0.05);
+  color: var(--text);
+  font-size: 13px;
+  text-align: center;
+  transition: border-color var(--trans);
+}
+
+.ptable .p-inp:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1);
+}
+
+.ptable .norm-cell {
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  text-align: right;
+  padding-right: 8px;
+  white-space: nowrap;
+}
+
 /* ===== DIVIDER ===== */
-.divider{height:1px;background:var(--border);margin:14px 0}
-.sub-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
-  color:var(--muted);margin-bottom:10px;margin-top:4px}
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 14px 0;
+}
+
+.sub-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  margin-top: 4px;
+}
+
 /* ===== CALC BUTTON ===== */
-.calc-wrap{display:flex;gap:8px;margin-top:4px}
-.calc-btn{flex:1;padding:12px;border-radius:var(--radius);background:var(--blue);
-  color:#fff;font-weight:700;font-size:15px;text-align:center;
-  transition:all var(--trans)}
-.calc-btn:hover{background:#2d8ae0;transform:translateY(-1px)}
-.calc-btn:active{transform:none}
+.calc-wrap {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.calc-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  transition: all var(--trans);
+}
+
+.calc-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.calc-btn:active {
+  transform: none;
+}
+
 /* ===== RESULTS ===== */
-.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
-.res-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
-  padding:12px 14px;transition:border-color var(--trans)}
-.res-card.normal{border-color:var(--green-dim);background:var(--green-bg)}
-.res-card.patho{border-color:var(--red-dim);background:var(--red-bg)}
-.res-card.blue{border-color:var(--blue-dim);background:var(--blue-bg)}
-.res-card .r-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
-.res-card .r-val{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px;color:var(--text)}
-.res-card .r-unit{font-size:11px;color:var(--muted);font-weight:500;margin-top:1px}
-.res-card .r-ref{font-size:10px;color:var(--faint);margin-top:4px;line-height:1.4}
-.res-card.normal .r-val{color:var(--green)}
-.res-card.patho .r-val{color:var(--red)}
-.res-card.blue .r-val{color:var(--blue)}
-.section-sub{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
-  color:var(--muted);padding:14px 16px 10px;border-top:1px solid var(--border)}
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.res-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  transition: border-color var(--trans);
+}
+
+.res-card.normal {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: var(--green-bg);
+}
+
+.res-card.patho {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: var(--red-bg);
+}
+
+.res-card.blue {
+  border-color: rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.res-card .r-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.res-card .r-val {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.res-card .r-unit {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.res-card .r-ref {
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.res-card.normal .r-val {
+  color: var(--green);
+}
+
+.res-card.patho .r-val {
+  color: var(--red);
+}
+
+.res-card.blue .r-val {
+  color: var(--accent);
+}
+
+.section-sub {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+  padding: 14px 16px 10px;
+  border-top: 1px solid var(--border);
+}
+
 /* ===== THERMO DUAL ===== */
-.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:500px){.dual-grid{grid-template-columns:1fr}}
-.dual-col-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
-  color:var(--blue);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 500px) {
+  .dual-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dual-col-head {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
 /* ===== TEXTAREA ===== */
-.befund-ta{width:100%;padding:10px 12px;border-radius:var(--radius);border:1px solid var(--border);
-  background:var(--surface2);color:var(--text);font-size:14px;resize:vertical;min-height:120px;
-  transition:border-color var(--trans)}
-.befund-ta:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.befund-ta {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 14px;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color var(--trans);
+}
+
+.befund-ta:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
 /* ===== HIDDEN ===== */
-.hidden{display:none!important}
+.hidden {
+  display: none \!important;
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="RHK Logo">
-      <rect width="26" height="26" rx="6" fill="currentColor" opacity=".12"/>
-      <path d="M5 13 C5 8.58 8.58 5 13 5 C17.42 5 21 8.58 21 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <path d="M8 16 L10.5 11 L13 16 L15 13 L17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    </svg>
-    Rechtsherzkatheter
-  </div>
-  <div class="header-right">
+<header class="sw-header">
+  <a class="sw-back" href="index-2.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    STILWATERS
+  </a>
+  <span class="sw-page-title">Rechtsherzkatheter</span>
+  <div class="sw-header-actions">
     <button class="theme-btn" data-theme-toggle aria-label="Theme wechseln" onclick="toggleTheme()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
@@ -178,10 +666,10 @@ select.inp{cursor:pointer}
   <div class="step-pill" id="pill2" onclick="showStep(2)">② Ergebnisse</div>
 </div>
 
-<!-- ================================================================ STEP 1 ================================================================ -->
+<\!-- ================================================================ STEP 1 ================================================================ -->
 <main id="step1">
 
-  <!-- BASISDATEN -->
+  <\!-- BASISDATEN -->
   <div class="section">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Basisdaten</div>
@@ -201,7 +689,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- SAETTIGUNGEN -->
+  <\!-- SAETTIGUNGEN -->
   <div class="section">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Sauerstoffsättigungen</div>
@@ -223,7 +711,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- DRÜCKE -->
+  <\!-- DRÜCKE -->
   <div class="section">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Drücke (mmHg)</div>
@@ -304,7 +792,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- THERMODILUTION (optional) -->
+  <\!-- THERMODILUTION (optional) -->
   <div class="section" id="sec-thermo">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Thermodilution <span class="badge-opt">Optional</span></div>
@@ -325,7 +813,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- SHUNT (optional) -->
+  <\!-- SHUNT (optional) -->
   <div class="section" id="sec-shunt">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Shunt-Diagnostik <span class="badge-opt">Optional</span></div>
@@ -339,12 +827,12 @@ select.inp{cursor:pointer}
     </div>
     <div class="collapsible closed" id="mod-shunt" style="max-height:0">
       <div class="section-body">
-         <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Sättigungen werden oben im Sättigungsabschnitt eingegeben.</p>
+         <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">Sättigungen werden oben im Sättigungsabschnitt eingegeben.</p>
       </div>
     </div>
   </div>
 
-  <!-- VASOREAGIBILITAET (optional) -->
+  <\!-- VASOREAGIBILITAET (optional) -->
   <div class="section" id="sec-vaso">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Vasoreagibilitätstest <span class="badge-opt">Optional</span></div>
@@ -390,7 +878,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- GORLIN (optional) -->
+  <\!-- GORLIN (optional) -->
   <div class="section" id="sec-gorlin">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Gorlin-Formel <span class="badge-opt">Optional</span></div>
@@ -408,12 +896,12 @@ select.inp{cursor:pointer}
           <div class="field"><label>Klappe</label><select class="inp" id="gorlin_klappe" onchange="calc()"><option value="AK">Aortenklappe (K=1,0)</option><option value="MK">Mitralklappe (K=0,85)</option></select></div>
           <div class="field"><label>Pmean (mmHg)</label><input class="inp" id="gorlin_pmean" type="number" step="0.1" placeholder="Mittlerer Gradient" oninput="calc()"><span class="norm">SEP wird aus Drucktabelle oben verwendet</span></div>
         </div>
-        <p style="font-size:11px;color:var(--faint);margin-top:10px">KÖF = HZV(ml/min) / (44,3 × K × SEP(sec/min) × √Pmean) — SEP im Drucktisch eingeben</p>
+        <p style="font-size:11px;color:var(--text-secondary);opacity:0.7;margin-top:10px">KÖF = HZV(ml/min) / (44,3 × K × SEP(sec/min) × √Pmean) — SEP im Drucktisch eingeben</p>
       </div>
     </div>
   </div>
 
-  <!-- KONSTRIKTION (optional) -->
+  <\!-- KONSTRIKTION (optional) -->
   <div class="section" id="sec-konst">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Konstriktion vs. Restriktion <span class="badge-opt">Optional</span></div>
@@ -427,7 +915,7 @@ select.inp{cursor:pointer}
     </div>
     <div class="collapsible closed" id="mod-konst" style="max-height:0">
       <div class="section-body">
-        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">LVEDP-RVEDP, RVSP, RVEDP/RVSP, PA syst. werden automatisch aus den Drücken berechnet.</p>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">LVEDP-RVEDP, RVSP, RVEDP/RVSP, PA syst. werden automatisch aus den Drücken berechnet.</p>
         <div class="grid2">
           <div class="field"><label>Dip-and-Plateau RV</label>
             <select class="inp" id="kr_dip"><option value="">— nicht beurteilt —</option><option value="prominent">Prominent (≥5 mmHg) → Konstriktiv</option><option value="abgeschwaechtcht">Abgeschwächt / fehlend → Restriktiv</option></select>
@@ -455,7 +943,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- QUALITATIVE BEFUNDE (optional) -->
+  <\!-- QUALITATIVE BEFUNDE (optional) -->
   <div class="section" id="sec-qual">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Qualitative Befunde <span class="badge-opt">Optional</span></div>
@@ -543,18 +1031,18 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- NAVIGATE -->
+  <\!-- NAVIGATE -->
   <div class="calc-wrap" style="margin-top:20px">
-    <button class="calc-btn" onclick="neueBerechnung()" style="flex:0.35;background:var(--surface2);color:var(--text);border:1px solid var(--border)">🗑 Neue Berechnung</button>
+    <button class="calc-btn" onclick="neueBerechnung()" style="flex:0.35;background:var(--surface-2);color:var(--text);border:1px solid var(--border)">🗑 Neue Berechnung</button>
     <button class="calc-btn" onclick="showStep(2)" style="flex:0.65">Berechnungen anzeigen →</button>
   </div>
 
 </main>
 
-<!-- ================================================================ STEP 2 ================================================================ -->
+<\!-- ================================================================ STEP 2 ================================================================ -->
 <main id="step2" class="hidden">
 
-  <!-- BASISDATEN RESULTS -->
+  <\!-- BASISDATEN RESULTS -->
   <div class="section">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Basisdaten & O₂-Parameter</div>
@@ -574,7 +1062,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- HZV & WIDERSTAENDE -->
+  <\!-- HZV & WIDERSTAENDE -->
   <div class="section">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>HZV, CI, SV & Widerstände</div>
@@ -582,7 +1070,7 @@ select.inp{cursor:pointer}
     </div>
     <div class="collapsible" style="max-height:900px">
       <div class="section-body">
-        <!-- FICK -->
+        <\!-- FICK -->
         <div class="sub-label">Fick-Methode</div>
         <div class="res-grid">
           <div class="res-card blue" id="rc_hzv"><div class="r-label">HZV (Fick)</div><div class="r-val" id="r_hzv">—</div><div class="r-unit">l/min</div><div class="r-ref">Normal: 4,0–8,0</div></div>
@@ -590,7 +1078,7 @@ select.inp{cursor:pointer}
           <div class="res-card blue" id="rc_sv"><div class="r-label">SV (Fick)</div><div class="r-val" id="r_sv">—</div><div class="r-unit">ml</div><div class="r-ref">Normal: 60–100</div></div>
           <div class="res-card blue" id="rc_svi"><div class="r-label">SVI (Fick)</div><div class="r-val" id="r_svi">—</div><div class="r-unit">ml/m²</div><div class="r-ref">Normal: 33–47</div></div>
         </div>
-        <!-- THERMO -->
+        <\!-- THERMO -->
         <div id="res_thermo_block" class="hidden">
           <div class="divider"></div>
           <div class="sub-label">Thermodilution</div>
@@ -602,7 +1090,7 @@ select.inp{cursor:pointer}
           </div>
         </div>
         <div class="divider"></div>
-        <!-- WIDERSTAENDE FICK -->
+        <\!-- WIDERSTAENDE FICK -->
         <div class="sub-label">Widerstände & Leistung — Fick</div>
         <div class="res-grid">
           <div class="res-card" id="rc_svr"><div class="r-label">SVR</div><div class="r-val" id="r_svr">—</div><div class="r-unit">dyn·s·cm⁻⁵</div><div class="r-ref">Normal: 900–1400</div></div>
@@ -611,7 +1099,7 @@ select.inp{cursor:pointer}
           <div class="res-card" id="rc_pvr_wu"><div class="r-label">PVR (WU)</div><div class="r-val" id="r_pvr_wu">—</div><div class="r-unit">WU</div><div class="r-ref">Normal: &lt;2</div></div>
           <div class="res-card" id="rc_pvr_svr"><div class="r-label">PVR/SVR</div><div class="r-val" id="r_pvr_svr">—</div><div class="r-unit"></div><div class="r-ref">Normal: &lt;0,75</div></div>
         </div>
-        <!-- WIDERSTAENDE THERMO -->
+        <\!-- WIDERSTAENDE THERMO -->
         <div id="res_thermo_resist" class="hidden">
           <div class="divider"></div>
           <div class="sub-label">Widerstände & Leistung — Thermodilution</div>
@@ -627,7 +1115,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- GRADIENTEN & INDIZES -->
+  <\!-- GRADIENTEN & INDIZES -->
   <div class="section">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Pulmonale Gradienten & Indizes</div>
@@ -652,7 +1140,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- SHUNT ERGEBNISSE -->
+  <\!-- SHUNT ERGEBNISSE -->
   <div class="section hidden" id="res_shunt_sec">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Shunt-Diagnostik</div>
@@ -665,18 +1153,17 @@ select.inp{cursor:pointer}
           <div class="res-card blue"><div class="r-label">Qp (pulmonal)</div><div class="r-val" id="r_qp">—</div><div class="r-unit">l/min</div></div>
           <div class="res-card" id="rc_qpqs"><div class="r-label">Qp:Qs</div><div class="r-val" id="r_qpqs">—</div><div class="r-unit"></div><div class="r-ref">Relevant ab ≥1,5:1 (LR-Shunt)</div></div>
         </div>
-        <div id="shunt_hints" style="margin-top:12px;font-size:12px;color:var(--muted)"></div>
+        <div id="shunt_hints" style="margin-top:12px;font-size:12px;color:var(--text-secondary)"></div>
       </div>
     </div>
        <div class="section-body">
-        <p style="font-size:12px;color:var(--muted)">PA &gt; 80% → verdächtig auf Links-Rechts-Shunt | SVC→PA ≥7% → ASD | RA→RV ≥5% → VSD</p>
-         <p style="font-size:12px;color:var(--muted);margin-bottom:12px">		
-          Ohne Shunt Qp = Qs / Links-Rechts-Shunt: Qp > Qs	/ Rechts-Links-Shunt: Qp < Qs		/ Relevant ab 33% bzw 1,5:1			</p>
+        <p style="font-size:12px;color:var(--text-secondary)">PA &gt; 80% → verdächtig auf Links-Rechts-Shunt | SVC→PA ≥7% → ASD | RA→RV ≥5% → VSD</p>
+         <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">Ohne Shunt Qp = Qs / Links-Rechts-Shunt: Qp > Qs	/ Rechts-Links-Shunt: Qp < Qs		/ Relevant ab 33% bzw 1,5:1</p>
       </div>
       </div>
   </div>
 
-  <!-- VASOREAGIBILITAET ERGEBNISSE -->
+  <\!-- VASOREAGIBILITAET ERGEBNISSE -->
   <div class="section hidden" id="res_vaso_sec">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Vasoreagibilität — Ergebnisse</div>
@@ -694,10 +1181,10 @@ select.inp{cursor:pointer}
         </div>
       </div>
     </div>
-     <p style="font-size:12px;color:var(--muted)">"positive acute response is defined as a reduction in mPAP greater than or equal to 10mmHg, reaching an absolute mPAP less than or equal to 40 mm Hg, with an increased or unchanged CO"</p>
+     <p style="font-size:12px;color:var(--text-secondary)">"positive acute response is defined as a reduction in mPAP greater than or equal to 10mmHg, reaching an absolute mPAP less than or equal to 40 mm Hg, with an increased or unchanged CO"</p>
   </div>
 
-  <!-- GORLIN ERGEBNISSE -->
+  <\!-- GORLIN ERGEBNISSE -->
   <div class="section hidden" id="res_gorlin_sec">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Gorlin — Klappenöffnungsfläche</div>
@@ -713,7 +1200,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- KONSTRIKTION ERGEBNISSE -->
+  <\!-- KONSTRIKTION ERGEBNISSE -->
   <div class="section hidden" id="res_konst_sec">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Konstriktion vs. Restriktion</div>
@@ -732,7 +1219,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- QUALITATIVE ERGEBNISSE -->
+  <\!-- QUALITATIVE ERGEBNISSE -->
   <div class="section hidden" id="res_qual_sec">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Qualitative Befunde</div>
@@ -744,7 +1231,7 @@ select.inp{cursor:pointer}
     </div>
   </div>
 
-  <!-- FREITEXT -->
+  <\!-- FREITEXT -->
   <div class="section" style="margin-top:20px">
     <div class="section-head" onclick="toggleSec(this)">
       <div class="section-title"><span class="section-dot"></span>Befund (Freitext)</div>
@@ -758,8 +1245,8 @@ select.inp{cursor:pointer}
   </div>
 
   <div class="calc-wrap" style="margin-top:20px">
-    <button class="calc-btn" onclick="showStep(1)" style="flex:0.25;background:var(--surface2);color:var(--text);border:1px solid var(--border)">← Eingabe</button>
-    <button class="calc-btn" onclick="neueBerechnung()" style="flex:0.35;background:var(--red-dim);color:var(--red);border:1px solid var(--red-dim)">🗑 Neue Berechnung</button>
+    <button class="calc-btn" onclick="showStep(1)" style="flex:0.25;background:var(--surface-2);color:var(--text);border:1px solid var(--border)">← Eingabe</button>
+    <button class="calc-btn" onclick="neueBerechnung()" style="flex:0.35;background:var(--red);color:#fff;border:1px solid var(--red)">🗑 Neue Berechnung</button>
     <button class="calc-btn" onclick="copyBefund()" style="flex:0.4">
       <span id="copy-label2">📋 Kopieren</span>
     </button>
@@ -769,19 +1256,19 @@ select.inp{cursor:pointer}
 
 <script>
 // ===== HELPERS =====
-function n(id){ const e=document.getElementById(id); if(!e) return null; const v=parseFloat(e.value); return isNaN(v)?null:v; }
+function n(id){ const e=document.getElementById(id); if(\!e) return null; const v=parseFloat(e.value); return isNaN(v)?null:v; }
 function s(id){ const e=document.getElementById(id); return e?e.value:''; }
 function fmt(v,d=1){ return v===null?'—':v.toFixed(d); }
 function setV(id,v,d=1){ const e=document.getElementById(id); if(e) e.textContent=v===null?'—':v.toFixed(d); }
 
 function colorCard(cardId,val,lo,hi,inverted=false){
-  const c=document.getElementById(cardId); if(!c||val===null) return;
+  const c=document.getElementById(cardId); if(\!c||val===null) return;
   c.classList.remove('normal','patho','blue');
   const ok = inverted ? (val<=hi) : (val>=lo && val<=hi);
   c.classList.add(ok?'normal':'patho');
 }
 function colorCardLo(cardId,val,threshold,belowIsGood=false){
-  const c=document.getElementById(cardId); if(!c||val===null) return;
+  const c=document.getElementById(cardId); if(\!c||val===null) return;
   c.classList.remove('normal','patho','blue');
   const ok = belowIsGood ? val<=threshold : val>=threshold;
   c.classList.add(ok?'normal':'patho');
@@ -791,21 +1278,21 @@ function colorCardLo(cardId,val,threshold,belowIsGood=false){
 function toggleSec(head){
   const cont=head.nextElementSibling;
   const chev=head.querySelector('.chevron');
-  const isOpen=cont.style.maxHeight&&cont.style.maxHeight!=='0px'&&!cont.classList.contains('closed');
+  const isOpen=cont.style.maxHeight&&cont.style.maxHeight\!=='0px'&&\!cont.classList.contains('closed');
   if(isOpen){ cont.style.maxHeight='0px'; if(chev)chev.classList.remove('open'); }
   else { cont.style.maxHeight=cont.scrollHeight+'px'; if(chev)chev.classList.add('open'); }
 }
 function toggleMod(id){
   const tog=document.getElementById('tog-'+id);
   const mod=document.getElementById('mod-'+id);
-  if(!mod) return;
+  if(\!mod) return;
   if(tog.checked){ mod.classList.remove('closed'); mod.style.maxHeight=mod.scrollHeight+600+'px'; }
   else { mod.classList.add('closed'); mod.style.maxHeight='0px'; }
 }
 function showStep(n){
   calc();
-  document.getElementById('step1').classList.toggle('hidden',n!==1);
-  document.getElementById('step2').classList.toggle('hidden',n!==2);
+  document.getElementById('step1').classList.toggle('hidden',n\!==1);
+  document.getElementById('step2').classList.toggle('hidden',n\!==2);
   document.getElementById('pill1').classList.toggle('active',n===1);
   document.getElementById('pill2').classList.toggle('active',n===2);
   if(n===2) window.scrollTo(0,0);
@@ -821,10 +1308,8 @@ function calc(){
   // --- Basisdaten ---
   const gr=n('groesse'), gw=n('gewicht'), al=n('alter'), hf=n('hf');
   const hb_mmol=n('hb_mmol'), sex=s('geschlecht');
-  const hb_gdl = hb_mmol!==null ? hb_mmol*0.6206*16.11/10 : null;
-  // Actually: 1 mmol/l Hb = 1.6113 g/dl (based on MW=64500, 4 hemes)
-  // Simpler: hb_gdl = hb_mmol * 1.6113
-  const hb = hb_mmol!==null ? hb_mmol*1.6113 : null;
+  const hb_gdl = hb_mmol\!==null ? hb_mmol*0.6206*16.11/10 : null;
+  const hb = hb_mmol\!==null ? hb_mmol*1.6113 : null;
   setV('r_hb_gdl', hb, 1);
 
   let kof=null, vo2=null;
@@ -833,7 +1318,7 @@ function calc(){
 
   if(al&&hf&&kof){
     const coeff = sex==='m' ? 11.49 : 17.04;
-    const vo2_m2 = 138.1 - coeff*Math.log10(al) + 0.378*hf;
+    const vo2_m2 = 138.1 - coeff*Math.log(al) + 0.378*hf;
     vo2 = vo2_m2 * kof;
   }
   setV('r_vo2',vo2,1);
@@ -870,8 +1355,8 @@ function calc(){
 
   // --- SVR/PVR Fick ---
   let svr=null,svr_wu=null,pvr=null,pvr_wu=null,pvr_svr=null;
-  if(ao_m&&ra_m!=null&&hzv){ svr=(ao_m-ra_m)*80/hzv; svr_wu=svr/80; }
-  if(pa_m&&pcwp_m!=null&&hzv){ pvr=(pa_m-pcwp_m)*80/hzv; pvr_wu=pvr/80; }
+  if(ao_m&&ra_m\!=null&&hzv){ svr=(ao_m-ra_m)*80/hzv; svr_wu=svr/80; }
+  if(pa_m&&pcwp_m\!=null&&hzv){ pvr=(pa_m-pcwp_m)*80/hzv; pvr_wu=pvr/80; }
   if(pvr&&svr) pvr_svr=pvr/svr;
   setV('r_svr',svr,1); setV('r_svr_wu',svr_wu,2);
   setV('r_pvr',pvr,1); setV('r_pvr_wu',pvr_wu,2);
@@ -882,16 +1367,16 @@ function calc(){
 
   // --- Thermodilution ---
   const thermoOn=document.getElementById('tog-thermo').checked;
-  document.getElementById('res_thermo_block').classList.toggle('hidden',!thermoOn);
-  document.getElementById('res_thermo_resist').classList.toggle('hidden',!thermoOn);
+  document.getElementById('res_thermo_block').classList.toggle('hidden',\!thermoOn);
+  document.getElementById('res_thermo_resist').classList.toggle('hidden',\!thermoOn);
   let hzv_t=n('hzv_thermo'), ci_t=null, sv_t=null, svi_t=null;
   let svr_t=null,svr_wu_t=null,pvr_t=null,pvr_wu_t=null,pvr_svr_t=null;
   if(thermoOn&&hzv_t){
     if(kof) ci_t=hzv_t/kof;
     if(hf_val) sv_t=(hzv_t*1000)/hf_val;
     if(sv_t&&kof) svi_t=sv_t/kof;
-    if(ao_m&&ra_m!=null){ svr_t=(ao_m-ra_m)*80/hzv_t; svr_wu_t=svr_t/80; }
-    if(pa_m&&pcwp_m!=null){ pvr_t=(pa_m-pcwp_m)*80/hzv_t; pvr_wu_t=pvr_t/80; }
+    if(ao_m&&ra_m\!=null){ svr_t=(ao_m-ra_m)*80/hzv_t; svr_wu_t=svr_t/80; }
+    if(pa_m&&pcwp_m\!=null){ pvr_t=(pa_m-pcwp_m)*80/hzv_t; pvr_wu_t=pvr_t/80; }
     if(pvr_t&&svr_t) pvr_svr_t=pvr_t/svr_t;
   }
   setV('r_hzv_t',hzv_t,2); setV('r_ci_t',ci_t,2); setV('r_sv_t',sv_t,0); setV('r_svi_t',svi_t,0);
@@ -905,18 +1390,18 @@ function calc(){
 
   // --- Pulmonale Gradienten ---
   let tpg=null,dpg=null,papp=null,cpo=null,cpi=null,lvswi=null,rvswi=null,papi=null,pac=null,zvd_pcwp=null;
-  if(pa_m&&pcwp_m!=null) tpg=pa_m-pcwp_m;
-  if(pa_d&&pcwp_m!=null) dpg=pa_d-pcwp_m;
+  if(pa_m&&pcwp_m\!=null) tpg=pa_m-pcwp_m;
+  if(pa_d&&pcwp_m\!=null) dpg=pa_d-pcwp_m;
   if(pa_s&&pa_d) papp=pa_s-pa_d;
   if(ao_m&&hzv) cpo=ao_m*hzv/451;
   if(ao_m&&ci) cpi=ao_m*ci/451;
-  if(ao_m&&pcwp_m!=null&&svi) lvswi=(ao_m-pcwp_m)*svi*0.0136;
-  if(pa_m&&ra_m!=null&&svi) rvswi=(pa_m-ra_m)*svi*0.0136;
+  if(ao_m&&svi) lvswi=ao_m*svi*0.0136;
+  if(pa_m&&ra_m\!=null&&svi) rvswi=(pa_m-ra_m)*svi*0.0136;
   if(pa_s&&pa_d&&ra_m&&ra_m>0) papi=(pa_s-pa_d)/ra_m;
   if(svi&&papp&&papp>0) pac=svi/papp;
   if(ra_m&&pcwp_m&&pcwp_m>0) zvd_pcwp=ra_m/pcwp_m;
   let lvedp_rvedp=null;
-  if(lv_edp!=null&&rv_edp!=null) lvedp_rvedp=lv_edp-rv_edp;
+  if(lv_edp\!=null&&rv_edp\!=null) lvedp_rvedp=lv_edp-rv_edp;
   setV('r_tpg',tpg,1); setV('r_dpg',dpg,1); setV('r_papp',papp,1);
   setV('r_cpo',cpo,2); setV('r_cpi',cpi,2);
   setV('r_lvswi',lvswi,1); setV('r_rvswi',rvswi,1);
@@ -924,25 +1409,21 @@ function calc(){
   setV('r_lvedp_rvedp',lvedp_rvedp,1);
   colorCardLo('rc_tpg',tpg,12,true); colorCardLo('rc_dpg',dpg,7,true);
   colorCardLo('rc_cpo',cpo,0.6,false); colorCardLo('rc_cpi',cpi,0.4,false);
-  // LVSWI: normal 50-62
-  if(lvswi!=null){ const c=document.getElementById('rc_lvswi'); c.classList.remove('normal','patho'); c.classList.add(lvswi>=35?'normal':'patho'); }
+  if(lvswi\!=null){ const c=document.getElementById('rc_lvswi'); c.classList.remove('normal','patho'); c.classList.add(lvswi>=35?'normal':'patho'); }
   colorCardLo('rc_rvswi',rvswi,450,false);
   colorCardLo('rc_papi',papi,2.0,false);
   colorCardLo('rc_pac',pac,2.3,false);
   colorCardLo('rc_zvd_pcwp',zvd_pcwp,0.63,true);
-  // LVEDP-RVEDP: ≤5 = Konstriktiv
-  if(lvedp_rvedp!=null){ const c=document.getElementById('rc_lvedp_rvedp'); c.classList.remove('normal','patho'); c.classList.add(Math.abs(lvedp_rvedp)<=5?'normal':'patho'); }
+  if(lvedp_rvedp\!=null){ const c=document.getElementById('rc_lvedp_rvedp'); c.classList.remove('normal','patho'); c.classList.add(Math.abs(lvedp_rvedp)<=5?'normal':'patho'); }
 
-  // Color HZV/CI/SV/SVI Fick
-  function colorHZV(cid,val,lo,hi){ const c=document.getElementById(cid); if(!c||val===null) return; c.classList.remove('normal','patho','blue'); c.classList.add(val>=lo&&val<=hi?'normal':'patho'); }
+  function colorHZV(cid,val,lo,hi){ const c=document.getElementById(cid); if(\!c||val===null) return; c.classList.remove('normal','patho','blue'); c.classList.add(val>=lo&&val<=hi?'normal':'patho'); }
   colorHZV('rc_hzv',hzv,4.0,8.0); colorHZV('rc_ci',ci,2.5,4.0); colorHZV('rc_sv',sv,60,100); colorHZV('rc_svi',svi,33,47);
 
   // --- Shunt ---
   const shuntOn=document.getElementById('tog-shunt').checked;
-  document.getElementById('res_shunt_sec').classList.toggle('hidden',!shuntOn);
+  document.getElementById('res_shunt_sec').classList.toggle('hidden',\!shuntOn);
   if(shuntOn){
     let qs=null,qp=null,qpqs=null;
-    // MVO2 = (3*SVC + IVC)/4 if available, else use RA
     const mvo2_o2 = (sat_svc&&sat_ivc) ? hb*1.34*((3*sat_svc+sat_ivc)/4)/100 :
                     (sat_ra&&hb) ? hb*1.34*sat_ra/100 : null;
     const o2_pcw = (sat_pcw&&hb) ? hb*1.34*sat_pcw/100 : (o2art);
@@ -953,7 +1434,6 @@ function calc(){
     if(qs&&qp&&qs>0) qpqs=qp/qs;
     setV('r_qs',qs,2); setV('r_qp',qp,2); setV('r_qpqs',qpqs,2);
     colorCardLo('rc_qpqs',qpqs,1.5,true);
-    // Hints
     let hints=[];
     if(sat_pa&&sat_pa>80) hints.push('⚠ PA-Sat >80% → verdächtig auf Links-Rechts-Shunt');
     if(sat_svc&&sat_pa&&sat_pa-sat_svc>=7) hints.push('⚠ SVC→PA Sprung ≥7% → ASD?');
@@ -963,7 +1443,7 @@ function calc(){
 
   // --- Vasoreagibilitaet ---
   const vasoOn=document.getElementById('tog-vaso').checked;
-  document.getElementById('res_vaso_sec').classList.toggle('hidden',!vasoOn);
+  document.getElementById('res_vaso_sec').classList.toggle('hidden',\!vasoOn);
   if(vasoOn){
     const v_sat_ao=n('v_sat_ao'), v_sat_pa=n('v_sat_pa');
     const v_pa_m=n('v_pa_m'), v_pcwp_m=n('v_pcwp_m'), v_ra_m=n('v_ra_m'), v_ao_m=n('v_ao_m');
@@ -974,14 +1454,13 @@ function calc(){
     if(v_o2art&&v_o2zv) v_avdo2=v_o2art-v_o2zv;
     if(vo2&&v_avdo2&&v_avdo2>0) v_hzv=vo2/(v_avdo2*10);
     if(v_hzv&&kof) v_ci=v_hzv/kof;
-    if(v_pa_m!=null&&v_pcwp_m!=null&&v_hzv) v_pvr_wu=((v_pa_m-v_pcwp_m)*80/v_hzv)/80;
-    if(v_pa_m!=null&&v_pcwp_m!=null) v_tpg=v_pa_m-v_pcwp_m;
-    if(v_pa_d!=null&&v_pcwp_m!=null) v_dpg=v_pa_d-v_pcwp_m;
+    if(v_pa_m\!=null&&v_pcwp_m\!=null&&v_hzv) v_pvr_wu=((v_pa_m-v_pcwp_m)*80/v_hzv)/80;
+    if(v_pa_m\!=null&&v_pcwp_m\!=null) v_tpg=v_pa_m-v_pcwp_m;
+    if(v_pa_d\!=null&&v_pcwp_m\!=null) v_dpg=v_pa_d-v_pcwp_m;
     setV('r_vaso_hzv',v_hzv,2); setV('r_vaso_ci',v_ci,2);
     setV('r_vaso_pvr',v_pvr_wu,2); setV('r_vaso_tpg',v_tpg,1); setV('r_vaso_dpg',v_dpg,1);
-    // ESC response
     let resp='—';
-    if(v_pa_m!=null&&pa_m!=null&&v_hzv!=null&&hzv!=null){
+    if(v_pa_m\!=null&&pa_m\!=null&&v_hzv\!=null&&hzv\!=null){
       const mpap_red=pa_m-v_pa_m;
       if(mpap_red>=10&&v_pa_m<=40&&v_hzv>=hzv-0.5) resp='✓ Positiv (ESC 2022)';
       else resp='✗ Negativ';
@@ -996,7 +1475,7 @@ function calc(){
 
   // --- Gorlin ---
   const gorlinOn=document.getElementById('tog-gorlin').checked;
-  document.getElementById('res_gorlin_sec').classList.toggle('hidden',!gorlinOn);
+  document.getElementById('res_gorlin_sec').classList.toggle('hidden',\!gorlinOn);
   if(gorlinOn){
     const klappe=s('gorlin_klappe'), pmean=n('gorlin_pmean');
     const K = klappe==='AK' ? 1.0 : 0.85;
@@ -1012,46 +1491,44 @@ function calc(){
       koef_thermo=(hzv_t*1000)/(44.3*K*sep*Math.sqrt(pmean));
     setV('r_gorlin_fick',koef_fick,2);
     setV('r_gorlin_thermo',koef_thermo,2);
-    // Color
     const threshSevere = klappe==='AK'?1.0:1.5;
     const threshMild   = klappe==='AK'?2.0:2.5;
-    function colorGorlin(cardEl, val){ if(!cardEl||val===null) return; cardEl.classList.remove('normal','patho','blue'); cardEl.classList.add(val<threshSevere?'patho':val>threshMild?'normal':'blue'); }
+    function colorGorlin(cardEl, val){ if(\!cardEl||val===null) return; cardEl.classList.remove('normal','patho','blue'); cardEl.classList.add(val<threshSevere?'patho':val>threshMild?'normal':'blue'); }
     colorGorlin(document.getElementById('rc_gorlin_fick'), koef_fick);
     const thermoCard=document.getElementById('res_gorlin_thermo_card');
-    const showThermo=thermoOn&&hzv_t!=null;
-    thermoCard.classList.toggle('hidden',!showThermo);
+    const showThermo=thermoOn&&hzv_t\!=null;
+    thermoCard.classList.toggle('hidden',\!showThermo);
     if(showThermo){ colorGorlin(thermoCard, koef_thermo); }
   }
 
   // --- Konstriktion ---
   const konstOn=document.getElementById('tog-konst').checked;
-  document.getElementById('res_konst_sec').classList.toggle('hidden',!konstOn);
+  document.getElementById('res_konst_sec').classList.toggle('hidden',\!konstOn);
   if(konstOn){
     setV('r_kr_lvedp',lvedp_rvedp,1);
     setV('r_kr_rvsp',rv_s,0);
-    let kr_ratio=null; if(rv_edp!=null&&rv_s&&rv_s>0) kr_ratio=rv_edp/rv_s;
+    let kr_ratio=null; if(rv_edp\!=null&&rv_s&&rv_s>0) kr_ratio=rv_edp/rv_s;
     setV('r_kr_ratio',kr_ratio,3);
     setV('r_kr_pas',pa_s,0);
-    if(lvedp_rvedp!=null){ const c=document.getElementById('rc_kr_lvedp'); c.classList.remove('normal','patho'); c.classList.add(Math.abs(lvedp_rvedp)<=5?'normal':'patho'); }
-    if(rv_s!=null){ const c=document.getElementById('rc_kr_rvsp'); c.classList.remove('normal','patho'); c.classList.add(rv_s<55?'normal':'patho'); }
-    if(kr_ratio!=null){ const c=document.getElementById('rc_kr_ratio'); c.classList.remove('normal','patho'); c.classList.add(kr_ratio>=1/3?'normal':'patho'); }
-    if(pa_s!=null){ const c=document.getElementById('rc_kr_pas'); c.classList.remove('normal','patho'); c.classList.add(pa_s<55?'normal':'patho'); }
-    // Qual results
+    if(lvedp_rvedp\!=null){ const c=document.getElementById('rc_kr_lvedp'); c.classList.remove('normal','patho'); c.classList.add(Math.abs(lvedp_rvedp)<=5?'normal':'patho'); }
+    if(rv_s\!=null){ const c=document.getElementById('rc_kr_rvsp'); c.classList.remove('normal','patho'); c.classList.add(rv_s<55?'normal':'patho'); }
+    if(kr_ratio\!=null){ const c=document.getElementById('rc_kr_ratio'); c.classList.remove('normal','patho'); c.classList.add(kr_ratio>=1/3?'normal':'patho'); }
+    if(pa_s\!=null){ const c=document.getElementById('rc_kr_pas'); c.classList.remove('normal','patho'); c.classList.add(pa_s<55?'normal':'patho'); }
     const fields=[['kr_dip','Dip-Plateau'],['kr_kuss','Kussmaul'],['kr_ydesc','Y-Descent'],['kr_sai','Systolic Area Index'],['kr_vdisk','Ventr. Diskordanz'],['kr_pawp','PAWP-LVEDP'],['kr_vol','Volumenchallenge']];
     let html='';
-    fields.forEach(([id,lbl])=>{ const v=s(id); if(v){ html+=`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted);min-width:160px;display:inline-block">${lbl}:</span> ${document.getElementById(id).options[document.getElementById(id).selectedIndex].text}</div>`; } });
+    fields.forEach(([id,lbl])=>{ const v=s(id); if(v){ html+=`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-secondary);min-width:160px;display:inline-block">${lbl}:</span> ${document.getElementById(id).options[document.getElementById(id).selectedIndex].text}</div>`; } });
     document.getElementById('kr_qual_results').innerHTML=html;
   }
 
   // --- Qualitative Befunde ---
   const qualOn=document.getElementById('tog-qual').checked;
-  document.getElementById('res_qual_sec').classList.toggle('hidden',!qualOn);
+  document.getElementById('res_qual_sec').classList.toggle('hidden',\!qualOn);
   if(qualOn){
     const qFields=[['q_vwelle','v-Welle PCWP'],['q_dipplateau','Dip-Plateau RV'],['q_kussmaul','Kussmaul-Zeichen'],['q_ra_kurve','RA-Kurvenform'],['q_pa_kurve','PA-Kurve'],['q_pcwp_kurve','PCWP-Kurve'],['q_tamponade','Tamponade']];
     let html='<div class="res-grid">';
     qFields.forEach(([id,lbl])=>{
-      const el=document.getElementById(id); if(!el) return;
-      const v=el.value; if(!v) return;
+      const el=document.getElementById(id); if(\!el) return;
+      const v=el.value; if(\!v) return;
       const txt=el.options[el.selectedIndex].text;
       html+=`<div class="res-card blue"><div class="r-label">${lbl}</div><div class="r-val" style="font-size:13px;line-height:1.3">${txt}</div></div>`;
     });
@@ -1065,15 +1542,13 @@ function copyBefund(){
   calc();
   const lines=[];
   const sep60='='.repeat(60), dash40='-'.repeat(40);
-  function g(id){ const e=document.getElementById(id); return e&&e.textContent&&e.textContent.trim()&&e.textContent.trim()!=='—'?e.textContent.trim():null; }
+  function g(id){ const e=document.getElementById(id); return e&&e.textContent&&e.textContent.trim()&&e.textContent.trim()\!=='—'?e.textContent.trim():null; }
   function inp(id){ const e=document.getElementById(id); return e&&e.value&&e.value.trim()?e.value.trim():null; }
   function row(lbl,val,unit,ref){ let l='  '+lbl.padEnd(26)+val; if(unit) l+=' '+unit; if(ref) l+='   ['+ref+']'; return l; }
 
   lines.push('RECHTSHERZKATHETER-BEFUND');
   lines.push(sep60);
   lines.push('');
-
-  // Patientendaten
   lines.push('PATIENTENDATEN');
   lines.push(dash40);
   if(inp('groesse')) lines.push(row('Größe:',inp('groesse'),'cm',''));
@@ -1086,7 +1561,6 @@ function copyBefund(){
   if(g('r_vo2')) lines.push(row('VO₂ (LaFarge):',g('r_vo2'),'ml/min',''));
   lines.push('');
 
-  // Sättigungen
   const satMap=[['sat_ao','AO','%','>95%'],['sat_pa','PA','%','>65% (gemischtvenös)'],['sat_pcw','PCW','%',''],['sat_ra','RA','%','>70% (zentralvenös)'],['sat_svc','SVC','%',''],['sat_ivc','IVC','%',''],['sat_rv','RV','%',''],['sat_la','LA','%','']];
   const satRows=satMap.filter(r=>inp(r[0]));
   if(satRows.length){
@@ -1099,7 +1573,6 @@ function copyBefund(){
     lines.push('');
   }
 
-  // Drücke
   const pMap=[['AO','ao_s','ao_d','ao_m','S/D/MAP'],['LV','lv_s','lv_d','lv_edp','S/D/LVEDP'],['RA','ra_a','ra_v','ra_m','a/v/M'],['RV','rv_s','rv_d','rv_edp','S/D/RVEDP'],['PA','pa_s','pa_d','pa_m','S/D/mPAP'],['PCWP','pcwp_a','pcwp_v','pcwp_m','a/v/M'],['LA','la_a','la_v','la_m','a/v/M']];
   const pRows=pMap.filter(r=>inp(r[1])||inp(r[2])||inp(r[3]));
   if(pRows.length){
@@ -1116,7 +1589,6 @@ function copyBefund(){
     lines.push('');
   }
 
-  // HZV Fick
   lines.push('HZV, CI, SV & WIDERSTÄNDE — FICK');
   lines.push(dash40);
   if(g('r_hzv')) lines.push(row('HZV:',g('r_hzv'),'l/min','Normal 4,0-8,0'));
@@ -1130,7 +1602,6 @@ function copyBefund(){
   if(g('r_pvr_svr')) lines.push(row('PVR/SVR:',g('r_pvr_svr'),'','Normal <0,75'));
   lines.push('');
 
-  // Thermo
   if(document.getElementById('tog-thermo').checked&&g('r_hzv_t')){
     lines.push('HZV, CI, SV & WIDERSTÄNDE — THERMODILUTION');
     lines.push(dash40);
@@ -1144,7 +1615,6 @@ function copyBefund(){
     lines.push('');
   }
 
-  // Gradienten
   const gradMap=[['r_tpg','TPG','mmHg','<=12'],['r_dpg','DPG','mmHg','<7'],['r_papp','PAPP','mmHg',''],['r_cpo','CPO','Watt','>0,6'],['r_cpi','CPI','W/m²','>0,4'],['r_lvswi','LVSWI','g*m/m²','50-62'],['r_rvswi','RVSWI','g*m/m²','>450'],['r_papi','PAPI','','>2,0'],['r_pac','PAC','ml/mmHg','>2,3'],['r_zvd_pcwp','ZVD/PCWP','','<0,63'],['r_lvedp_rvedp','LVEDP-RVEDP','mmHg','<=5 Konstriktiv']];
   const gradRows=gradMap.filter(r=>g(r[0]));
   if(gradRows.length){
@@ -1154,7 +1624,6 @@ function copyBefund(){
     lines.push('');
   }
 
-  // Shunt
   if(document.getElementById('tog-shunt').checked&&g('r_qs')){
     lines.push('SHUNT-DIAGNOSTIK');
     lines.push(dash40);
@@ -1164,7 +1633,6 @@ function copyBefund(){
     lines.push('');
   }
 
-  // Vaso
   if(document.getElementById('tog-vaso').checked){
     const subst=document.getElementById('vaso_subst').value==='iloprost'?'Iloprost inhalativ':'Nitrolingual i.v.';
     lines.push('VASOREAGIBILITÄTSTEST ('+subst+')');
@@ -1173,11 +1641,10 @@ function copyBefund(){
     vm.forEach(r=>{if(inp(r[0]))lines.push(row(r[1]+':',inp(r[0]),r[2],''))});
     if(g('r_vaso_pvr')) lines.push(row('PVR nach:',g('r_vaso_pvr'),'WU','<2'));
     const respEl=document.getElementById('r_vaso_resp');
-    if(respEl&&respEl.textContent&&respEl.textContent!=='—') lines.push(row('Ansprechen:',respEl.textContent,'','ESC 2022'));
+    if(respEl&&respEl.textContent&&respEl.textContent\!=='—') lines.push(row('Ansprechen:',respEl.textContent,'','ESC 2022'));
     lines.push('');
   }
 
-  // Gorlin
   if(document.getElementById('tog-gorlin').checked&&g('r_gorlin_fick')){
     const kl=document.getElementById('gorlin_klappe').value;
     lines.push('GORLIN — '+kl);
@@ -1187,7 +1654,6 @@ function copyBefund(){
     lines.push('');
   }
 
-  // Freitext
   const ft=document.getElementById('befundtext').value.trim();
   if(ft){ lines.push('BEFUND'); lines.push(dash40); lines.push(ft); lines.push(''); }
 
@@ -1203,28 +1669,24 @@ function fallbackCopy(text){
   ta.select(); document.execCommand('copy'); document.body.removeChild(ta); flashCopy();
 }
 function flashCopy(){
-  ['copy-label','copy-label2'].forEach(id=>{ const e=document.getElementById(id); if(e){ const orig=e.textContent; e.textContent='✓ Kopiert!'; setTimeout(()=>e.textContent=orig,2000); } });
+  ['copy-label','copy-label2'].forEach(id=>{ const e=document.getElementById(id); if(e){ const orig=e.textContent; e.textContent='✓ Kopiert\!'; setTimeout(()=>e.textContent=orig,2000); } });
 }
 
 // ===== NEUE BERECHNUNG =====
 function neueBerechnung(){
-  if(!confirm('Alle Eingaben löschen und neu beginnen?')) return;
-  // Clear all inputs
+  if(\!confirm('Alle Eingaben löschen und neu beginnen?')) return;
   document.querySelectorAll('input[type="number"], input[type="text"]').forEach(el=>el.value='');
   document.querySelectorAll('textarea').forEach(el=>el.value='');
   document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
-  // Reset toggles
   ['thermo','shunt','vaso','gorlin','konst','qual'].forEach(id=>{
     const tog=document.getElementById('tog-'+id);
     if(tog&&tog.checked){ tog.checked=false; toggleMod(id); }
   });
-  // Reset all result cards to blue
   document.querySelectorAll('.res-card').forEach(c=>{ c.classList.remove('normal','patho'); c.classList.add('blue'); });
   calc();
   showStep(1);
 }
 
-// Init
 calc();
 </script>
 </body>
